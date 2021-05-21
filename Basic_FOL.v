@@ -31,8 +31,8 @@ Inductive functional_symbol : Type :=
   | constant : string -> functional_symbol
   | func : string -> list var -> functional_symbol.
 
-Inductive predicative_symbol : Type:=
-  | predicate : string -> list var -> predicative_symbol.
+Inductive predicate : string -> list var -> Prop:=
+  | predicative_symbol (name : string)  (vars : list var) : predicate name vars.
 
 Check (func "f" [a; b]).
 Definition f := func "f".
@@ -43,6 +43,7 @@ Check (predicate "P" [a]).
 Definition P := predicate "P".
 Check (P [a]).
 
+Check ( forall x : var, P [x]).
 
 
 
