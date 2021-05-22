@@ -22,5 +22,9 @@ Inductive term : Type :=
   | tvar : var -> term
   | tfunc : functional_symbol -> list term -> term.
 
-Inductive atomic_formulae : Type :=
-  | afpred : predicative_symbol -> list term -> atomic_formulae.
+Inductive atomic_formulae : predicative_symbol -> list term -> Prop :=
+  | afpred (p : predicative_symbol) (l : list term) : atomic_formulae p l.
+
+Definition fi := atomic_formulae (predicate "P") [tvar a; tvar b].
+Check(fi).
+Check(fi -> fi).
