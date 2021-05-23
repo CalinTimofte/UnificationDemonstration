@@ -22,9 +22,22 @@ Inductive term : Type :=
   | tvar : var -> term
   | tfunc : functional_symbol -> list term -> term.
 
-Inductive atomic_formulae : predicative_symbol -> list term -> Prop :=
-  | afpred (p : predicative_symbol) (l : list term) : atomic_formulae p l.
+Inductive atomic_formulae : Prop :=
+  | afpred: predicative_symbol -> list term -> atomic_formulae.
 
-Definition fi := atomic_formulae (predicate "P") [tvar a; tvar b].
-Check(fi).
-Check(fi -> fi).
+Check (afpred (predicate "P") [tvar a]).
+
+Inductive first_order_formulae : Type :=
+  | Aformula (p : atomic_formulae)
+  | Anot (phi : first_order_formulae)
+  | Aand (phi1 phi2 : first_order_formulae)
+  | Aor (phi1 phi2 : first_order_formulae)
+  | Aimplies (phi1 phi2 : first_order_formulae)
+  | Adoubleimplies (phi1 phi2 : first_order_formulae)
+  | Aforall (x : var) (phi : first_order_formulae)
+  | Aexists (x : var) (phi : first_order_formulae).
+
+Fixpoint first_order_formulae_eval (phi: first_order_formulae) : Prop :=
+  match phi with
+  | Aformula phi0 => phi0
+  end.
