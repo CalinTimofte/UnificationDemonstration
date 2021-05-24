@@ -26,12 +26,13 @@ Inductive term : Type :=
 Inductive atomic_formulae : Type :=
   | Afpred: predicative_symbol -> list term -> atomic_formulae.
 
+Definition P := Predicate "P".
 Check (Afpred (Predicate "P") [Tvar a]).
-Definition phi := Afpred (Predicate "p") [Tvar a].
+Definition phi := Afpred P.
 
 
 Inductive first_order_formulae : Type :=
-  | Aformula (phi : atomic_formulae)
+  | Aformulae (phi : atomic_formulae)
   | Anot (phi : first_order_formulae)
   | Aand (phi1 phi2 : first_order_formulae)
   | Aor (phi1 phi2 : first_order_formulae)
@@ -79,20 +80,71 @@ Fixpoint vars_term (t : term) : list var :=
 
 Definition vars_atomic_formulae (a : atomic_formulae) : list var :=
   match a with
-  | Afpred p l => flat_map vars_term l
+  | Afpred p l => remove_duplicates_var_list (flat_map vars_term l)
   end.
 
-Fixpoint vars_first_order_formulae (phi : first_order_formulae) : list var :=
+Fixpoint vars_first_order_formulae' (phi : first_order_formulae) : list var :=
   match phi with
-  | Aformula phi0 => vars_atomic_formulae phi0
-  | Anot phi0 => vars_first_order_formulae phi0
-  | Aand phi1 phi2 => (vars_first_order_formulae phi1) ++ (vars_first_order_formulae phi2)
-  | Aor phi1 phi2 => (vars_first_order_formulae phi1) ++ (vars_first_order_formulae phi2)
-  | Aimplies phi1 phi2 => (vars_first_order_formulae phi1) ++ (vars_first_order_formulae phi2)
-  | Adoubleimplies phi1 phi2 => (vars_first_order_formulae phi1) ++ (vars_first_order_formulae phi2)
-  | Aforall x phi0 => (vars_first_order_formulae phi0) ++ [x]
-  | Aexists x phi0 => (vars_first_order_formulae phi0) ++ [x]
+  | Aformulae phi0 => vars_atomic_formulae phi0
+  | Anot phi0 => vars_first_order_formulae' phi0
+  | Aand phi1 phi2 => (vars_first_order_formulae' phi1) ++ (vars_first_order_formulae' phi2)
+  | Aor phi1 phi2 => (vars_first_order_formulae' phi1) ++ (vars_first_order_formulae' phi2)
+  | Aimplies phi1 phi2 => (vars_first_order_formulae' phi1) ++ (vars_first_order_formulae' phi2)
+  | Adoubleimplies phi1 phi2 => (vars_first_order_formulae' phi1) ++ (vars_first_order_formulae' phi2)
+  | Aforall x phi0 => (vars_first_order_formulae' phi0) ++ [x]
+  | Aexists x phi0 => (vars_first_order_formulae' phi0) ++ [x]
   end.
 
+Definition vars_first_order_formulae (phi : first_order_formulae) : list var := remove_duplicates_var_list (vars_first_order_formulae' phi).
 
 Compute (vars_term (Tfunc (Func "f") [(Tvar a); (Tfunc (Func "g") [Tvar b; Tvar b])])).
+
+Definition x := Named_var "x".
+Definition y := Named_var "y".
+Definition z := Named_var "z".
+
+Compute (vars_term (Tfunc (Func "f") [(Tvar a); (Tvar a)])).
+Definition phi1 := ( Aand ( Aforall x ( Aand ( Aformulae ( phi [Tvar x; Tvar y] ) ) ( Aexists y ( Aand ( Aformulae (phi [Tvar z; Tfunc ( Func "f" ) [Tvar x; Tvar y]]) ) ( Aformulae ( phi [Tvar x; Tvar y] ) )  ) ) ) ) ( Aformulae ( phi [Tvar x; Tvar x] ) )).
+Compute(vars_first_order_formulae' phi1).
+
+Definition remove_element_var_list (v : var) (l : list var) : list var :=
+  assemble_var_list (remove string_dec (var_get_name v)(disassemble_var_list l)).
+
+Compute (remove_element_var_list x [x; y; z]).
+
+Fixpoint free_vars_first_order_formulae' (phi : first_order_formulae) : list var :=
+  match phi with
+  | Aformulae phi0 => vars_atomic_formulae phi0
+  | Anot phi0 => free_vars_first_order_formulae' phi0
+  | Aand phi1 phi2 => (free_vars_first_order_formulae' phi1) ++ (free_vars_first_order_formulae' phi2)
+  | Aor phi1 phi2 => (free_vars_first_order_formulae' phi1) ++ (free_vars_first_order_formulae' phi2)
+  | Aimplies phi1 phi2 => (free_vars_first_order_formulae' phi1) ++ (free_vars_first_order_formulae' phi2)
+  | Adoubleimplies phi1 phi2 => (free_vars_first_order_formulae' phi1) ++ (free_vars_first_order_formulae' phi2)
+  | Aforall x phi0 => remove_element_var_list x (free_vars_first_order_formulae' phi0)
+  | Aexists x phi0 => remove_element_var_list x (free_vars_first_order_formulae' phi0)
+  end.
+
+Definition free_vars_first_order_formulae (phi : first_order_formulae) : list var := 
+              remove_duplicates_var_list (free_vars_first_order_formulae' phi).
+
+Compute (free_vars_first_order_formulae (Aforall x (Aformulae (phi [Tvar x; Tvar y])))).
+Compute (free_vars_first_order_formulae phi1).
+
+Fixpoint bound_vars_first_order_formulae' (phi : first_order_formulae) : list var :=
+  match phi with
+  | Aformulae phi0 => []
+  | Anot phi0 => bound_vars_first_order_formulae' phi0
+  | Aand phi1 phi2 => (bound_vars_first_order_formulae' phi1) ++ (bound_vars_first_order_formulae' phi2)
+  | Aor phi1 phi2 => (bound_vars_first_order_formulae' phi1) ++ (bound_vars_first_order_formulae' phi2)
+  | Aimplies phi1 phi2 => (bound_vars_first_order_formulae' phi1) ++ (bound_vars_first_order_formulae' phi2)
+  | Adoubleimplies phi1 phi2 => (bound_vars_first_order_formulae' phi1) ++ (bound_vars_first_order_formulae' phi2)
+  | Aforall x phi0 => (bound_vars_first_order_formulae' phi0) ++ [x]
+  | Aexists x phi0 => (bound_vars_first_order_formulae' phi0) ++ [x]
+  end.
+
+Definition bound_vars_first_order_formulae (phi : first_order_formulae) : list var := 
+              remove_duplicates_var_list (bound_vars_first_order_formulae' phi).
+
+Compute (bound_vars_first_order_formulae (Aforall x (Aformulae (phi [Tvar x; Tvar y])))).
+Compute (bound_vars_first_order_formulae phi1).
+
