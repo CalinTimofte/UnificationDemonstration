@@ -148,3 +148,36 @@ Definition bound_vars_first_order_formulae (phi : first_order_formulae) : list v
 Compute (bound_vars_first_order_formulae (Aforall x (Aformulae (phi [Tvar x; Tvar y])))).
 Compute (bound_vars_first_order_formulae phi1).
 
+Inductive assignment_pair : Type :=
+  | Apair: var -> term -> assignment_pair.
+
+Inductive assignment : Type :=
+  | Apairs: list assignment_pair -> assignment.
+
+Check (Apair x (Tvar y)).
+Check (Apairs [Apair x (Tvar y); Apair z (Tfunc (Func "f") [Tvar x; Tvar y])]).
+
+Definition var_eq (v1 v2 : var) : bool :=
+  var_get_name v1 =? var_get_name v2.
+
+Compute (var_eq x x).
+Compute (var_eq x y).
+
+Fixpoint var_assignment (v : var) (a : assignment) : term :=
+  match a with
+  | Apairs l => match l with
+                | [] => Tvar v
+                | h::tl => match h with
+                          | Apair v0 t => match (var_eq v0 v) with
+                                          | true => t
+                                          | false => var_assignment v (Apairs tl)
+                                          end
+                          end
+                 end
+   end.
+
+
+Fixpoint term_assignment (t : term) : term :=
+  match t with
+  | Tconst c => Tconst c
+  | Tvar 
