@@ -40,3 +40,16 @@ Inductive first_order_formulae : Type :=
   | Aforall (x : var) (phi : first_order_formulae)
   | Aexists (x : var) (phi : first_order_formulae).
 
+Compute(hd a [b;a]).
+Compute (hd (Tvar a) [Tvar b; Tvar a]).
+
+
+Fixpoint vars_term (t : term) : list var :=
+  match t with
+  | Tconst c => []
+  | Tvar v => [v]
+  | Tfunc f l => flat_map vars_term l
+  end.
+
+Compute (vars_term (Tfunc (Func "f") [(Tvar a); (Tfunc (Func "g") [Tvar b; Tvar b])])).
+
