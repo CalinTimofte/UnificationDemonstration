@@ -163,19 +163,28 @@ Definition var_eq (v1 v2 : var) : bool :=
 Compute (var_eq x x).
 Compute (var_eq x y).
 
-Fixpoint var_assignment (v : var) (a : assignment) : term :=
-  match a with
-  | Apairs l => match l with
-                | [] => Tvar v
-                | h::tl => match h with
-                          | Apair v0 t => match (var_eq v0 v) with
-                                          | true => t
-                                          | false => var_assignment v (Apairs tl)
-                                          end
-                          end
-                 end
-   end.
+Fixpoint var_assignment' (v : var) (a : assignment) (fuel: nat): term :=
+  match fuel with
+  | O => Tvar v
+  | S fuel' => match a with
+              | Apairs l => match l with
+                            | [] => Tvar v
+                            | h::tl => match h with
+                                      | Apair v0 t => match (var_eq v0 v) with
+                                                      | true => t
+                                                      | false => var_assignment' v (Apairs tl) fuel'
+                                                      end
+                                      end
+                             end
+               end
+  end.
 
+Definition var_assignment (v : var) (a : assignment) : term :=
+  match a with
+  | Apairs l => var_assignment' v a (length l)
+  end.
+
+Compute (var_assignment x (Apairs [Apair y (Tvar x); Apair x (Tvar y)])).
 
 Fixpoint term_assignment (t : term) : term :=
   match t with
