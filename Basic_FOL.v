@@ -203,7 +203,7 @@ Fixpoint term_assignment (a : assignment) (t : term) : term :=
 Compute (term_assignment sigma1 t2).
 Compute (term_assignment sigma1 t1).
 
-Definition atomic_formulae_assignment (a : atomic_formulae) (asn : assignment) : atomic_formulae :=
+(* Definition atomic_formulae_assignment (a : atomic_formulae) (asn : assignment) : atomic_formulae :=
   match a with
   | Afpred p l => Afpred p (map (term_assignment asn) l)
   end.
@@ -218,4 +218,11 @@ Fixpoint first_order_formulae_assignment (phi : first_order_formulae) (a : assig
   | Adoubleimplies phi1 phi2 => Adoubleimplies (first_order_formulae_assignment phi1 a) (first_order_formulae_assignment phi2 a)
   | Aforall x phi0 => Aforall x (first_order_formulae_assignment phi0 a)
   | Aexists x phi0 => Aexists x (first_order_formulae_assignment phi0 a)
-  end.
+  end. *)
+
+Inductive term_pair : Type :=
+  | Tpair (t1 t2 : term) : term_pair.
+
+Inductive unification_problem : Type :=
+  | Uset (l : list term_pair) : unification_problem
+  | Ubottom.
