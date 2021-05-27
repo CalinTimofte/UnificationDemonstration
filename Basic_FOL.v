@@ -71,12 +71,15 @@ Definition remove_duplicates_var_list (l : list var) : list var :=
 
 Compute (remove_duplicates_var_list [Named_var "a"; Named_var "b"; Named_var "b"]).
 
-Fixpoint vars_term (t : term) : list var :=
+Fixpoint vars_term' (t : term) : list var :=
   match t with
   | Tconst c => []
   | Tvar v => [v]
-  | Tfunc f l => remove_duplicates_var_list (flat_map vars_term l)
+  | Tfunc f l => flat_map vars_term' l
   end.
+
+Definition vars_term (t : term) : list var :=
+  remove_duplicates_var_list (vars_term' t).
 
 Definition vars_atomic_formulae (a : atomic_formulae) : list var :=
   match a with
@@ -179,14 +182,22 @@ Fixpoint var_assignment' (v : var) (a : assignment) (fuel: nat): term :=
                end
   end.
 
-Definition var_assignment (v : var) (a : assignment) : term :=
+Definition var_assignment (a : assignment) (v: var): term :=
   match a with
   | Apairs l => var_assignment' v a (length l)
   end.
 
-Compute (var_assignment x (Apairs [Apair y (Tvar x); Apair x (Tvar y)])).
+Compute (var_assignment (Apairs [Apair y (Tvar x); Apair x (Tvar y)]) x).
+Definition sigma1 := Apairs [Apair y (Tvar x); Apair x (Tvar y)].
 
-Fixpoint term_assignment (t : term) : term :=
+Definition t1 := Tfunc (Func "f") [Tvar x; Tvar y; Tvar x; Tfunc (Func "g") [Tvar x; Tvar y]].
+Definition t2 := Tfunc (Func "f") [Tvar x; Tvar y; Tvar x].
+
+Definition term_assignment (a : assignment) (t : term) : term :=
   match t with
   | Tconst c => Tconst c
-  | Tvar 
+  | Tvar v => Tvar v
+  | Tfunc f l=> Tfunc f (map (var_assignment a) (vars_term' (Tfunc f l)))
+  end.
+
+Compute (term_assignment sigma1 t2).
