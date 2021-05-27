@@ -193,11 +193,29 @@ Definition sigma1 := Apairs [Apair y (Tvar x); Apair x (Tvar y)].
 Definition t1 := Tfunc (Func "f") [Tvar x; Tvar y; Tvar x; Tfunc (Func "g") [Tvar x; Tvar y]].
 Definition t2 := Tfunc (Func "f") [Tvar x; Tvar y; Tvar x].
 
-Definition term_assignment (a : assignment) (t : term) : term :=
+Fixpoint term_assignment (a : assignment) (t : term) : term :=
   match t with
   | Tconst c => Tconst c
-  | Tvar v => Tvar v
-  | Tfunc f l=> Tfunc f (map (var_assignment a) (vars_term' (Tfunc f l)))
+  | Tvar v => var_assignment a v
+  | Tfunc f l=> Tfunc f (map (term_assignment a) l)
   end.
 
 Compute (term_assignment sigma1 t2).
+Compute (term_assignment sigma1 t1).
+
+Definition atomic_formulae_assignment (a : atomic_formulae) (asn : assignment) : atomic_formulae :=
+  match a with
+  | Afpred p l => Afpred p (map (term_assignment asn) l)
+  end.
+
+Fixpoint first_order_formulae_assignment (phi : first_order_formulae) (a : assignment) : first_order_formulae :=
+  match phi with
+  | Aformulae phi0 => Aformulae (atomic_formulae_assignment phi0 a)
+  | Anot phi0 => Anot (first_order_formulae_assignment phi0 a)
+  | Aand phi1 phi2 => Aand (first_order_formulae_assignment phi1 a) (first_order_formulae_assignment phi2 a)
+  | Aor phi1 phi2 => Aor (first_order_formulae_assignment phi1 a) (first_order_formulae_assignment phi2 a)
+  | Aimplies phi1 phi2 => Aimplies (first_order_formulae_assignment phi1 a) (first_order_formulae_assignment phi2 a)
+  | Adoubleimplies phi1 phi2 => Adoubleimplies (first_order_formulae_assignment phi1 a) (first_order_formulae_assignment phi2 a)
+  | Aforall x phi0 => Aforall x (first_order_formulae_assignment phi0 a)
+  | Aexists x phi0 => Aexists x (first_order_formulae_assignment phi0 a)
+  end.
