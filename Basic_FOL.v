@@ -226,3 +226,20 @@ Inductive term_pair : Type :=
 Inductive unification_problem : Type :=
   | Uset (l : list term_pair) : unification_problem
   | Ubottom.
+
+Definition append_assignment (a : assignment) (ap : assignment_pair) : assignment :=
+  match a with
+  | Apairs l => Apairs (l ++ [ap])
+  end.
+
+Compute (append_assignment sigma1 (Apair z (Tvar y))).
+
+Fixpoint change_assignment (a : assignment) (ap : assignment_pair) : assignment :=
+  match a with
+  | Apairs l => match l with
+                | [] => append_assignment a ap
+                | hd::tl => match hd with
+                            | Apair v1 t1 => match ap with
+                                             | Apair v2 t2 => match (var_eq v1 v2) with
+                                                              | true => Apairs ([(Apair v1 t2)] ++ tl)
+                                                              | false => Apairs hd ++ 
