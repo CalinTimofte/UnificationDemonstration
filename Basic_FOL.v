@@ -227,19 +227,32 @@ Inductive unification_problem : Type :=
   | Uset (l : list term_pair) : unification_problem
   | Ubottom.
 
+Definition append_assignment_to_list (l : list assignment_pair) (ap : assignment_pair) : list assignment_pair :=
+  l ++ [ap].
+
 Definition append_assignment (a : assignment) (ap : assignment_pair) : assignment :=
   match a with
-  | Apairs l => Apairs (l ++ [ap])
+  | Apairs l => Apairs (append_assignment_to_list l ap)
   end.
 
 Compute (append_assignment sigma1 (Apair z (Tvar y))).
 
-Fixpoint change_assignment (a : assignment) (ap : assignment_pair) : assignment :=
+Fixpoint change_assignment_list (l : list assignment_pair) (ap : assignment_pair) : list assignment_pair :=
+  match l with
+  | [] => append_assignment_to_list l ap
+  | hd::tl => match hd with
+              | Apair v1 t1 => match ap with
+                               | Apair v2 t2 => match (var_eq v1 v2) with
+                                                | true => [(Apair v1 t2)] ++ tl
+                                                | false => [hd] ++  (change_assignment_list tl ap)
+                                                end
+                              end
+              end
+  end.
+
+Definition change_assignment (a : assignment) (ap : assignment_pair) : assignment :=
   match a with
-  | Apairs l => match l with
-                | [] => append_assignment a ap
-                | hd::tl => match hd with
-                            | Apair v1 t1 => match ap with
-                                             | Apair v2 t2 => match (var_eq v1 v2) with
-                                                              | true => Apairs ([(Apair v1 t2)] ++ tl)
-                                                              | false => Apairs hd ++ 
+  | Apairs l => Apairs (change_assignment_list l ap)
+  end.
+
+Compute (change_assignment sigma1 (Apair x (Tvar z))).
