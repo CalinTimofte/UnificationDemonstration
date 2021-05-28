@@ -44,6 +44,8 @@ Inductive first_order_formulae : Type :=
 Compute(hd a [b;a]).
 Compute (hd (Tvar a) [Tvar b; Tvar a]).
 
+(* Support functions for removing duplicates in a var list *)
+
 Definition var_get_name (v : var) : string := 
   match v with
   | Named_var s => s
@@ -65,6 +67,8 @@ Fixpoint assemble_var_list (l : list string) : list var :=
 
 Compute (disassemble_var_list [Named_var "a"; Named_var "b"; Named_var "b"]).
 Compute (assemble_var_list ["a"; "b"; "b"]).
+
+(* --------------------------------------------- *)
 
 Definition remove_duplicates_var_list (l : list var) : list var :=
   assemble_var_list (nodup string_dec (disassemble_var_list l)).
@@ -166,6 +170,8 @@ Definition var_eq (v1 v2 : var) : bool :=
 Compute (var_eq x x).
 Compute (var_eq x y).
 
+(* var_assignment needs fuel to determine if recursion is correct *)
+
 Fixpoint var_assignment' (v : var) (a : assignment) (fuel: nat): term :=
   match fuel with
   | O => Tvar v
@@ -203,30 +209,6 @@ Fixpoint term_assignment (a : assignment) (t : term) : term :=
 Compute (term_assignment sigma1 t2).
 Compute (term_assignment sigma1 t1).
 
-(* Definition atomic_formulae_assignment (a : atomic_formulae) (asn : assignment) : atomic_formulae :=
-  match a with
-  | Afpred p l => Afpred p (map (term_assignment asn) l)
-  end.
-
-Fixpoint first_order_formulae_assignment (phi : first_order_formulae) (a : assignment) : first_order_formulae :=
-  match phi with
-  | Aformulae phi0 => Aformulae (atomic_formulae_assignment phi0 a)
-  | Anot phi0 => Anot (first_order_formulae_assignment phi0 a)
-  | Aand phi1 phi2 => Aand (first_order_formulae_assignment phi1 a) (first_order_formulae_assignment phi2 a)
-  | Aor phi1 phi2 => Aor (first_order_formulae_assignment phi1 a) (first_order_formulae_assignment phi2 a)
-  | Aimplies phi1 phi2 => Aimplies (first_order_formulae_assignment phi1 a) (first_order_formulae_assignment phi2 a)
-  | Adoubleimplies phi1 phi2 => Adoubleimplies (first_order_formulae_assignment phi1 a) (first_order_formulae_assignment phi2 a)
-  | Aforall x phi0 => Aforall x (first_order_formulae_assignment phi0 a)
-  | Aexists x phi0 => Aexists x (first_order_formulae_assignment phi0 a)
-  end. *)
-
-Inductive term_pair : Type :=
-  | Tpair (t1 t2 : term) : term_pair.
-
-Inductive unification_problem : Type :=
-  | Uset (l : list term_pair) : unification_problem
-  | Ubottom.
-
 Definition append_assignment_to_list (l : list assignment_pair) (ap : assignment_pair) : list assignment_pair :=
   l ++ [ap].
 
@@ -256,3 +238,12 @@ Definition change_assignment (a : assignment) (ap : assignment_pair) : assignmen
   end.
 
 Compute (change_assignment sigma1 (Apair x (Tvar z))).
+
+Inductive term_pair : Type :=
+  | Tpair (t1 t2 : term) : term_pair.
+
+Inductive unification_problem : Type :=
+  | Uset (l : list term_pair) : unification_problem
+  | Ubottom.
+
+
