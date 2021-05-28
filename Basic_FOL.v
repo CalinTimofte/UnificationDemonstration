@@ -246,4 +246,32 @@ Inductive unification_problem : Type :=
   | Uset (l : list term_pair) : unification_problem
   | Ubottom.
 
+Fixpoint andb_list (l : list bool) : bool :=
+  match l with
+  | [] => true
+  | h::tl => andb h (andb_list tl)
+  end.
 
+Fixpoint term_eq (t1 t2 : term) : bool :=
+  match t1 with
+  | Tconst c1 => match c1 with
+                | Func f1 => match t2 with
+                            | Tconst c2 => match c2 with
+                                           | Func f2 => f1 =? f2
+                                           end
+                            | _ => false
+                            end
+                end
+  | Tvar v1 => match t2 with
+               | Tvar v2 => var_eq v1 v2
+               | _ => false
+               end
+  | Tfunc f1 l1 => match t2 with
+                  | Tfunc f2 l2 => match f1 with
+                                   | Func fs1 => match f2 with
+                                                 | Func fs2 => andb (fs1 =? fs2) map (term_eq l1 l2)
+                                                 end
+                                   end
+                  | _ => false
+                  end
+  end.
