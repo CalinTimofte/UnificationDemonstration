@@ -246,6 +246,47 @@ Inductive unification_problem : Type :=
   | Uset (l : list term_pair) : unification_problem
   | Ubottom.
 
+Fixpoint term_in_unification_problem' (u : unification_problem) (criterion : term -> term -> bool) (gas : nat): bool :=
+  match gas with
+  | O => false
+  | S n' =>
+    match u with
+    | Ubottom => false
+    | Uset l => match l with
+                | [] => false
+                | h::tl => match h with
+                           | Tpair t1 t2 => match (criterion t1 t2) with
+                                            | true => true
+                                            | false => term_in_unification_problem' (Uset tl) criterion n'
+                                            end
+                            end
+                end
+    end
+  end.
+
+Definition term_in_unification_problem (u : unification_problem) (criterion : term -> term -> bool) : bool :=
+  match u with
+  | Ubottom => false
+  | Uset l => term_in_unification_problem' u criterion (length l)
+  end.
+
+Fixpoint remove_first_appearance_term_pair_list (l : list term_pair) (criterion : term -> term -> bool) : list term_pair :=
+  match l with
+  | [] => []
+  | h::tl => match h with
+             | Tpair t1 t2 => match (criterion t1 t2) with
+                              | true => tl
+                              | false => h :: (remove_first_appearance_term_pair_list tl criterion)
+                              end
+             end
+  end.
+
+Definition remove_first_appearance_term_unification_problem (u : unification_problem) (criterion : term -> term -> bool) : unification_problem :=
+  match u with
+  | Ubottom => Ubottom
+  | Uset l => Uset (remove_first_appearance_term_pair_list l criterion)
+  end.
+
 Fixpoint andb_list (l : list bool) : bool :=
   match l with
   | [] => true
@@ -297,3 +338,16 @@ Definition term_eq (t1 t2 : term) : bool :=
   end.
 
 Compute (term_eq t1 t1).
+
+Compute (term_in_unification_problem (Uset [Tpair t1 t2; Tpair t1 t1; Tpair t2 t2]) term_eq).
+Compute (remove_first_appearance_term_unification_problem (remove_first_appearance_term_unification_problem (Uset [Tpair t1 t2; Tpair t1 t1; Tpair t2 t2]) term_eq) term_eq).
+
+Definition some_func (n : nat) : nat :=
+  match n with
+  | O => O
+  | S n' => n'
+  end.
+
+Inductive solver : unification_problem -> Prop :=
+  | Solved : solver Ubottom
+  | Delete (
