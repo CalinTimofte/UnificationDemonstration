@@ -344,12 +344,15 @@ Compute (remove_first_appearance_term_unification_problem (remove_first_appearan
 
 Check ((term_in_unification_problem (Uset [Tpair t1 t2; Tpair t1 t1; Tpair t2 t2]) term_eq) = true).
 
+
 Inductive solver : unification_problem -> Prop :=
   | Sbottom : solver Ubottom
   | SDelete (u_p u_p' : unification_problem)(H : ((term_in_unification_problem u_p term_eq) = true)) (H' : (remove_first_appearance_term_unification_problem u_p term_eq) = u_p'): solver u_p.
 
-Theorem test : solver (Uset [Tpair t1 t2; Tpair t1 t1; Tpair t2 t2]).
+Theorem test1 : solver (Uset [Tpair t1 t2; Tpair t1 t1; Tpair t2 t2]).
   Proof. apply (SDelete (Uset [Tpair t1 t2; Tpair t1 t1; Tpair t2 t2]) (Uset [Tpair t1 t2; Tpair t2 t2])).
   - simpl. reflexivity.
   - simpl. reflexivity.
 Qed.
+
+
