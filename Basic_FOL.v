@@ -415,10 +415,64 @@ Compute (term_pair_solved_form (Tvar x) (Tfunc (Func "f") [Tvar y; Tvar z])).
 Compute (all_terms_have_property_unification_problem (Uset [Tpair t1 t2; Tpair t1 t1; Tpair t2 t2]) term_pair_solved_form).
 Compute (all_terms_have_property_unification_problem (Uset [Tpair (Tvar a) t2; Tpair (Tvar a) t1]) term_pair_solved_form).
 
+Fixpoint times_term_appears_on_left_side_unification_problem' (t : term) (up : unification_problem) (gas : nat): nat :=
+  match gas with
+  | O => 0
+  | S n' =>
+        match up with
+        | Ubottom => 0
+        | Uset l => match l with
+                    | [] => 0
+                    | h::tl => match h with
+                               | Tpair t1 t2 => match (term_eq t t1) with
+                                                | true => 1 + (times_term_appears_on_left_side_unification_problem' t (Uset tl) n')
+                                                | false => times_term_appears_on_left_side_unification_problem' t (Uset tl) n'
+                                                end
+                                end
+                    end
+        end
+  end.
+
+Definition times_term_appears_on_left_side_unification_problem (t : term) (up : unification_problem) : nat :=
+  match up with
+  | Ubottom => 0
+  | Uset l => times_term_appears_on_left_side_unification_problem' t up ((length l) + 1)
+  end.
+
+Compute (times_term_appears_on_left_side_unification_problem t1 (Uset [Tpair t2 t2; Tpair t2 t1; Tpair t2 t2])).
+
+Fixpoint all_terms_appear_only_once' (up : unification_problem) (gas : nat): bool :=
+  match gas with
+  | O => false
+  | S n' =>
+          match up with
+          | Ubottom => true
+          | Uset l => match l with
+                      | [] => true
+                      | h::tl => match h with
+                                 | Tpair t1 t2 => match (Nat.eqb (times_term_appears_on_left_side_unification_problem t1 up) 1) with
+                                                  | false => false
+                                                  | true => all_terms_appear_only_once' (Uset tl) n'
+                                                  end
+                                 end
+                      end
+          end
+  end.
+
+Definition all_terms_appear_only_once (up : unification_problem) : bool :=
+  match up with
+  | Ubottom => true
+  | Uset l => all_terms_appear_only_once' up ((length l) + 1)
+  end.
+
+Compute (all_terms_appear_only_once (Uset [Tpair t1 t2; Tpair t2 t2])).
+
+Definition unification_problem_in_solved_form (up : unification_problem) : bool :=
+  andb (all_terms_have_property_unification_problem up term_pair_solved_form) (all_terms_appear_only_once up).
 
 Inductive solver : unification_problem -> Prop :=
   | Sbottom : solver Ubottom
-  | Ssolved (u_p : unification_problem) (H : (all_terms_have_property_unification_problem u_p term_pair_solved_form) = true) : solver u_p
+  | Ssolved (u_p : unification_problem) (H : (unification_problem_in_solved_form u_p) = true) : solver u_p
   | SDelete (u_p u_p' : unification_problem)(H : ((term_in_unification_problem u_p term_eq) = true)) (H' : (remove_first_appearance_term_unification_problem u_p term_eq) = u_p')(H'' : solver u_p'): solver u_p.
 
 Theorem test1 : solver (Uset [Tpair (Tvar a) t2; Tpair t1 t1]).
@@ -426,7 +480,7 @@ Theorem test1 : solver (Uset [Tpair (Tvar a) t2; Tpair t1 t1]).
   - simpl. reflexivity.
   - simpl. reflexivity.
   - apply Ssolved.
-    -- simpl. reflexivity.
+    -- unfold unification_problem_in_solved_form. simpl. reflexivity.
 Qed.
 
 
