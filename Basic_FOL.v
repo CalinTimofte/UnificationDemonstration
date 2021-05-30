@@ -287,6 +287,32 @@ Definition remove_first_appearance_term_unification_problem (u : unification_pro
   | Uset l => Uset (remove_first_appearance_term_pair_list l criterion)
   end.
 
+Fixpoint all_terms_have_property_unification_problem' (u : unification_problem) (criterion : term -> term -> bool) (gas : nat): bool :=
+  match gas with
+  | O => false
+  | S n' =>  
+          match u with
+          | Ubottom => false
+          | Uset l => match l with
+                      | [] => true
+                      | h::tl => match h with
+                                 | Tpair t1 t2 => match (criterion t1 t2) with
+                                                  | false => false
+                                                  | true => all_terms_have_property_unification_problem' (Uset tl) criterion n'
+                                                  end
+                                  end
+                      end
+          end
+  end.
+
+Definition all_terms_have_property_unification_problem (u : unification_problem) (criterion : term -> term -> bool) : bool :=
+  match u with
+  | Ubottom => false
+  | Uset l => all_terms_have_property_unification_problem' u criterion ((length l) + 1)
+  end.
+
+
+
 Fixpoint andb_list (l : list bool) : bool :=
   match l with
   | [] => true
@@ -344,12 +370,63 @@ Compute (remove_first_appearance_term_unification_problem (remove_first_appearan
 
 Check ((term_in_unification_problem (Uset [Tpair t1 t2; Tpair t1 t1; Tpair t2 t2]) term_eq) = true).
 
+Fixpoint var_in_list_var (v : var) (l : list var) : bool :=
+  match l with
+  | [] => false
+  | h::tl => match (var_eq h v) with
+             | true => true
+             | false => var_in_list_var v tl
+             end
+  end.
+
+Compute (var_in_list_var x [y; y; x; y; x]).
+
+Definition var_in_term (v : var) (t : term) : bool :=
+  var_in_list_var v (vars_term t).
+
+Compute (var_in_term x (Tfunc (Func "f") [Tvar y; Tvar x; Tvar y])).
+
+Definition term_pair_first_var (t1 t2 : term) : bool :=
+  match t1 with
+           | Tconst _ => false
+           | Tvar _ => true
+           | Tfunc _ _ => false
+           end.
+
+
+Compute (term_pair_first_var  (Tvar x) (Tvar x)).
+Compute (term_pair_first_var (Tconst (Func "f")) (Tvar x)).
+Compute (term_pair_first_var (Tfunc (Func "f") []) (Tvar x)).
+
+Definition term_pair_solved_form (t1 t2 : term) : bool :=
+  match (term_pair_first_var t1 t2) with
+  | false => false
+  | true => match (vars_term t1) with
+            | [] => false
+            | h::tl => match (var_in_term h t2) with
+                       | true => false
+                       | false => true
+                       end
+            end
+  end.
+
+Compute (term_pair_solved_form (Tvar x) (Tfunc (Func "f") [Tvar y; Tvar z])).
+
+Compute (all_terms_have_property_unification_problem (Uset [Tpair t1 t2; Tpair t1 t1; Tpair t2 t2]) term_pair_solved_form).
+Compute (all_terms_have_property_unification_problem (Uset [Tpair (Tvar a) t2; Tpair (Tvar a) t1]) term_pair_solved_form).
+
+
 Inductive solver : unification_problem -> Prop :=
   | Sbottom : solver Ubottom
-  | SDelete (u_p u_p' : unification_problem)(H : ((term_in_unification_problem u_p term_eq) = true)) (H' : (remove_first_appearance_term_unification_problem u_p term_eq) = u_p'): solver u_p.
+  | Ssolved (u_p : unification_problem) (H : (all_terms_have_property_unification_problem u_p term_pair_solved_form) = true) : solver u_p
+  | SDelete (u_p u_p' : unification_problem)(H : ((term_in_unification_problem u_p term_eq) = true)) (H' : (remove_first_appearance_term_unification_problem u_p term_eq) = u_p')(H'' : solver u_p'): solver u_p.
 
-Theorem test : solver (Uset [Tpair t1 t2; Tpair t1 t1; Tpair t2 t2]).
-  Proof. apply (SDelete (Uset [Tpair t1 t2; Tpair t1 t1; Tpair t2 t2]) (Uset [Tpair t1 t2; Tpair t2 t2])).
+Theorem test1 : solver (Uset [Tpair (Tvar a) t2; Tpair t1 t1]).
+  Proof. apply (SDelete (Uset [Tpair (Tvar a) t2; Tpair t1 t1]) (Uset [Tpair (Tvar a) t2])).
   - simpl. reflexivity.
   - simpl. reflexivity.
+  - apply Ssolved.
+    -- simpl. reflexivity.
 Qed.
+
+
