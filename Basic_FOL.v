@@ -492,33 +492,59 @@ Definition is_decomposition_term_pair (t1 t2: term) : bool :=
                  end
   end.
 
-Fixpoint  get_list_of_tpairs_from_decomposition_tpair (tp : term_pair) := list term_pair:
-  match tp with
-  | Tpair t1 t2 => match t1 with
-                   | Tconst _ => []
-                   | Tvar _ => []
-                   | Tfunc f1 l1 => match t2 with
-                                    | Tconst _ => []
-                                    | Tvar _ => []
-                                    | Tfunc f2 l2 => match l1 with
-                                                     | [] => []
-                                                     | h1::tl1 => match l2 with
-                                                                  | [] => []
-                                                                  | h2::tl2 => [(Tpair h1 h2)] ++ get_list_of_tpairs_from_decomposition_tpair (Tpair (Tfunc f1 tl1)(Tfunc f2 tl2))
-                                                                  end
-                                                      end
-                                     end
-                   end
+Fixpoint  get_list_of_tpairs_from_decomposition_tpair' (tp : term_pair) (gas : nat): list term_pair:=
+  match gas with
+  | O => []
+  | S n' =>
+          match tp with
+          | Tpair t1 t2 => match t1 with
+                           | Tconst _ => []
+                           | Tvar _ => []
+                           | Tfunc f1 l1 => match t2 with
+                                            | Tconst _ => []
+                                            | Tvar _ => []
+                                            | Tfunc f2 l2 => match l1 with
+                                                             | [] => []
+                                                             | h1::tl1 => match l2 with
+                                                                          | [] => []
+                                                                          | h2::tl2 => [(Tpair h1 h2)] ++ (get_list_of_tpairs_from_decomposition_tpair' (Tpair (Tfunc f1 tl1)(Tfunc f2 tl2)) n')
+                                                                          end
+                                                              end
+                                             end
+                           end
+          end
   end.
 
-Fixpoint append_decomposed_term_pair (tp : term_pair) (up : unification_problem) : unification_problem :=
-  match up with
-  | Uset l => match tp with
-              Tpair t1 t2  
+Definition get_list_of_tpairs_from_decomposition_tpair (tp : term_pair) : list term_pair :=
+  get_list_of_tpairs_from_decomposition_tpair' tp 100.
 
-Fixpoint remove_and_replace_decomposition_term_pair (tp : term_pair) (up : unification_problem) : unification_problem :=
+Compute (get_list_of_tpairs_from_decomposition_tpair (Tpair (Tfunc (Func "f") [Tvar a; Tvar b]) (Tfunc (Func "g") [Tvar y; Tvar x]))).
+
+Definition term_pair_eq (tp1 tp2 : term_pair) : bool :=
+  match tp1 with
+  | Tpair t11 t12 => match tp2 with
+                     | Tpair t21 t22 => andb (term_eq t11 t21) (term_eq t12 t22)
+                     end
+  end.
+
+Definition append_decomposition_unification_problem (tp : term_pair) (up : unification_problem) : unification_problem:=
   match up with
-  | Uset l => match l with 
+  | Ubottom => Ubottom
+  | Uset l => Uset (l ++ get_list_of_tpairs_from_decomposition_tpair tp)
+  end.
+
+Fixpoint remove_decomposition_term_pair (tp : term_pair) (tpl : list term_pair) : list term_pair :=
+  match tpl with
+  | [] => []
+  | h::tl => match (term_pair_eq tp h) with
+            | true => tl
+            | false => [h] ++ (remove_decomposition_term_pair tp tl)
+            end
+  end.
+
+Compute (remove_decomposition_term_pair (Tpair (Tfunc (Func "f") [Tvar a; Tvar b]) (Tfunc (Func "g") [Tvar y; Tvar x])) [Tpair (Tvar a) t2; Tpair t1 t1; Tpair (Tfunc (Func "f") [Tvar a; Tvar b]) (Tfunc (Func "g") [Tvar y; Tvar x])).
+
+Definition remove_and_replace_decomposition_unif_problem (tp : term_pair
 
 Compute (is_decomposition_term_pair (Tfunc (Func "f") [Tvar a; Tvar b]) (Tfunc (Func "g") [Tvar y; Tvar x])).
 Compute (term_in_unification_problem (Uset [Tpair (Tfunc (Func "f") [Tvar a; Tvar b]) (Tfunc (Func "g") [Tvar y; Tvar x])]) is_decomposition_term_pair).
