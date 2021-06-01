@@ -527,6 +527,8 @@ Definition term_pair_eq (tp1 tp2 : term_pair) : bool :=
                      end
   end.
 
+Compute (term_pair_eq (Tpair (Tfunc (Func "f") [Tvar a; Tvar b]) (Tfunc (Func "g") [Tvar y; Tvar x])) (Tpair (Tfunc (Func "f") [Tvar a; Tvar b]) (Tfunc (Func "g") [Tvar y; Tvar x]))).
+
 Definition append_decomposition_unification_problem (tp : term_pair) (up : unification_problem) : unification_problem:=
   match up with
   | Ubottom => Ubottom
@@ -542,9 +544,18 @@ Fixpoint remove_decomposition_term_pair (tp : term_pair) (tpl : list term_pair) 
             end
   end.
 
-Compute (remove_decomposition_term_pair (Tpair (Tfunc (Func "f") [Tvar a; Tvar b]) (Tfunc (Func "g") [Tvar y; Tvar x])) [Tpair (Tvar a) t2; Tpair t1 t1; Tpair (Tfunc (Func "f") [Tvar a; Tvar b]) (Tfunc (Func "g") [Tvar y; Tvar x])).
+Definition decomposition_term_pair := Tpair (Tfunc (Func "f") [Tvar x; Tvar y]) (Tfunc (Func "g") [Tvar a; Tvar b]).
+Definition unif_probl1 := Uset [Tpair (Tvar a) t2; Tpair t1 t1; decomposition_term_pair].
 
-Definition remove_and_replace_decomposition_unif_problem (tp : term_pair
+Compute (remove_decomposition_term_pair (Tpair (Tfunc (Func "f") [Tvar a; Tvar b]) (Tfunc (Func "g") [Tvar y; Tvar x])) [Tpair (Tvar a) t2; Tpair t1 t1; Tpair (Tfunc (Func "f") [Tvar a; Tvar b]) (Tfunc (Func "g") [Tvar y; Tvar x])]).
+
+Definition remove_and_replace_decomposition_unif_problem (tp : term_pair) (up : unification_problem) : unification_problem :=
+  match up with 
+  | Ubottom => Ubottom
+  | Uset l => append_decomposition_unification_problem tp (Uset (remove_decomposition_term_pair tp l))
+  end.
+
+Compute (remove_and_replace_decomposition_unif_problem (Tpair (Tfunc (Func "f") [Tvar x; Tvar y]) (Tfunc (Func "g") [Tvar a; Tvar b])) unif_probl1).
 
 Compute (is_decomposition_term_pair (Tfunc (Func "f") [Tvar a; Tvar b]) (Tfunc (Func "g") [Tvar y; Tvar x])).
 Compute (term_in_unification_problem (Uset [Tpair (Tfunc (Func "f") [Tvar a; Tvar b]) (Tfunc (Func "g") [Tvar y; Tvar x])]) is_decomposition_term_pair).
@@ -552,14 +563,18 @@ Compute (term_in_unification_problem (Uset [Tpair (Tfunc (Func "f") [Tvar a; Tva
 Inductive solver : unification_problem -> Prop :=
   | Sbottom : solver Ubottom
   | Ssolved (u_p : unification_problem) (H : (unification_problem_in_solved_form u_p) = true) : solver u_p
-  | SDelete (u_p u_p' : unification_problem)(H : ((term_in_unification_problem u_p term_eq) = true)) (H' : (remove_first_appearance_term_unification_problem u_p term_eq) = u_p')(H'' : solver u_p'): solver u_p.
+  | Sdelete (u_p u_p' : unification_problem)(H : ((term_in_unification_problem u_p term_eq) = true)) (H' : (remove_first_appearance_term_unification_problem u_p term_eq) = u_p')(H'' : solver u_p'): solver u_p
+  | Sdecompose (u_p u_p' : unification_problem)(tp : term_pair)(H : ((term_in_unification_problem u_p is_decomposition_term_pair) = true)) (H' : (remove_and_replace_decomposition_unif_problem tp u_p) = u_p')(H'' : solver u_p'): solver u_p.
 
-Theorem test1 : solver (Uset [Tpair (Tvar a) t2; Tpair t1 t1]).
-  Proof. apply (SDelete (Uset [Tpair (Tvar a) t2; Tpair t1 t1]) (Uset [Tpair (Tvar a) t2])).
+Theorem test1 : solver unif_probl1.
+  Proof. unfold unif_probl1. apply (Sdelete unif_probl1 (Uset [Tpair (Tvar a) t2; decomposition_term_pair])).
   - simpl. reflexivity.
   - simpl. reflexivity.
-  - apply Ssolved.
-    -- unfold unification_problem_in_solved_form. simpl. reflexivity.
+  - apply (Sdecompose (Uset [Tpair (Tvar a) t2; decomposition_term_pair]) (Uset [Tpair (Tvar a) t2; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)]) decomposition_term_pair).
+    -- simpl. reflexivity.
+    -- simpl. reflexivity.
+    -- apply Ssolved.
+     --- unfold unification_problem_in_solved_form. simpl. reflexivity.
 Qed.
 
 
