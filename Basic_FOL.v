@@ -23,6 +23,15 @@ Inductive term : Type :=
   | Tvar : var -> term
   | Tfunc : functional_symbol -> list term -> term.
 
+Definition arity_term (t : term) : nat :=
+  match t with
+  | Tconst _ => 0
+  | Tvar _=> 0
+  | Tfunc f l => length l
+  end.
+
+Compute (arity_term(Tfunc (Func "f") [Tvar a;Tvar b])).
+
 Inductive atomic_formulae : Type :=
   | Afpred: predicative_symbol -> list term -> atomic_formulae.
 
@@ -311,8 +320,6 @@ Definition all_terms_have_property_unification_problem (u : unification_problem)
   | Uset l => all_terms_have_property_unification_problem' u criterion ((length l) + 1)
   end.
 
-
-
 Fixpoint andb_list (l : list bool) : bool :=
   match l with
   | [] => true
@@ -469,6 +476,52 @@ Compute (all_terms_appear_only_once (Uset [Tpair t1 t2; Tpair t2 t2])).
 
 Definition unification_problem_in_solved_form (up : unification_problem) : bool :=
   andb (all_terms_have_property_unification_problem up term_pair_solved_form) (all_terms_appear_only_once up).
+
+Definition is_decomposition_term_pair (t1 t2: term) : bool :=
+  match t1 with
+  | Tconst _ => false
+  | Tvar _ => false
+  | Tfunc f1 l1 => match f1 with
+                 | Func fn1 => match t2 with 
+                               | Tconst _ => false
+                               | Tvar _ => false
+                               | Tfunc f2 l2 => match f2 with
+                                                | Func fn2 => andb (negb (fn1 =? fn2)) (Nat.eqb  (length l1)(length l2))
+                                                end
+                               end
+                 end
+  end.
+
+Fixpoint  get_list_of_tpairs_from_decomposition_tpair (tp : term_pair) := list term_pair:
+  match tp with
+  | Tpair t1 t2 => match t1 with
+                   | Tconst _ => []
+                   | Tvar _ => []
+                   | Tfunc f1 l1 => match t2 with
+                                    | Tconst _ => []
+                                    | Tvar _ => []
+                                    | Tfunc f2 l2 => match l1 with
+                                                     | [] => []
+                                                     | h1::tl1 => match l2 with
+                                                                  | [] => []
+                                                                  | h2::tl2 => [(Tpair h1 h2)] ++ get_list_of_tpairs_from_decomposition_tpair (Tpair (Tfunc f1 tl1)(Tfunc f2 tl2))
+                                                                  end
+                                                      end
+                                     end
+                   end
+  end.
+
+Fixpoint append_decomposed_term_pair (tp : term_pair) (up : unification_problem) : unification_problem :=
+  match up with
+  | Uset l => match tp with
+              Tpair t1 t2  
+
+Fixpoint remove_and_replace_decomposition_term_pair (tp : term_pair) (up : unification_problem) : unification_problem :=
+  match up with
+  | Uset l => match l with 
+
+Compute (is_decomposition_term_pair (Tfunc (Func "f") [Tvar a; Tvar b]) (Tfunc (Func "g") [Tvar y; Tvar x])).
+Compute (term_in_unification_problem (Uset [Tpair (Tfunc (Func "f") [Tvar a; Tvar b]) (Tfunc (Func "g") [Tvar y; Tvar x])]) is_decomposition_term_pair).
 
 Inductive solver : unification_problem -> Prop :=
   | Sbottom : solver Ubottom
