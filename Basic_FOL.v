@@ -546,7 +546,9 @@ Fixpoint remove_decomposition_term_pair (tp : term_pair) (tpl : list term_pair) 
 
 Definition decomposition_term_pair := Tpair (Tfunc (Func "f") [Tvar x; Tvar y]) (Tfunc (Func "f") [Tvar a; Tvar b]).
 Definition orientation_term_pair := Tpair t2 (Tvar a).
+Definition conflict_term := Tpair (Tfunc (Func "f") [Tvar x; Tvar y]) (Tfunc (Func "g") [Tvar a; Tvar b]).
 Definition unif_probl1 := Uset [ Tpair t1 t1; decomposition_term_pair; orientation_term_pair].
+Definition unif_probl2 := Uset [ conflict_term ].
 
 Compute (remove_decomposition_term_pair (Tpair (Tfunc (Func "f") [Tvar a; Tvar b]) (Tfunc (Func "g") [Tvar y; Tvar x])) [Tpair (Tvar a) t2; Tpair t1 t1; Tpair (Tfunc (Func "f") [Tvar a; Tvar b]) (Tfunc (Func "g") [Tvar y; Tvar x])]).
 
@@ -590,12 +592,29 @@ Definition apply_orientation (tp : term_pair) (up : unification_problem) : unifi
 
 Compute (apply_orientation orientation_term_pair unif_probl1).
 
+Definition is_conflict_term_pair (t1 t2 : term) : bool :=
+  match t1, t2 with
+  | Tfunc f1 l1, Tfunc f2 l2 => match f1, f2 with
+                          | Func fn1, Func fn2 => negb (eqb fn1 fn2)
+                          end
+  | _, _ => false
+  end.
+
+Compute (is_conflict_term_pair (Tfunc (Func "f") [Tvar x; Tvar y]) (Tfunc (Func "g") [Tvar a; Tvar b])).
+Compute (is_conflict_term_pair (Tfunc (Func "f") [Tvar x; Tvar y]) (Tfunc (Func "f") [Tvar a; Tvar b])).
+
+Definition remove_conflict_term_pair (tp : term_pair) (up : unification_problem) : unification_problem :=
+  Ubottom.
+
+Compute (remove_conflict_term_pair conflict_term unif_probl2).
+
 Inductive solver : unification_problem -> Prop :=
   | Sbottom : solver Ubottom
   | Ssolved (u_p : unification_problem) (H : (unification_problem_in_solved_form u_p) = true) : solver u_p
   | Sdelete (u_p u_p' : unification_problem)(H : ((term_in_unification_problem u_p term_eq) = true)) (H' : (remove_first_appearance_term_unification_problem u_p term_eq) = u_p')(H'' : solver u_p'): solver u_p
   | Sdecompose (u_p u_p' : unification_problem)(tp : term_pair)(H : ((term_in_unification_problem u_p is_decomposition_term_pair) = true)) (H' : (remove_and_replace_decomposition_unif_problem tp u_p) = u_p')(H'' : solver u_p'): solver u_p
-  | Sorientation (u_p u_p' : unification_problem) (tp : term_pair) (H : ((term_in_unification_problem u_p is_orientation_term_pair) = true)) (H' : (apply_orientation tp u_p) = u_p') (H'' : solver u_p'): solver u_p.
+  | Sorientation (u_p u_p' : unification_problem) (tp : term_pair) (H : ((term_in_unification_problem u_p is_orientation_term_pair) = true)) (H' : (apply_orientation tp u_p) = u_p') (H'' : solver u_p'): solver u_p
+  | Sconflict (u_p u_p' : unification_problem) (tp : term_pair) (H : ((term_in_unification_problem u_p is_conflict_term_pair) = true)) (H' : (remove_conflict_term_pair tp u_p) = u_p') (H'' : solver u_p'): solver u_p.
 
 Theorem test1 : solver unif_probl1.
   Proof. unfold unif_probl1. apply (Sdelete unif_probl1 (Uset [decomposition_term_pair; orientation_term_pair])).
@@ -611,4 +630,11 @@ Theorem test1 : solver unif_probl1.
       ---- simpl. reflexivity.
 Qed.
 
+Theorem test2 : solver unif_probl2.
+  Proof. unfold unif_probl2. unfold conflict_term.
+  apply (Sconflict unif_probl2 Ubottom conflict_term).
+  - simpl. reflexivity.
+  - simpl. reflexivity.
+  - apply Sbottom.
+Qed.
 
