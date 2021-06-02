@@ -486,7 +486,7 @@ Definition is_decomposition_term_pair (t1 t2: term) : bool :=
                                | Tconst _ => false
                                | Tvar _ => false
                                | Tfunc f2 l2 => match f2 with
-                                                | Func fn2 => andb (negb (fn1 =? fn2)) (Nat.eqb  (length l1)(length l2))
+                                                | Func fn2 => andb (fn1 =? fn2) (Nat.eqb  (length l1)(length l2))
                                                 end
                                end
                  end
@@ -544,7 +544,7 @@ Fixpoint remove_decomposition_term_pair (tp : term_pair) (tpl : list term_pair) 
             end
   end.
 
-Definition decomposition_term_pair := Tpair (Tfunc (Func "f") [Tvar x; Tvar y]) (Tfunc (Func "g") [Tvar a; Tvar b]).
+Definition decomposition_term_pair := Tpair (Tfunc (Func "f") [Tvar x; Tvar y]) (Tfunc (Func "f") [Tvar a; Tvar b]).
 Definition unif_probl1 := Uset [Tpair (Tvar a) t2; Tpair t1 t1; decomposition_term_pair].
 
 Compute (remove_decomposition_term_pair (Tpair (Tfunc (Func "f") [Tvar a; Tvar b]) (Tfunc (Func "g") [Tvar y; Tvar x])) [Tpair (Tvar a) t2; Tpair t1 t1; Tpair (Tfunc (Func "f") [Tvar a; Tvar b]) (Tfunc (Func "g") [Tvar y; Tvar x])]).
@@ -557,7 +557,7 @@ Definition remove_and_replace_decomposition_unif_problem (tp : term_pair) (up : 
 
 Compute (remove_and_replace_decomposition_unif_problem (Tpair (Tfunc (Func "f") [Tvar x; Tvar y]) (Tfunc (Func "g") [Tvar a; Tvar b])) unif_probl1).
 
-Compute (is_decomposition_term_pair (Tfunc (Func "f") [Tvar a; Tvar b]) (Tfunc (Func "g") [Tvar y; Tvar x])).
+Compute (is_decomposition_term_pair (Tfunc (Func "f") [Tvar a; Tvar b]) (Tfunc (Func "f") [Tvar y; Tvar x])).
 Compute (term_in_unification_problem (Uset [Tpair (Tfunc (Func "f") [Tvar a; Tvar b]) (Tfunc (Func "g") [Tvar y; Tvar x])]) is_decomposition_term_pair).
 
 Inductive solver : unification_problem -> Prop :=
