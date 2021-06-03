@@ -623,12 +623,58 @@ Compute (is_occurs_check_term_pair (Tvar a) (Tfunc (Func "g") [Tvar a; Tvar b]))
 Definition occurs_check (tp : term_pair) (up : unification_problem) : unification_problem :=
   remove_conflict_term_pair tp up.
 
+Definition is_elimination_term_pair (t1 t2 : term) : bool :=
+  term_pair_solved_form t1 t2.
+
+Definition from_elimination_term_pair_to_assignment (tp : term_pair) : assignment :=
+  match tp with
+  | Tpair t1 t2 => match t1 with
+                   | Tvar v => Apairs [Apair v t2]
+                   | _ => Apairs []
+                   end
+  end.
+
+Compute (from_elimination_term_pair_to_assignment (Tpair (Tvar x) (Tvar a))).
+Definition x1 := Named_var "x1".
+Definition x2 := Named_var "x2".
+Definition x3 := Named_var "x3".
+Definition f := Func "f".
+Definition g := Func "g".
+Definition elimination_tpair := Tpair (Tvar x2) (Tvar a).
+Definition unif_probl4 := Uset [Tpair (Tfunc f [Tfunc g [Tvar x1; Tvar a]; Tvar x2]) (Tvar x3); Tpair (Tfunc f [Tvar x2; Tvar x2]) (Tfunc f [Tvar a; Tvar x1])].
+Definition unif_probl4' := Uset [Tpair (Tfunc f [Tfunc g [Tvar x1; Tvar a]; Tvar x2]) (Tvar x3); Tpair (Tvar x2) (Tvar a); Tpair (Tvar x2) (Tvar x1)].
+Definition unif_probl4'' := Uset [Tpair (Tfunc f [Tfunc g [Tvar x1; Tvar a]; Tvar a]) (Tvar x3); Tpair (Tvar x2) (Tvar a); Tpair (Tvar a) (Tvar x1)].
+Definition unif_probl4''' := Uset [Tpair (Tfunc f [Tfunc g [Tvar x1; Tvar a]; Tvar a]) (Tvar x3); Tpair (Tvar x2) (Tvar a); Tpair (Tvar x1) (Tvar a)].
+Definition unif_probl4'''' := Uset [Tpair (Tfunc f [Tfunc g [Tvar a; Tvar a]; Tvar a]) (Tvar x3); Tpair (Tvar x2) (Tvar a); Tpair (Tvar x1) (Tvar a)].
+Definition unif_probl4''''' := Uset [Tpair (Tvar x3) (Tfunc f [Tfunc g [Tvar a; Tvar a]; Tvar a]); Tpair (Tvar x2) (Tvar a); Tpair (Tvar x1) (Tvar a)].
+Definition elimination_example := Uset [Tpair (Tfunc f [Tfunc g [Tvar x1; Tvar a]; Tvar x2]) (Tvar x3); Tpair (Tfunc f [Tvar x2; Tvar x2]) (Tfunc f [Tvar a; Tvar x1]); elimination_tpair].
+
+Fixpoint elimination_term_pair_list (tp : term_pair) (tpl : list term_pair) : list term_pair :=
+  match tpl with
+  | [] => []
+  | h::tl => match (term_pair_eq tp h) with
+             | true => [h] ++ (elimination_term_pair_list tp tl)
+             | _ => match h with
+                    | Tpair t1 t2 => [Tpair (term_assignment (from_elimination_term_pair_to_assignment tp) t1) (term_assignment (from_elimination_term_pair_to_assignment tp) t2)] ++ (elimination_term_pair_list tp tl)
+                    end
+             end
+  end.
+
+Definition elimination (tp : term_pair) (up : unification_problem) : unification_problem :=
+  match up with
+  | Ubottom => Ubottom
+  | Uset l => Uset (elimination_term_pair_list tp l)
+  end.
+
+Compute (elimination elimination_tpair elimination_example).
+
 Inductive solver : unification_problem -> Prop :=
   | Sbottom : solver Ubottom
   | Ssolved (u_p : unification_problem) (H : (unification_problem_in_solved_form u_p) = true) : solver u_p
   | Sdelete (u_p u_p' : unification_problem)(H : ((term_in_unification_problem u_p term_eq) = true)) (H' : (remove_first_appearance_term_unification_problem u_p term_eq) = u_p')(H'' : solver u_p'): solver u_p
   | Sdecompose (u_p u_p' : unification_problem)(tp : term_pair)(H : ((term_in_unification_problem u_p is_decomposition_term_pair) = true)) (H' : (remove_and_replace_decomposition_unif_problem tp u_p) = u_p')(H'' : solver u_p'): solver u_p
   | Sorientation (u_p u_p' : unification_problem) (tp : term_pair) (H : ((term_in_unification_problem u_p is_orientation_term_pair) = true)) (H' : (apply_orientation tp u_p) = u_p') (H'' : solver u_p'): solver u_p
+  | Selimination (u_p u_p' : unification_problem) (tp : term_pair) (H : ((term_in_unification_problem u_p is_elimination_term_pair) = true)) (H' : (elimination tp u_p) = u_p') (H'' : solver u_p'): solver u_p
   | Sconflict (u_p u_p' : unification_problem) (tp : term_pair) (H : ((term_in_unification_problem u_p is_conflict_term_pair) = true)) (H' : (remove_conflict_term_pair tp u_p) = u_p') (H'' : solver u_p'): solver u_p
   | Soccurs_check (u_p u_p' : unification_problem) (tp : term_pair) (H : ((term_in_unification_problem u_p is_occurs_check_term_pair) = true)) (H' : (occurs_check tp u_p) = u_p') (H'' : solver u_p'): solver u_p.
 
@@ -660,5 +706,25 @@ Proof.
   - simpl. reflexivity.
   - simpl. reflexivity.
   - apply Sbottom.
+Qed.
+
+Theorem test4 : solver unif_probl4.
+Proof.
+  apply (Sdecompose unif_probl4 unif_probl4' (Tpair (Tfunc f [Tvar x2; Tvar x2]) (Tfunc f [Tvar a; Tvar x1]))).
+  - simpl. reflexivity.
+  - simpl. reflexivity.
+  - apply (Selimination unif_probl4' unif_probl4'' (Tpair (Tvar x2) (Tvar a))).
+    -- simpl. reflexivity.
+    -- simpl. reflexivity.
+    -- apply (Sorientation unif_probl4'' unif_probl4''' (Tpair (Tvar a) (Tvar x1))).
+      --- simpl. reflexivity.
+      --- simpl. reflexivity.
+      --- apply (Selimination unif_probl4''' unif_probl4'''' (Tpair (Tvar x1) (Tvar a))).
+        ---- simpl. reflexivity.
+        ---- simpl. reflexivity.
+        ---- apply (Sorientation unif_probl4'''' unif_probl4''''' (Tpair (Tfunc f [Tfunc g [Tvar a; Tvar a]; Tvar a])(Tvar x3))).
+          ----- simpl. reflexivity.
+          ----- simpl. reflexivity.
+          ----- apply Ssolved. simpl. reflexivity.
 Qed.
 
