@@ -1,27 +1,10 @@
+From Licenta Require Import Syntax.
+
 Require Import String.
 Open Scope string_scope.
 
 Require Import List.
 Import ListNotations.
-
-Inductive var: Type :=
-  | Named_var: string -> var.
-
-Check ([Named_var "a"; Named_var "b"]).
-Check(Named_var "a").
-Definition a := Named_var "a".
-Definition b := Named_var "b".
-
-Inductive functional_symbol : Type :=
-  | Func: string -> functional_symbol.
-
-Inductive predicative_symbol : Type :=
-  | Predicate: string -> predicative_symbol.
-
-Inductive term : Type :=
-  | Tconst : functional_symbol -> term
-  | Tvar : var -> term
-  | Tfunc : functional_symbol -> list term -> term.
 
 Definition arity_term (t : term) : nat :=
   match t with
@@ -32,35 +15,12 @@ Definition arity_term (t : term) : nat :=
 
 Compute (arity_term(Tfunc (Func "f") [Tvar a;Tvar b])).
 
-Inductive atomic_formulae : Type :=
-  | Afpred: predicative_symbol -> list term -> atomic_formulae.
-
-Definition P := Predicate "P".
-Check (Afpred (Predicate "P") [Tvar a]).
-Definition phi := Afpred P.
-
-
-Inductive first_order_formulae : Type :=
-  | Aformulae (phi : atomic_formulae)
-  | Anot (phi : first_order_formulae)
-  | Aand (phi1 phi2 : first_order_formulae)
-  | Aor (phi1 phi2 : first_order_formulae)
-  | Aimplies (phi1 phi2 : first_order_formulae)
-  | Adoubleimplies (phi1 phi2 : first_order_formulae)
-  | Aforall (x : var) (phi : first_order_formulae)
-  | Aexists (x : var) (phi : first_order_formulae).
-
-Compute(hd a [b;a]).
-Compute (hd (Tvar a) [Tvar b; Tvar a]).
-
 (* Support functions for removing duplicates in a var list *)
 
 Definition var_get_name (v : var) : string := 
   match v with
   | Named_var s => s
   end.
-
-Check (Named_var "a" = Named_var "b").
 
 Fixpoint disassemble_var_list (l : list var) : list string :=
   match l with
@@ -115,12 +75,9 @@ Definition vars_first_order_formulae (phi : first_order_formulae) : list var := 
 
 Compute (vars_term (Tfunc (Func "f") [(Tvar a); (Tfunc (Func "g") [Tvar b; Tvar b])])).
 
-Definition x := Named_var "x".
-Definition y := Named_var "y".
-Definition z := Named_var "z".
+
 
 Compute (vars_term (Tfunc (Func "f") [(Tvar a); (Tvar a)])).
-Definition phi1 := ( Aand ( Aforall x ( Aand ( Aformulae ( phi [Tvar x; Tvar y] ) ) ( Aexists y ( Aand ( Aformulae (phi [Tvar z; Tfunc ( Func "f" ) [Tvar x; Tvar y]]) ) ( Aformulae ( phi [Tvar x; Tvar y] ) )  ) ) ) ) ( Aformulae ( phi [Tvar x; Tvar x] ) )).
 Compute(vars_first_order_formulae' phi1).
 
 Definition remove_element_var_list (v : var) (l : list var) : list var :=
@@ -164,14 +121,9 @@ Definition bound_vars_first_order_formulae (phi : first_order_formulae) : list v
 Compute (bound_vars_first_order_formulae (Aforall x (Aformulae (phi [Tvar x; Tvar y])))).
 Compute (bound_vars_first_order_formulae phi1).
 
-Inductive assignment_pair : Type :=
-  | Apair: var -> term -> assignment_pair.
 
-Inductive assignment : Type :=
-  | Apairs: list assignment_pair -> assignment.
 
-Check (Apair x (Tvar y)).
-Check (Apairs [Apair x (Tvar y); Apair z (Tfunc (Func "f") [Tvar x; Tvar y])]).
+
 
 Definition var_eq (v1 v2 : var) : bool :=
   var_get_name v1 =? var_get_name v2.
@@ -203,10 +155,7 @@ Definition var_assignment (a : assignment) (v: var): term :=
   end.
 
 Compute (var_assignment (Apairs [Apair y (Tvar x); Apair x (Tvar y)]) x).
-Definition sigma1 := Apairs [Apair y (Tvar x); Apair x (Tvar y)].
 
-Definition t1 := Tfunc (Func "f") [Tvar x; Tvar y; Tvar x; Tfunc (Func "g") [Tvar x; Tvar y]].
-Definition t2 := Tfunc (Func "f") [Tvar x; Tvar y; Tvar x].
 
 Fixpoint term_assignment (a : assignment) (t : term) : term :=
   match t with
@@ -248,12 +197,7 @@ Definition change_assignment (a : assignment) (ap : assignment_pair) : assignmen
 
 Compute (change_assignment sigma1 (Apair x (Tvar z))).
 
-Inductive term_pair : Type :=
-  | Tpair (t1 t2 : term) : term_pair.
 
-Inductive unification_problem : Type :=
-  | Uset (l : list term_pair) : unification_problem
-  | Ubottom.
 
 Fixpoint term_in_unification_problem' (u : unification_problem) (criterion : term -> term -> bool) (gas : nat): bool :=
   match gas with
@@ -544,12 +488,7 @@ Fixpoint remove_decomposition_term_pair (tp : term_pair) (tpl : list term_pair) 
             end
   end.
 
-Definition decomposition_term_pair := Tpair (Tfunc (Func "f") [Tvar x; Tvar y]) (Tfunc (Func "f") [Tvar a; Tvar b]).
-Definition orientation_term_pair := Tpair t2 (Tvar a).
-Definition conflict_term := Tpair (Tfunc (Func "f") [Tvar x; Tvar y]) (Tfunc (Func "g") [Tvar a; Tvar b]).
-Definition occurs_check_term_pair := (Tpair (Tvar a) (Tfunc (Func "g") [Tvar a; Tvar b])).
-Definition unif_probl1 := Uset [ Tpair t1 t1; decomposition_term_pair; orientation_term_pair].
-Definition unif_probl2 := Uset [ conflict_term ].
+
 
 Compute (remove_decomposition_term_pair (Tpair (Tfunc (Func "f") [Tvar a; Tvar b]) (Tfunc (Func "g") [Tvar y; Tvar x])) [Tpair (Tvar a) t2; Tpair t1 t1; Tpair (Tfunc (Func "f") [Tvar a; Tvar b]) (Tfunc (Func "g") [Tvar y; Tvar x])]).
 
@@ -635,19 +574,6 @@ Definition from_elimination_term_pair_to_assignment (tp : term_pair) : assignmen
   end.
 
 Compute (from_elimination_term_pair_to_assignment (Tpair (Tvar x) (Tvar a))).
-Definition x1 := Named_var "x1".
-Definition x2 := Named_var "x2".
-Definition x3 := Named_var "x3".
-Definition f := Func "f".
-Definition g := Func "g".
-Definition elimination_tpair := Tpair (Tvar x2) (Tvar a).
-Definition unif_probl4 := Uset [Tpair (Tfunc f [Tfunc g [Tvar x1; Tvar a]; Tvar x2]) (Tvar x3); Tpair (Tfunc f [Tvar x2; Tvar x2]) (Tfunc f [Tvar a; Tvar x1])].
-Definition unif_probl4' := Uset [Tpair (Tfunc f [Tfunc g [Tvar x1; Tvar a]; Tvar x2]) (Tvar x3); Tpair (Tvar x2) (Tvar a); Tpair (Tvar x2) (Tvar x1)].
-Definition unif_probl4'' := Uset [Tpair (Tfunc f [Tfunc g [Tvar x1; Tvar a]; Tvar a]) (Tvar x3); Tpair (Tvar x2) (Tvar a); Tpair (Tvar a) (Tvar x1)].
-Definition unif_probl4''' := Uset [Tpair (Tfunc f [Tfunc g [Tvar x1; Tvar a]; Tvar a]) (Tvar x3); Tpair (Tvar x2) (Tvar a); Tpair (Tvar x1) (Tvar a)].
-Definition unif_probl4'''' := Uset [Tpair (Tfunc f [Tfunc g [Tvar a; Tvar a]; Tvar a]) (Tvar x3); Tpair (Tvar x2) (Tvar a); Tpair (Tvar x1) (Tvar a)].
-Definition unif_probl4''''' := Uset [Tpair (Tvar x3) (Tfunc f [Tfunc g [Tvar a; Tvar a]; Tvar a]); Tpair (Tvar x2) (Tvar a); Tpair (Tvar x1) (Tvar a)].
-Definition elimination_example := Uset [Tpair (Tfunc f [Tfunc g [Tvar x1; Tvar a]; Tvar x2]) (Tvar x3); Tpair (Tfunc f [Tvar x2; Tvar x2]) (Tfunc f [Tvar a; Tvar x1]); elimination_tpair].
 
 Fixpoint elimination_term_pair_list (tp : term_pair) (tpl : list term_pair) : list term_pair :=
   match tpl with
@@ -667,64 +593,3 @@ Definition elimination (tp : term_pair) (up : unification_problem) : unification
   end.
 
 Compute (elimination elimination_tpair elimination_example).
-
-Inductive solver : unification_problem -> Prop :=
-  | Sbottom : solver Ubottom
-  | Ssolved (u_p : unification_problem) (H : (unification_problem_in_solved_form u_p) = true) : solver u_p
-  | Sdelete (u_p u_p' : unification_problem)(H : ((term_in_unification_problem u_p term_eq) = true)) (H' : (remove_first_appearance_term_unification_problem u_p term_eq) = u_p')(H'' : solver u_p'): solver u_p
-  | Sdecompose (u_p u_p' : unification_problem)(tp : term_pair)(H : ((term_in_unification_problem u_p is_decomposition_term_pair) = true)) (H' : (remove_and_replace_decomposition_unif_problem tp u_p) = u_p')(H'' : solver u_p'): solver u_p
-  | Sorientation (u_p u_p' : unification_problem) (tp : term_pair) (H : ((term_in_unification_problem u_p is_orientation_term_pair) = true)) (H' : (apply_orientation tp u_p) = u_p') (H'' : solver u_p'): solver u_p
-  | Selimination (u_p u_p' : unification_problem) (tp : term_pair) (H : ((term_in_unification_problem u_p is_elimination_term_pair) = true)) (H' : (elimination tp u_p) = u_p') (H'' : solver u_p'): solver u_p
-  | Sconflict (u_p u_p' : unification_problem) (tp : term_pair) (H : ((term_in_unification_problem u_p is_conflict_term_pair) = true)) (H' : (remove_conflict_term_pair tp u_p) = u_p') (H'' : solver u_p'): solver u_p
-  | Soccurs_check (u_p u_p' : unification_problem) (tp : term_pair) (H : ((term_in_unification_problem u_p is_occurs_check_term_pair) = true)) (H' : (occurs_check tp u_p) = u_p') (H'' : solver u_p'): solver u_p.
-
-Theorem test1 : solver unif_probl1.
-  Proof. unfold unif_probl1. apply (Sdelete unif_probl1 (Uset [decomposition_term_pair; orientation_term_pair])).
-  - simpl. reflexivity.
-  - simpl. reflexivity.
-  - apply (Sdecompose (Uset [decomposition_term_pair; orientation_term_pair]) (Uset [orientation_term_pair; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)]) decomposition_term_pair).
-    -- simpl. reflexivity.
-    -- simpl. reflexivity.
-    -- apply (Sorientation (Uset [orientation_term_pair; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)]) (Uset [Tpair (Tvar a) t2; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)]) orientation_term_pair).
-     --- simpl. reflexivity.
-     --- simpl. reflexivity. 
-     --- apply Ssolved. 
-      ---- simpl. reflexivity.
-Qed.
-
-Theorem test2 : solver unif_probl2.
-  Proof. unfold unif_probl2. unfold conflict_term.
-  apply (Sconflict unif_probl2 Ubottom conflict_term).
-  - simpl. reflexivity.
-  - simpl. reflexivity.
-  - apply Sbottom.
-Qed.
-
-Theorem test3 : solver (Uset [occurs_check_term_pair]).
-Proof.
-  apply (Soccurs_check (Uset [occurs_check_term_pair]) Ubottom occurs_check_term_pair).
-  - simpl. reflexivity.
-  - simpl. reflexivity.
-  - apply Sbottom.
-Qed.
-
-Theorem test4 : solver unif_probl4.
-Proof.
-  apply (Sdecompose unif_probl4 unif_probl4' (Tpair (Tfunc f [Tvar x2; Tvar x2]) (Tfunc f [Tvar a; Tvar x1]))).
-  - simpl. reflexivity.
-  - simpl. reflexivity.
-  - apply (Selimination unif_probl4' unif_probl4'' (Tpair (Tvar x2) (Tvar a))).
-    -- simpl. reflexivity.
-    -- simpl. reflexivity.
-    -- apply (Sorientation unif_probl4'' unif_probl4''' (Tpair (Tvar a) (Tvar x1))).
-      --- simpl. reflexivity.
-      --- simpl. reflexivity.
-      --- apply (Selimination unif_probl4''' unif_probl4'''' (Tpair (Tvar x1) (Tvar a))).
-        ---- simpl. reflexivity.
-        ---- simpl. reflexivity.
-        ---- apply (Sorientation unif_probl4'''' unif_probl4''''' (Tpair (Tfunc f [Tfunc g [Tvar a; Tvar a]; Tvar a])(Tvar x3))).
-          ----- simpl. reflexivity.
-          ----- simpl. reflexivity.
-          ----- apply Ssolved. simpl. reflexivity.
-Qed.
-
