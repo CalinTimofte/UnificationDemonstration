@@ -60,3 +60,61 @@ Proof.
   - apply Ssolved. apply H.
 Qed. 
 
+Theorem test5: solver Ubottom.
+Proof.
+  apply is_solved_in_one_step. left. simpl. reflexivity.
+Qed.
+
+Fixpoint term_pair_list_eq (tpl1 tpl2 : list term_pair) : bool :=
+  match tpl1 with
+  | [] => match tpl2 with 
+          | [] => true
+          | _ => false
+          end
+  | h1::tl1 => match tpl2 with
+               | [] => false
+               | h2::tl2 => andb (term_pair_eq h1 h2) (term_pair_list_eq tl1 tl2)
+               end
+  end.
+
+Definition unification_problem_eq (up1 up2: unification_problem) : bool :=
+  match up1 with
+  | Ubottom => match up2 with
+              | Ubottom => true
+              | _ => false
+              end
+  | Uset l1 => match up2 with
+               | Ubottom => false
+               | Uset l2 => term_pair_list_eq l1 l2
+               end
+  end.
+
+Compute (unification_problem_eq
+        (Uset [orientation_term_pair; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)])
+        (Uset [orientation_term_pair; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)])
+      ).
+
+Theorem progress : forall (u_p : unification_problem),
+  ((is_bottom u_p) = true) \/ ((unification_problem_in_solved_form u_p) = true) \/ (exists (u_p': unification_problem), solver u_p -> solver u_p')->
+  solver u_p.
+Proof.
+  intros. destruct H.
+  - apply is_solved_in_one_step. left. apply H.
+  - destruct H.
+    -- apply is_solved_in_one_step. right. apply H.
+    -- inversion H. apply H.
+Qed.
+  
+Theorem test1 : solver unif_probl1.
+  Proof. unfold unif_probl1. apply (Sdelete unif_probl1 (Uset [decomposition_term_pair; orientation_term_pair])).
+  - simpl. reflexivity.
+  - simpl. reflexivity.
+  - apply (Sdecompose (Uset [decomposition_term_pair; orientation_term_pair]) (Uset [orientation_term_pair; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)])).
+    -- simpl. reflexivity.
+    -- exists decomposition_term_pair. simpl. reflexivity.
+    -- apply (Sorientation (Uset [orientation_term_pair; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)]) (Uset [Tpair (Tvar a) t2; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)]) orientation_term_pair).
+     --- simpl. reflexivity.
+     --- simpl. reflexivity. 
+     --- apply Ssolved. 
+      ---- simpl. reflexivity.
+Qed.

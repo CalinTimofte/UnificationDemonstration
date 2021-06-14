@@ -43,7 +43,7 @@ Qed.
 
 Theorem test5: solver Ubottom.
 Proof.
-  apply is_solved. left. simpl. reflexivity.
+  apply is_solved_in_one_step. left. simpl. reflexivity.
 Qed.
   
 Theorem test1 : solver unif_probl1.
