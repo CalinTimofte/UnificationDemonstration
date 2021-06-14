@@ -30,7 +30,7 @@ Compute (Sdecompose
 
 Compute (Ssolved (Uset [Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)])).
 
-Theorem is_solved : forall (u_p : unification_problem),
+Theorem is_solved_in_one_step : forall (u_p : unification_problem),
   ((is_bottom u_p) = true) \/ ((unification_problem_in_solved_form u_p) = true) ->
   solver u_p.
 Proof.
@@ -41,7 +41,11 @@ Proof.
   - apply Ssolved. apply H.
 Qed. 
 
-
+Theorem test5: solver Ubottom.
+Proof.
+  apply is_solved. left. simpl. reflexivity.
+Qed.
+  
 Theorem test1 : solver unif_probl1.
   Proof. unfold unif_probl1. apply (Sdelete unif_probl1 (Uset [decomposition_term_pair; orientation_term_pair])).
   - simpl. reflexivity.
