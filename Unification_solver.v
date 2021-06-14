@@ -17,6 +17,31 @@ Inductive solver : unification_problem -> Prop :=
   | Sconflict (u_p u_p' : unification_problem) (tp : term_pair) (H : ((term_in_unification_problem u_p is_conflict_term_pair) = true)) (H' : (remove_conflict_term_pair tp u_p) = u_p') (H'' : solver u_p'): solver u_p
   | Soccurs_check (u_p u_p' : unification_problem) (tp : term_pair) (H : ((term_in_unification_problem u_p is_occurs_check_term_pair) = true)) (H' : (occurs_check tp u_p) = u_p') (H'' : solver u_p'): solver u_p.
 
+Definition is_bottom (u : unification_problem) : bool :=
+  match u with
+  | Ubottom => true
+  | _ => false
+  end.
+
+Compute (Sdecompose 
+          (Uset [Tpair (Tfunc (Func "f") [Tvar x; Tvar y]) (Tfunc (Func "f") [Tvar a; Tvar b])])
+          (Uset [Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)])
+          decomposition_term_pair).
+
+Compute (Ssolved (Uset [Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)])).
+
+Theorem is_solved : forall (u_p : unification_problem),
+  ((is_bottom u_p) = true) \/ ((unification_problem_in_solved_form u_p) = true) ->
+  solver u_p.
+Proof.
+  intros. destruct H.
+  - destruct u_p.
+    -- simpl in H. discriminate.
+    -- apply Sbottom.
+  - apply Ssolved. apply H.
+Qed. 
+
+
 Theorem test1 : solver unif_probl1.
   Proof. unfold unif_probl1. apply (Sdelete unif_probl1 (Uset [decomposition_term_pair; orientation_term_pair])).
   - simpl. reflexivity.
@@ -67,3 +92,4 @@ Proof.
           ----- apply Ssolved. simpl. reflexivity.
 Qed.
 
+Compute (Sdelete unif_probl1 (Uset [decomposition_term_pair; orientation_term_pair])).
