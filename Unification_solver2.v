@@ -141,7 +141,19 @@ Proof.
       --- apply H0.
 Qed.
 
-
+Theorem progress' : forall (u_p : unification_problem),
+  solver (UP u_p) ->
+  ~((is_bottom u_p) = true) -> ~((unification_problem_in_solved_form u_p) = true) ->
+  (exists (u_p': unification_problem), (solver (UP u_p'))
+   /\ (exists (tp : term_pair) (rule : unif_solver_rule tp u_p), apply_rule tp u_p rule = (UP u_p'))).
+Proof.
+  intros. inversion H.
+  - unfold not in H0. rewrite <- H3 in H0. simpl in H0. exfalso. apply H0. reflexivity.
+  - unfold not in H1. exfalso. apply H1. apply H3.
+  - exists u_p'. destruct H3. split.
+    -- apply H3.
+    -- exists tp. exists rule. apply H4.
+Qed.
 
 
 Theorem test1 : solver unif_probl1.
