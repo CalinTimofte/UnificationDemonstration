@@ -30,7 +30,7 @@ Inductive solver : Type :=
   | Selimination (u : unification_problem)
   | Sconflict (u : unification_problem)
   | Soccurs_check (u : unification_problem).
-*)
+
 
 Inductive solver : unification_problem -> Prop :=
   | Sbottom : solver Ubottom
@@ -41,6 +41,30 @@ Inductive solver : unification_problem -> Prop :=
   | Selimination (u_p u_p' : unification_problem) (H : ((term_in_unification_problem u_p is_elimination_term_pair) = true)) (H' : exists (tp : term_pair), (elimination tp u_p) = u_p') (H'' : solver u_p'): solver u_p
   | Sconflict (u_p u_p' : unification_problem) (H : ((term_in_unification_problem u_p is_conflict_term_pair) = true)) (H' : exists (tp : term_pair), (remove_conflict_term_pair tp u_p) = u_p') (H'' : solver u_p'): solver u_p
   | Soccurs_check (u_p u_p' : unification_problem) (H : ((term_in_unification_problem u_p is_occurs_check_term_pair) = true)) (H' : exists (tp : term_pair), (occurs_check tp u_p) = u_p') (H'' : solver u_p'): solver u_p.
+*)
+
+Inductive solver : unification_problem -> Prop :=
+  | Sbottom : solver Ubottom
+  | Ssolved (u_p : unification_problem) (H : (unification_problem_in_solved_form u_p) = true) : solver u_p
+  | Sapply (u_p : unification_problem) (rule : term_pair -> unification_problem -> unification_problem) (H: exists u_p' : unification_problem, (solver u_p') /\ (exists (tp : term_pair), rule tp u_p = u_p')) : solver u_p.
+
+Definition solver_delete (tp : term_pair) (up : unification_problem) : unification_problem :=
+  remove_first_appearance_term_unification_problem up term_eq.
+
+Theorem test1 : solver unif_probl1.
+  Proof. unfold unif_probl1. apply (Sapply unif_probl1 solver_delete). exists (Uset [decomposition_term_pair; orientation_term_pair]). split.
+  - apply (Sapply (Uset [decomposition_term_pair; orientation_term_pair]) remove_and_replace_decomposition_unif_problem).
+    exists (Uset [orientation_term_pair; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)]). split.
+    -- apply (Sapply (Uset [orientation_term_pair; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)]) apply_orientation). 
+       exists (Uset [Tpair (Tvar a) t2; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)]). split.
+       --- apply Ssolved. simpl. reflexivity.
+       --- exists orientation_term_pair. simpl. reflexivity.
+    -- exists decomposition_term_pair. simpl. reflexivity.
+    (* Delete does not need a term pair *)
+  - exists decomposition_term_pair. simpl. reflexivity.
+Qed.
+  
+Qed.
 
 Definition is_bottom (u : unification_problem) : bool :=
   match u with
@@ -103,18 +127,4 @@ Proof.
   - destruct H.
     -- apply is_solved_in_one_step. right. apply H.
     -- inversion H. apply H.
-Qed.
-  
-Theorem test1 : solver unif_probl1.
-  Proof. unfold unif_probl1. apply (Sdelete unif_probl1 (Uset [decomposition_term_pair; orientation_term_pair])).
-  - simpl. reflexivity.
-  - simpl. reflexivity.
-  - apply (Sdecompose (Uset [decomposition_term_pair; orientation_term_pair]) (Uset [orientation_term_pair; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)])).
-    -- simpl. reflexivity.
-    -- exists decomposition_term_pair. simpl. reflexivity.
-    -- apply (Sorientation (Uset [orientation_term_pair; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)]) (Uset [Tpair (Tvar a) t2; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)]) orientation_term_pair).
-     --- simpl. reflexivity.
-     --- simpl. reflexivity. 
-     --- apply Ssolved. 
-      ---- simpl. reflexivity.
 Qed.
