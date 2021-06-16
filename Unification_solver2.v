@@ -10,38 +10,17 @@ Import ListNotations.
 Definition unification_problem_is_bottom (u : unification_problem) : bool :=
   true.
 
-(*Inductive solver : Prop :=
-  | Sbottom (u_p : unification_problem) (H : (unification_problem_is_bottom u_p) = true)
-  | Ssolved (u_p : unification_problem) (H : (unification_problem_in_solved_form u_p) = true)
-  | Sdelete (u_p u_p' : unification_problem)(H : ((term_in_unification_problem u_p term_eq) = true)) (H' : (remove_first_appearance_term_unification_problem u_p term_eq) = u_p')
-  | Sdecompose (u_p u_p' : unification_problem)(tp : term_pair)(H : ((term_in_unification_problem u_p is_decomposition_term_pair) = true)) (H' : (remove_and_replace_decomposition_unif_problem tp u_p) = u_p')
-  | Sorientation (u_p u_p' : unification_problem) (tp : term_pair) (H : ((term_in_unification_problem u_p is_orientation_term_pair) = true)) (H' : (apply_orientation tp u_p) = u_p') 
-  | Selimination (u_p u_p' : unification_problem) (tp : term_pair) (H : ((term_in_unification_problem u_p is_elimination_term_pair) = true)) (H' : (elimination tp u_p) = u_p') 
-  | Sconflict (u_p u_p' : unification_problem) (tp : term_pair) (H : ((term_in_unification_problem u_p is_conflict_term_pair) = true)) (H' : (remove_conflict_term_pair tp u_p) = u_p') 
-  | Soccurs_check (u_p u_p' : unification_problem) (tp : term_pair) (H : ((term_in_unification_problem u_p is_occurs_check_term_pair) = true)) (H' : (occurs_check tp u_p) = u_p').
+Inductive maybe_unification_problem : Type :=
+  | UError
+  | UP (u_p :unification_problem).
 
+(*Definition maybe_unification_problem_to_unification_problem (m_u_p : maybe_unification_problem) : unification_problem :=
+  match m_u_p with
+  | UError => Ubottom
+  | UP u_p => u_p
+  end.
 
-Inductive solver : Type :=
-  | Sbottom (u : unification_problem)
-  | Ssolved (u : unification_problem)
-  | Sdelete (u : unification_problem)
-  | Sdecompose (u : unification_problem)
-  | Sorientation (u : unification_problem)
-  | Selimination (u : unification_problem)
-  | Sconflict (u : unification_problem)
-  | Soccurs_check (u : unification_problem).
-
-
-Inductive solver : unification_problem -> Prop :=
-  | Sbottom : solver Ubottom
-  | Ssolved (u_p : unification_problem) (H : (unification_problem_in_solved_form u_p) = true) : solver u_p
-  | Sdelete (u_p u_p' : unification_problem)(H : ((term_in_unification_problem u_p term_eq) = true)) (H' : (remove_first_appearance_term_unification_problem u_p term_eq) = u_p')(H'' : solver u_p'): solver u_p
-  | Sdecompose (u_p u_p' : unification_problem)(H : ((term_in_unification_problem u_p is_decomposition_term_pair) = true)) (H': exists (tp : term_pair), (remove_and_replace_decomposition_unif_problem tp u_p) = u_p')(H'' : solver u_p'): solver u_p
-  | Sorientation (u_p u_p' : unification_problem) (H : ((term_in_unification_problem u_p is_orientation_term_pair) = true)) (H' : exists (tp : term_pair), (apply_orientation tp u_p) = u_p') (H'' : solver u_p'): solver u_p
-  | Selimination (u_p u_p' : unification_problem) (H : ((term_in_unification_problem u_p is_elimination_term_pair) = true)) (H' : exists (tp : term_pair), (elimination tp u_p) = u_p') (H'' : solver u_p'): solver u_p
-  | Sconflict (u_p u_p' : unification_problem) (H : ((term_in_unification_problem u_p is_conflict_term_pair) = true)) (H' : exists (tp : term_pair), (remove_conflict_term_pair tp u_p) = u_p') (H'' : solver u_p'): solver u_p
-  | Soccurs_check (u_p u_p' : unification_problem) (H : ((term_in_unification_problem u_p is_occurs_check_term_pair) = true)) (H' : exists (tp : term_pair), (occurs_check tp u_p) = u_p') (H'' : solver u_p'): solver u_p.
-*)
+Coercion maybe_unification_problem_to_unification_problem : maybe_unification_problem >-> unification_problem.*)
 
 Inductive unif_solver_rule (tp : term_pair) (u_p : unification_problem) : Type:=
   | Rdelete
@@ -49,28 +28,47 @@ Inductive unif_solver_rule (tp : term_pair) (u_p : unification_problem) : Type:=
   | Rorientation
   | Relimination
   | Rconflict
-  | Roccurs_check.
+  | Roccurs_check .
 
 Definition solver_delete (tp : term_pair) (up : unification_problem) : unification_problem :=
   remove_first_appearance_term_unification_problem up term_eq.
 
-Definition apply_rule (tp : term_pair) (u_p : unification_problem) (rule : unif_solver_rule tp u_p) : unification_problem :=
+Definition apply_rule (tp : term_pair) (u_p : unification_problem) (rule : unif_solver_rule tp u_p) : maybe_unification_problem :=
   match rule with
-  | Rdelete _ _ => solver_delete tp u_p
-  | Rdecompose  _ _ => remove_and_replace_decomposition_unif_problem tp u_p
-  | Rorientation  _ _ => apply_orientation tp u_p
-  | Relimination  _ _ => elimination tp u_p
-  | Rconflict   _ _ => remove_conflict_term_pair tp u_p
-  | Roccurs_check   _ _ => occurs_check tp u_p
+  | Rdelete _ _ => match (term_in_unification_problem u_p term_eq) with
+                   | true => UP (solver_delete tp u_p)
+                   | false => UError
+                   end
+  | Rdecompose  _ _ => match (term_in_unification_problem u_p is_decomposition_term_pair) with
+                       | true => UP (remove_and_replace_decomposition_unif_problem tp u_p)
+                       | false => UError
+                       end
+  | Rorientation  _ _ => match (term_in_unification_problem u_p is_orientation_term_pair) with
+                         | true => UP (apply_orientation tp u_p)
+                         | false => UError
+                         end
+  | Relimination  _ _ => match (term_in_unification_problem u_p is_elimination_term_pair) with
+                         | true => UP (elimination tp u_p)
+                         | false => UError
+                         end
+  | Rconflict   _ _ => match (term_in_unification_problem u_p is_conflict_term_pair) with
+                       | true => UP (remove_conflict_term_pair tp u_p)
+                       | false => UError
+                       end
+  | Roccurs_check   _ _ => match (term_in_unification_problem u_p is_occurs_check_term_pair) with
+                           | true => UP (occurs_check tp u_p)
+                           | false => UError
+                           end
   end.
 
-Inductive solver : unification_problem -> Prop :=
-  | Sbottom : solver Ubottom
-  | Ssolved (u_p : unification_problem) (H : (unification_problem_in_solved_form u_p) = true) : solver u_p
-  | Sapply (u_p u_p': unification_problem) (tp : term_pair) (rule : unif_solver_rule tp u_p) (H: (solver u_p') /\ (apply_rule tp u_p rule = u_p')) : solver u_p.
+Inductive solver : maybe_unification_problem -> Prop :=
+  | SError : solver UError
+  | Sbottom : solver (UP Ubottom)
+  | Ssolved (u_p : unification_problem) (H : (unification_problem_in_solved_form u_p) = true) : solver (UP u_p)
+  | Sapply (u_p u_p': unification_problem) (tp : term_pair) (rule : unif_solver_rule tp u_p) (H: (solver (UP u_p')) /\ (apply_rule tp u_p rule = (UP u_p'))) : solver (UP u_p).
 
 
-Theorem test3 : solver (Uset [occurs_check_term_pair]).
+Theorem test3 : solver (UP (Uset [occurs_check_term_pair])).
 Proof.
   apply (Sapply (Uset [occurs_check_term_pair]) Ubottom occurs_check_term_pair (Roccurs_check occurs_check_term_pair (Uset [occurs_check_term_pair]))). split.
   - apply Sbottom.
@@ -84,10 +82,9 @@ Definition is_bottom (u : unification_problem) : bool :=
   | _ => false
   end.
 
-
 Theorem is_solved_in_one_step : forall (u_p : unification_problem),
   ((is_bottom u_p) = true) \/ ((unification_problem_in_solved_form u_p) = true) ->
-  solver u_p.
+  solver (UP u_p).
 Proof.
   intros. destruct H.
   - destruct u_p.
@@ -96,7 +93,7 @@ Proof.
   - apply Ssolved. apply H.
 Qed. 
 
-Theorem test5: solver Ubottom.
+Theorem test5: solver ( UP Ubottom ).
 Proof.
   apply is_solved_in_one_step. left. simpl. reflexivity.
 Qed.
@@ -132,8 +129,8 @@ Compute (unification_problem_eq
 
 Theorem progress : forall (u_p : unification_problem),
   (((is_bottom u_p) = true) \/ ((unification_problem_in_solved_form u_p) = true) \/ 
-  (exists (u_p': unification_problem), (solver u_p') /\ (exists (tp : term_pair) (rule : unif_solver_rule tp u_p), apply_rule tp u_p rule = u_p'))) ->
-  solver u_p.
+  (exists (u_p': unification_problem), (solver (UP u_p')) /\ (exists (tp : term_pair) (rule : unif_solver_rule tp u_p), apply_rule tp u_p rule = (UP u_p')))) ->
+  solver (UP u_p).
 Proof.
   intros. destruct H.
   - apply is_solved_in_one_step. left. apply H.
