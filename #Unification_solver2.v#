@@ -157,7 +157,7 @@ Compute apply_one_step unif_probl1.
 Compute maybe_apply_one_step (apply_one_step unif_probl1).
 Compute maybe_apply_one_step (maybe_apply_one_step (apply_one_step unif_probl1)).
 Compute maybe_apply_one_step (maybe_apply_one_step (maybe_apply_one_step (apply_one_step unif_probl1))).
-Compute maybe_apply_one_step ().
+Compute maybe_apply_one_step (maybe_apply_one_step (maybe_apply_one_step (maybe_apply_one_step (apply_one_step unif_probl1)))).
 Compute maybe_unification_problem_in_solved_form (maybe_apply_one_step (maybe_apply_one_step (apply_one_step unif_probl1))).
 
 Print elimination_example.

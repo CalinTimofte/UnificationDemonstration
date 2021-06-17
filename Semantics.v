@@ -579,7 +579,7 @@ Fixpoint elimination_term_pair_list (tp : term_pair) (tpl : list term_pair) : li
   match tpl with
   | [] => []
   | h::tl => match (term_pair_eq tp h) with
-             | true => [h] ++ (elimination_term_pair_list tp tl)
+             | true => (elimination_term_pair_list tp tl) ++ [h]
              | _ => match h with
                     | Tpair t1 t2 => [Tpair (term_assignment (from_elimination_term_pair_to_assignment tp) t1) (term_assignment (from_elimination_term_pair_to_assignment tp) t2)] ++ (elimination_term_pair_list tp tl)
                     end
@@ -592,4 +592,5 @@ Definition elimination (tp : term_pair) (up : unification_problem) : unification
   | Uset l => Uset (elimination_term_pair_list tp l)
   end.
 
-Compute (elimination elimination_tpair elimination_example).
+Definition elimination_example' := Uset [Tpair (Tfunc f [Tfunc g [Tvar x1; Tvar a]; Tvar x2]) (Tvar x3); elimination_tpair; Tpair (Tfunc f [Tvar x2; Tvar x2]) (Tfunc f [Tvar a; Tvar x1])].
+Compute (elimination elimination_tpair elimination_example').
