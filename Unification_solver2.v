@@ -59,6 +59,42 @@ Definition conflict_test (tp : term_pair) (u_p : unification_problem) :=
 Definition occurs_check_test (tp : term_pair) (u_p : unification_problem) :=
   rule_test tp u_p is_occurs_check_term_pair.
 
+Inductive maybe_term_pair : Type :=
+  | TError
+  | TP (tp : term_pair).
+
+Fixpoint deliver_tpair_from_list (tpl : list term_pair) (criterion : term -> term -> bool) : maybe_term_pair :=
+  match tpl with
+  | [] => TError
+  | h::tl => match (term_pair_correct_for_rule h criterion) with
+             | true => TP h
+             | false => deliver_tpair_from_list tl criterion
+             end
+  end.
+
+Definition deliver_tpair_from_unification_problem (u_p : unification_problem) (criterion : term -> term -> bool) : maybe_term_pair :=
+  match u_p with
+  | Ubottom => TError
+  | Uset l => deliver_tpair_from_list l criterion
+  end.
+
+Definition delete_term_pair := Tpair t1 t1.
+Compute (deliver_tpair_from_unification_problem unif_probl1 term_eq).
+
+Definition unif_probl1' := Uset [decomposition_term_pair; orientation_term_pair].
+Compute (deliver_tpair_from_unification_problem unif_probl1' is_decomposition_term_pair).
+
+Definition unif_probl1'' := Uset [orientation_term_pair].
+Compute (deliver_tpair_from_unification_problem unif_probl1'' is_decomposition_term_pair).
+
+Compute (deliver_tpair_from_unification_problem unif_probl1 is_orientation_term_pair).
+
+Compute (deliver_tpair_from_unification_problem elimination_example is_elimination_term_pair).
+
+Compute (deliver_tpair_from_unification_problem unif_probl2 is_conflict_term_pair).
+
+Compute (deliver_tpair_from_unification_problem (Uset [occurs_check_term_pair]) is_occurs_check_term_pair).
+
 Definition apply_rule (tp : term_pair) (u_p : unification_problem) (rule : unif_solver_rule tp u_p) : maybe_unification_problem :=
   match rule with
   | Rdelete _ _ => match (delete_test tp u_p) with
