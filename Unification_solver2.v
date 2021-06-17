@@ -33,40 +33,65 @@ Inductive unif_solver_rule (tp : term_pair) (u_p : unification_problem) : Type:=
 Definition solver_delete (tp : term_pair) (up : unification_problem) : unification_problem :=
   remove_first_appearance_term_unification_problem up term_eq.
 
+Definition term_pair_correct_for_rule (tp : term_pair) (rule : term -> term -> bool) : bool :=
+  match tp with
+  | Tpair t1 t2 => rule t1 t2
+  end.
+
+Definition rule_test (tp : term_pair) (u_p : unification_problem) (criterion : term -> term -> bool) : bool :=
+  andb (term_pair_correct_for_rule tp criterion) (term_in_unification_problem u_p criterion).
+
+Definition delete_test (tp : term_pair) (u_p : unification_problem) : bool :=
+  andb (term_pair_correct_for_rule tp term_eq) (term_in_unification_problem u_p term_eq).
+
+Definition decompose_test (tp : term_pair) (u_p : unification_problem) :=
+  rule_test tp u_p is_decomposition_term_pair.
+
+Definition orientation_test (tp : term_pair) (u_p : unification_problem) :=
+  rule_test tp u_p is_orientation_term_pair.
+
+Definition elimination_test (tp : term_pair) (u_p : unification_problem) :=
+  rule_test tp u_p is_elimination_term_pair.
+
+Definition conflict_test (tp : term_pair) (u_p : unification_problem) :=
+  rule_test tp u_p is_conflict_term_pair.
+
+Definition occurs_check_test (tp : term_pair) (u_p : unification_problem) :=
+  rule_test tp u_p is_occurs_check_term_pair.
+
 Definition apply_rule (tp : term_pair) (u_p : unification_problem) (rule : unif_solver_rule tp u_p) : maybe_unification_problem :=
   match rule with
-  | Rdelete _ _ => match (term_in_unification_problem u_p term_eq) with
+  | Rdelete _ _ => match (delete_test tp u_p) with
                    | true => UP (solver_delete tp u_p)
                    | false => UError
                    end
-  | Rdecompose  _ _ => match (term_in_unification_problem u_p is_decomposition_term_pair) with
+  | Rdecompose  _ _ => match (decompose_test tp u_p) with
                        | true => UP (remove_and_replace_decomposition_unif_problem tp u_p)
                        | false => UError
                        end
-  | Rorientation  _ _ => match (term_in_unification_problem u_p is_orientation_term_pair) with
+  | Rorientation  _ _ => match (orientation_test tp u_p) with
                          | true => UP (apply_orientation tp u_p)
                          | false => UError
                          end
-  | Relimination  _ _ => match (term_in_unification_problem u_p is_elimination_term_pair) with
+  | Relimination  _ _ => match (elimination_test tp u_p) with
                          | true => UP (elimination tp u_p)
                          | false => UError
                          end
-  | Rconflict   _ _ => match (term_in_unification_problem u_p is_conflict_term_pair) with
+  | Rconflict   _ _ => match (conflict_test tp u_p) with
                        | true => UP (remove_conflict_term_pair tp u_p)
                        | false => UError
                        end
-  | Roccurs_check   _ _ => match (term_in_unification_problem u_p is_occurs_check_term_pair) with
+  | Roccurs_check   _ _ => match (occurs_check_test tp u_p) with
                            | true => UP (occurs_check tp u_p)
                            | false => UError
                            end
   end.
 
 Inductive solver : maybe_unification_problem -> Prop :=
-  | SError : solver UError
+  | Serror : solver UError
   | Sbottom : solver (UP Ubottom)
   | Ssolved (u_p : unification_problem) (H : (unification_problem_in_solved_form u_p) = true) : solver (UP u_p)
   | Sapply (u_p u_p': unification_problem) (tp : term_pair) (rule : unif_solver_rule tp u_p) (H: (solver (UP u_p')) /\ (apply_rule tp u_p rule = (UP u_p'))) : solver (UP u_p).
-
 
 Definition is_bottom (u : unification_problem) : bool :=
   match u with
@@ -155,11 +180,10 @@ Proof.
 Qed.
 
 Theorem test1 : solver (UP unif_probl1).
-    (* Delete does not need a term pair, put an arbitrary one in proof*)
   Proof. unfold unif_probl1. apply (Sapply unif_probl1 
                                            (Uset [decomposition_term_pair; orientation_term_pair]) 
-                                           orientation_term_pair 
-                                           (Rdelete orientation_term_pair unif_probl1)). split.
+                                           (Tpair t1 t1) 
+                                           (Rdelete (Tpair t1 t1) unif_probl1)). split.
   - apply (Sapply (Uset [decomposition_term_pair; orientation_term_pair])
                   (Uset [orientation_term_pair; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)])
                   decomposition_term_pair
