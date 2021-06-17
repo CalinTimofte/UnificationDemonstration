@@ -68,14 +68,6 @@ Inductive solver : maybe_unification_problem -> Prop :=
   | Sapply (u_p u_p': unification_problem) (tp : term_pair) (rule : unif_solver_rule tp u_p) (H: (solver (UP u_p')) /\ (apply_rule tp u_p rule = (UP u_p'))) : solver (UP u_p).
 
 
-Theorem test3 : solver (UP (Uset [occurs_check_term_pair])).
-Proof.
-  apply (Sapply (Uset [occurs_check_term_pair]) Ubottom occurs_check_term_pair (Roccurs_check occurs_check_term_pair (Uset [occurs_check_term_pair]))). split.
-  - apply Sbottom.
-  - simpl. reflexivity.
-Qed.
-
-
 Definition is_bottom (u : unification_problem) : bool :=
   match u with
   | Ubottom => true
@@ -155,16 +147,29 @@ Proof.
     -- exists tp. exists rule. apply H4.
 Qed.
 
+Theorem test3 : solver (UP (Uset [occurs_check_term_pair])).
+Proof.
+  apply (Sapply (Uset [occurs_check_term_pair]) Ubottom occurs_check_term_pair (Roccurs_check occurs_check_term_pair (Uset [occurs_check_term_pair]))). split.
+  - apply Sbottom.
+  - simpl. reflexivity.
+Qed.
 
-Theorem test1 : solver unif_probl1.
-  Proof. unfold unif_probl1. apply (Sapply unif_probl1 solver_delete). exists (Uset [decomposition_term_pair; orientation_term_pair]). split.
-  - apply (Sapply (Uset [decomposition_term_pair; orientation_term_pair]) remove_and_replace_decomposition_unif_problem).
-    exists (Uset [orientation_term_pair; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)]). split.
-    -- apply (Sapply (Uset [orientation_term_pair; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)]) apply_orientation). 
-       exists (Uset [Tpair (Tvar a) t2; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)]). split.
+Theorem test1 : solver (UP unif_probl1).
+    (* Delete does not need a term pair, put an arbitrary one in proof*)
+  Proof. unfold unif_probl1. apply (Sapply unif_probl1 
+                                           (Uset [decomposition_term_pair; orientation_term_pair]) 
+                                           orientation_term_pair 
+                                           (Rdelete orientation_term_pair unif_probl1)). split.
+  - apply (Sapply (Uset [decomposition_term_pair; orientation_term_pair])
+                  (Uset [orientation_term_pair; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)])
+                  decomposition_term_pair
+                  (Rdecompose decomposition_term_pair (Uset [decomposition_term_pair; orientation_term_pair]))). split.
+    -- apply (Sapply (Uset [orientation_term_pair; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)])
+                     (Uset [Tpair (Tvar a) t2; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)])
+                     orientation_term_pair
+                     (Rorientation orientation_term_pair (Uset [orientation_term_pair; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)]))). split.
        --- apply Ssolved. simpl. reflexivity.
-       --- exists orientation_term_pair. simpl. reflexivity.
-    -- exists decomposition_term_pair. simpl. reflexivity.
-    (* Delete does not need a term pair *)
-  - exists decomposition_term_pair. simpl. reflexivity.
+       --- simpl. reflexivity.
+    -- simpl. reflexivity.
+  - simpl. reflexivity.
 Qed.
