@@ -373,6 +373,19 @@ Proof.
     -- destruct H4. reflexivity. 
 Qed.
 
+Theorem preserving_solutions : forall (u_p u_p' : unification_problem),
+  solver (UP u_p) ->
+  (solver (UP u_p')) ->
+  ~((is_bottom u_p) = true) -> ~((unification_problem_in_solved_form u_p) = true) ->
+  (apply_one_step u_p = (UP u_p')) ->
+  (solve_unification_problem (UP u_p)) = (solve_unification_problem (UP u_p')).
+Proof.
+  intros. unfold solve_unification_problem. inversion H.
+  - unfold not in H1. exfalso. rewrite <- H5 in H1. simpl in H1. apply H1. reflexivity.
+  - contradiction.
+  - inversion H0.
+    -- rewrite <- H7 in H3. simpl in H3.
+
 Theorem test3 : solver (UP (Uset [occurs_check_term_pair])).
 Proof.
   apply (Sapply (Uset [occurs_check_term_pair]) Ubottom occurs_check_term_pair (Roccurs_check occurs_check_term_pair (Uset [occurs_check_term_pair]))). split.
