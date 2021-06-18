@@ -272,7 +272,7 @@ Inductive solver : maybe_unification_problem -> Prop :=
   | Serror : solver UError
   | Sbottom : solver (UP Ubottom)
   | Ssolved (u_p : unification_problem) (H : (unification_problem_in_solved_form u_p) = true) : solver (UP u_p)
-  | Sapply (u_p u_p': unification_problem) (tp : term_pair) (rule : unif_solver_rule tp u_p) (H: (solver (UP u_p')) /\ (apply_rule tp u_p rule = (UP u_p'))) : solver (UP u_p).
+  | Sapply (u_p : unification_problem) (H: exists u_p' : (unification_problem), (solver (UP u_p')) /\ (apply_one_step u_p = (UP u_p'))) : solver (UP u_p).
 
 Definition is_bottom (u : unification_problem) : bool :=
   match u with
@@ -327,14 +327,14 @@ Compute (unification_problem_eq
 
 Theorem progress : forall (u_p : unification_problem),
   (((is_bottom u_p) = true) \/ ((unification_problem_in_solved_form u_p) = true) \/ 
-  (exists (u_p': unification_problem), (solver (UP u_p')) /\ (exists (tp : term_pair) (rule : unif_solver_rule tp u_p), apply_rule tp u_p rule = (UP u_p')))) ->
+  (exists (u_p': unification_problem), (solver (UP u_p')) /\ (apply_one_step u_p = (UP u_p')))) ->
   solver (UP u_p).
 Proof.
   intros. destruct H.
   - apply is_solved_in_one_step. left. apply H.
   - destruct H.
     -- apply is_solved_in_one_step. right. apply H.
-    -- destruct H. destruct H. destruct H0. destruct H0. apply (Sapply u_p x x0 x1). split.
+    -- destruct H. destruct H. apply Sapply. exists x. split.
       --- apply H.
       --- apply H0.
 Qed.
@@ -343,14 +343,14 @@ Theorem progress' : forall (u_p : unification_problem),
   solver (UP u_p) ->
   ~((is_bottom u_p) = true) -> ~((unification_problem_in_solved_form u_p) = true) ->
   (exists (u_p': unification_problem), (solver (UP u_p'))
-   /\ (exists (tp : term_pair) (rule : unif_solver_rule tp u_p), apply_rule tp u_p rule = (UP u_p'))).
+   /\ (apply_one_step u_p = (UP u_p'))).
 Proof.
   intros. inversion H.
   - unfold not in H0. rewrite <- H3 in H0. simpl in H0. exfalso. apply H0. reflexivity.
   - unfold not in H1. exfalso. apply H1. apply H3.
-  - exists u_p'. destruct H3. split.
+  - destruct H3. destruct H3. exists x. split.
     -- apply H3.
-    -- exists tp. exists rule. apply H4.
+    -- destruct H4. reflexivity. 
 Qed.
 
 Theorem test3 : solver (UP (Uset [occurs_check_term_pair])).
