@@ -288,26 +288,32 @@ Definition solve_unification_problem (m_u_p : maybe_unification_problem) :=
 Compute solve_unification_problem (UP unif_probl1).
 Compute solve_unification_problem (UP unification_problem1').
 
-Inductive solver : maybe_unification_problem -> Prop :=
-  | Serror : solver UError
-  | Sbottom : solver (UP Ubottom)
-  | Ssolved (u_p : unification_problem) (H : (unification_problem_in_solved_form u_p) = true) : solver (UP u_p)
-  | Sapply (u_p : unification_problem) (H: exists u_p' : (unification_problem), (solver (UP u_p')) /\ (apply_one_step u_p = (UP u_p'))) : solver (UP u_p).
-
 Definition is_bottom (u : unification_problem) : bool :=
   match u with
   | Ubottom => true
   | _ => false
   end.
 
-Theorem is_solved_in_one_step : forall (u_p : unification_problem),
-  ((is_bottom u_p) = true) \/ ((unification_problem_in_solved_form u_p) = true) ->
-  solver (UP u_p).
+Definition maybe_is_bottom (m_u_p : maybe_unification_problem) : bool :=
+  match m_u_p with
+  | UError => false
+  | UP u_p => is_bottom u_p
+  end.
+
+Inductive solver : maybe_unification_problem -> Prop :=
+  | Serror : solver UError
+  | Sbottom (u_p : maybe_unification_problem) (H : maybe_is_bottom u_p = true): solver u_p
+  | Ssolved (u_p : maybe_unification_problem) (H : (maybe_unification_problem_in_solved_form u_p) = true) : solver u_p
+  | Sapply (u_p : maybe_unification_problem) (H: exists u_p' : (maybe_unification_problem), (maybe_apply_one_step u_p = u_p') /\ (solver (u_p'))) : solver u_p.
+
+Theorem is_solved_in_one_step : forall (m_u_p : maybe_unification_problem),
+  ((maybe_is_bottom m_u_p) = true) \/ ((maybe_unification_problem_in_solved_form m_u_p) = true) ->
+  solver m_u_p.
 Proof.
   intros. destruct H.
-  - destruct u_p.
+  - destruct m_u_p.
     -- simpl in H. discriminate.
-    -- apply Sbottom.
+    -- apply Sbottom. apply H.
   - apply Ssolved. apply H.
 Qed. 
 
@@ -345,7 +351,7 @@ Compute (unification_problem_eq
         (Uset [orientation_term_pair; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)])
       ).
 
-Theorem progress : forall (u_p : unification_problem),
+(* Theorem progress : forall (u_p : unification_problem),
   (((is_bottom u_p) = true) \/ ((unification_problem_in_solved_form u_p) = true) \/ 
   (exists (u_p': unification_problem), (solver (UP u_p')) /\ (apply_one_step u_p = (UP u_p')))) ->
   solver (UP u_p).
@@ -357,52 +363,35 @@ Proof.
     -- destruct H. destruct H. apply Sapply. exists x. split.
       --- apply H.
       --- apply H0.
-Qed.
+Qed. *)
 
-Theorem progress' : forall (u_p : unification_problem),
-  solver (UP u_p) ->
-  ~((is_bottom u_p) = true) -> ~((unification_problem_in_solved_form u_p) = true) ->
-  (exists (u_p': unification_problem), (solver (UP u_p'))
-   /\ (apply_one_step u_p = (UP u_p'))).
+Theorem progress' : forall (m_u_p : maybe_unification_problem),
+  solver m_u_p ->
+  ~((maybe_is_bottom m_u_p) = true) -> ~((maybe_unification_problem_in_solved_form m_u_p) = true) ->
+  (exists (m_u_p': maybe_unification_problem), (maybe_apply_one_step m_u_p = m_u_p') /\ (solver m_u_p')).
 Proof.
   intros. inversion H.
-  - unfold not in H0. rewrite <- H3 in H0. simpl in H0. exfalso. apply H0. reflexivity.
-  - unfold not in H1. exfalso. apply H1. apply H3.
-  - destruct H3. destruct H3. exists x. split.
-    -- apply H3.
-    -- destruct H4. reflexivity. 
+  - simpl. exists m_u_p. split. apply H2. apply H.
+  - unfold not in H0. exfalso. apply H0. apply H2.
+  - unfold not in H1. exfalso. apply H1. apply H2.
+  - destruct H2. exists x. apply H2.
 Qed.
 
-Theorem preserving_solutions : forall (u_p u_p' : unification_problem),
-  (solver (UP u_p)) -> 
-  (apply_one_step u_p = (UP u_p')) ->
-  (maybe_apply_one_step (apply_one_step u_p)) = (apply_one_step u_p').
+Theorem preserving_solutions : forall (m_u_p m_u_p' : maybe_unification_problem), 
+  (maybe_apply_one_step m_u_p = m_u_p') ->
+  (solver (maybe_apply_one_step m_u_p)) = solver m_u_p'.
 Proof.
-  intros. rewrite H0. simpl. reflexivity.
+  intros. rewrite H. simpl. reflexivity.
 Qed.
 
 Theorem test3 : solver (UP (Uset [occurs_check_term_pair])).
 Proof.
-  apply (Sapply (Uset [occurs_check_term_pair]) Ubottom occurs_check_term_pair (Roccurs_check occurs_check_term_pair (Uset [occurs_check_term_pair]))). split.
-  - apply Sbottom.
-  - simpl. reflexivity.
+  apply Sapply. exists (maybe_apply_one_step
+    (UP (Uset [occurs_check_term_pair]))). split.
+  - reflexivity.
+  - simpl. apply Sbottom. simpl. reflexivity.
 Qed.
 
 Theorem test1 : solver (UP unif_probl1).
-  Proof. unfold unif_probl1. apply (Sapply unif_probl1 
-                                           (Uset [decomposition_term_pair; orientation_term_pair]) 
-                                           (Tpair t1 t1) 
-                                           (Rdelete (Tpair t1 t1) unif_probl1)). split.
-  - apply (Sapply (Uset [decomposition_term_pair; orientation_term_pair])
-                  (Uset [orientation_term_pair; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)])
-                  decomposition_term_pair
-                  (Rdecompose decomposition_term_pair (Uset [decomposition_term_pair; orientation_term_pair]))). split.
-    -- apply (Sapply (Uset [orientation_term_pair; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)])
-                     (Uset [Tpair (Tvar a) t2; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)])
-                     orientation_term_pair
-                     (Rorientation orientation_term_pair (Uset [orientation_term_pair; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)]))). split.
-       --- apply Ssolved. simpl. reflexivity.
-       --- simpl. reflexivity.
-    -- simpl. reflexivity.
-  - simpl. reflexivity.
-Qed.
+  Proof. apply Sapply. exists (maybe_apply_one_step (UP unif_probl1)). split. reflexivity.
+  - simpl. apply Sapply.  Admitted.
