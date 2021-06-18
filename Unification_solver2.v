@@ -384,7 +384,7 @@ Proof.
   - simpl. exists m_u_p. split. apply H2. apply H.
   - unfold not in H0. exfalso. apply H0. apply H2.
   - unfold not in H1. exfalso. apply H1. apply H2.
-  - destruct H2. exists x. apply H2.
+  - exists (maybe_apply_one_step m_u_p). split. reflexivity. apply H2.
 Qed.
 
 Theorem preserving_solutions : forall (m_u_p m_u_p' : maybe_unification_problem), 
@@ -393,15 +393,3 @@ Theorem preserving_solutions : forall (m_u_p m_u_p' : maybe_unification_problem)
 Proof.
   intros. rewrite H. simpl. reflexivity.
 Qed.
-
-Theorem test3 : solver (UP (Uset [occurs_check_term_pair])).
-Proof.
-  apply Sapply. exists (maybe_apply_one_step
-    (UP (Uset [occurs_check_term_pair]))). split.
-  - reflexivity.
-  - simpl. apply Sbottom. simpl. reflexivity.
-Qed.
-
-Theorem test1 : solver (UP unif_probl1).
-  Proof. apply Sapply. exists (maybe_apply_one_step (UP unif_probl1)). split. reflexivity.
-  - simpl. apply Sapply.  Admitted.
