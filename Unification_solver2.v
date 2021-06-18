@@ -304,7 +304,17 @@ Inductive solver : maybe_unification_problem -> Prop :=
   | Serror : solver UError
   | Sbottom (u_p : maybe_unification_problem) (H : maybe_is_bottom u_p = true): solver u_p
   | Ssolved (u_p : maybe_unification_problem) (H : (maybe_unification_problem_in_solved_form u_p) = true) : solver u_p
-  | Sapply (u_p : maybe_unification_problem) (H: exists u_p' : (maybe_unification_problem), (maybe_apply_one_step u_p = u_p') /\ (solver (u_p'))) : solver u_p.
+  | Sapply (u_p : maybe_unification_problem) (H: solver (maybe_apply_one_step u_p)) : solver u_p.
+
+Theorem test3 : solver (UP (Uset [occurs_check_term_pair])).
+Proof.
+  apply Sapply. apply Sbottom. simpl. reflexivity.
+Qed.
+
+Theorem test1 : solver (UP unif_probl1).
+  Proof. apply Sapply. simpl. apply Sapply. simpl. apply Sapply. simpl. 
+  apply Sapply. simpl. apply Sapply. simpl. apply Sapply. simpl. apply Sbottom. simpl. reflexivity.
+Qed.
 
 Theorem is_solved_in_one_step : forall (m_u_p : maybe_unification_problem),
   ((maybe_is_bottom m_u_p) = true) \/ ((maybe_unification_problem_in_solved_form m_u_p) = true) ->
