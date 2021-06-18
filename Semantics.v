@@ -504,7 +504,7 @@ Compute (is_decomposition_term_pair (Tfunc (Func "f") [Tvar a; Tvar b]) (Tfunc (
 Compute (term_in_unification_problem (Uset [Tpair (Tfunc (Func "f") [Tvar a; Tvar b]) (Tfunc (Func "g") [Tvar y; Tvar x])]) is_decomposition_term_pair).
 
 Definition is_orientation_term_pair (t1 t2 : term) : bool :=
-  term_pair_solved_form t2 t1.
+  term_pair_first_var t2 t1.
 
 Compute (is_orientation_term_pair t2 (Tvar a)).
 Compute (term_in_unification_problem unif_probl1 is_orientation_term_pair).

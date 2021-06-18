@@ -1,4 +1,4 @@
-DIGEST 0a127c8251d6691de830afa2fad6ddee
+DIGEST e7a2a6b20e7998e58c42a8538ec454d3
 FLicenta.Semantics
 R28:33 Licenta.Syntax <> <> lib
 R52:57 Coq.Strings.String <> <> lib
@@ -1381,298 +1381,298 @@ R20741:20744 Licenta.Syntax <> term ind
 binder 20733:20734 <> t1:177
 binder 20736:20737 <> t2:178
 R20749:20752 Coq.Init.Datatypes <> bool ind
-R20759:20779 Licenta.Semantics <> term_pair_solved_form def
-R20784:20785 Licenta.Semantics <> t1:177 var
-R20781:20782 Licenta.Semantics <> t2:178 var
-R20798:20821 Licenta.Semantics <> is_orientation_term_pair def
-R20827:20830 Licenta.Syntax <> Tvar constr
-R20832:20832 Licenta.Syntax <> a def
-R20823:20824 Licenta.Syntax <> t2 def
-R20846:20872 Licenta.Semantics <> term_in_unification_problem def
-R20886:20909 Licenta.Semantics <> is_orientation_term_pair def
-R20874:20884 Licenta.Syntax <> unif_probl1 def
-def 20923:20948 <> orientation_term_pair_list
-R20958:20961 Licenta.Syntax <> term ind
-binder 20951:20952 <> t1:179
-binder 20954:20955 <> t2:180
-R20970:20973 Coq.Init.Datatypes <> list ind
-R20975:20983 Licenta.Syntax <> term_pair ind
-binder 20965:20966 <> tl:181
-R20988:20991 Coq.Init.Datatypes <> list ind
-R20993:21001 Licenta.Syntax <> term_pair ind
-R21014:21015 Licenta.Semantics <> tl:181 var
-R21026:21027 Coq.Lists.List ListNotations ::list_scope:'['_']' not
-R21032:21033 Coq.Lists.List ListNotations ::list_scope:'['_']' not
-R21040:21041 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R21076:21080 Licenta.Syntax <> Tpair constr
-R21100:21103 Coq.Init.Datatypes <> andb def
-R21123:21129 Licenta.Semantics <> term_eq def
-R21131:21132 Licenta.Semantics <> t2:180 var
-R21106:21112 Licenta.Semantics <> term_eq def
-R21114:21115 Licenta.Semantics <> t1:179 var
-R21179:21182 Coq.Init.Datatypes <> true constr
-R21204:21207 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R21187:21188 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
-R21202:21203 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
-R21189:21193 Licenta.Syntax <> Tpair constr
-R21208:21209 Licenta.Semantics <> tl:181 var
-R21245:21249 Coq.Init.Datatypes <> false constr
-R21257:21261 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R21297:21297 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R20759:20777 Licenta.Semantics <> term_pair_first_var def
+R20782:20783 Licenta.Semantics <> t1:177 var
+R20779:20780 Licenta.Semantics <> t2:178 var
+R20796:20819 Licenta.Semantics <> is_orientation_term_pair def
+R20825:20828 Licenta.Syntax <> Tvar constr
+R20830:20830 Licenta.Syntax <> a def
+R20821:20822 Licenta.Syntax <> t2 def
+R20844:20870 Licenta.Semantics <> term_in_unification_problem def
+R20884:20907 Licenta.Semantics <> is_orientation_term_pair def
+R20872:20882 Licenta.Syntax <> unif_probl1 def
+def 20921:20946 <> orientation_term_pair_list
+R20956:20959 Licenta.Syntax <> term ind
+binder 20949:20950 <> t1:179
+binder 20952:20953 <> t2:180
+R20968:20971 Coq.Init.Datatypes <> list ind
+R20973:20981 Licenta.Syntax <> term_pair ind
+binder 20963:20964 <> tl:181
+R20986:20989 Coq.Init.Datatypes <> list ind
+R20991:20999 Licenta.Syntax <> term_pair ind
+R21012:21013 Licenta.Semantics <> tl:181 var
+R21024:21025 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R21030:21031 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R21038:21039 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R21074:21078 Licenta.Syntax <> Tpair constr
+R21098:21101 Coq.Init.Datatypes <> andb def
+R21121:21127 Licenta.Semantics <> term_eq def
+R21129:21130 Licenta.Semantics <> t2:180 var
+R21104:21110 Licenta.Semantics <> term_eq def
+R21112:21113 Licenta.Semantics <> t1:179 var
+R21177:21180 Coq.Init.Datatypes <> true constr
+R21202:21205 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R21185:21186 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R21200:21201 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R21187:21191 Licenta.Syntax <> Tpair constr
+R21206:21207 Licenta.Semantics <> tl:181 var
+R21243:21247 Coq.Init.Datatypes <> false constr
+R21255:21259 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R21295:21295 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R21252:21252 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
 R21254:21254 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
-R21256:21256 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
-R21262:21287 Licenta.Semantics <> orientation_term_pair_list:182 def
-R21295:21296 Licenta.Semantics <> tl:181 var
-R21292:21293 Licenta.Semantics <> t2:180 var
-R21289:21290 Licenta.Semantics <> t1:179 var
-R21369:21394 Licenta.Semantics <> orientation_term_pair_list def
-R21408:21408 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
-R21426:21426 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
-R21409:21413 Licenta.Syntax <> Tpair constr
-R21419:21422 Licenta.Syntax <> Tvar constr
-R21424:21424 Licenta.Syntax <> a def
-R21415:21416 Licenta.Syntax <> t2 def
-R21400:21403 Licenta.Syntax <> Tvar constr
-R21405:21405 Licenta.Syntax <> a def
-R21396:21397 Licenta.Syntax <> t2 def
-def 21441:21457 <> apply_orientation
-R21465:21473 Licenta.Syntax <> term_pair ind
-binder 21460:21461 <> tp:185
-R21482:21500 Licenta.Syntax <> unification_problem ind
-binder 21477:21478 <> up:186
-R21505:21523 Licenta.Syntax <> unification_problem ind
-R21536:21537 Licenta.Semantics <> up:186 var
-R21548:21554 Licenta.Syntax <> Ubottom constr
-R21559:21565 Licenta.Syntax <> Ubottom constr
-R21571:21574 Licenta.Syntax <> Uset constr
-R21587:21588 Licenta.Semantics <> tp:185 var
-R21610:21614 Licenta.Syntax <> Tpair constr
-R21625:21628 Licenta.Syntax <> Uset constr
-R21631:21656 Licenta.Semantics <> orientation_term_pair_list def
-R21702:21718 Licenta.Semantics <> apply_orientation def
-R21742:21752 Licenta.Syntax <> unif_probl1 def
-R21720:21740 Licenta.Syntax <> orientation_term_pair def
-def 21768:21788 <> is_conflict_term_pair
-R21799:21802 Licenta.Syntax <> term ind
-binder 21791:21792 <> t1:189
-binder 21794:21795 <> t2:190
-R21807:21810 Coq.Init.Datatypes <> bool ind
-R21827:21828 Licenta.Semantics <> t2:190 var
-R21823:21824 Licenta.Semantics <> t1:189 var
-R21839:21843 Licenta.Syntax <> Tfunc constr
-R21852:21856 Licenta.Syntax <> Tfunc constr
-R21913:21916 Licenta.Syntax <> Func constr
-R21923:21926 Licenta.Syntax <> Func constr
-R21935:21938 Coq.Init.Datatypes <> negb def
-R21941:21943 Coq.Strings.String <> eqb def
-R21996:22000 Coq.Init.Datatypes <> false constr
-R22019:22039 Licenta.Semantics <> is_conflict_term_pair def
-R22078:22082 Licenta.Syntax <> Tfunc constr
-R22095:22095 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R22102:22103 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R22110:22110 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R22096:22099 Licenta.Syntax <> Tvar constr
-R22101:22101 Licenta.Syntax <> a def
-R22104:22107 Licenta.Syntax <> Tvar constr
-R22109:22109 Licenta.Syntax <> b def
-R22085:22088 Licenta.Syntax <> Func constr
-R22042:22046 Licenta.Syntax <> Tfunc constr
-R22059:22059 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R22066:22067 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R22074:22074 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R22060:22063 Licenta.Syntax <> Tvar constr
-R22065:22065 Licenta.Syntax <> x def
-R22068:22071 Licenta.Syntax <> Tvar constr
-R22073:22073 Licenta.Syntax <> y def
-R22049:22052 Licenta.Syntax <> Func constr
-R22124:22144 Licenta.Semantics <> is_conflict_term_pair def
-R22183:22187 Licenta.Syntax <> Tfunc constr
-R22200:22200 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R22207:22208 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R22215:22215 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R22201:22204 Licenta.Syntax <> Tvar constr
-R22206:22206 Licenta.Syntax <> a def
-R22209:22212 Licenta.Syntax <> Tvar constr
-R22214:22214 Licenta.Syntax <> b def
-R22190:22193 Licenta.Syntax <> Func constr
-R22147:22151 Licenta.Syntax <> Tfunc constr
-R22164:22164 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R22171:22172 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R22179:22179 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R22165:22168 Licenta.Syntax <> Tvar constr
-R22170:22170 Licenta.Syntax <> x def
-R22173:22176 Licenta.Syntax <> Tvar constr
-R22178:22178 Licenta.Syntax <> y def
-R22154:22157 Licenta.Syntax <> Func constr
-def 22232:22256 <> remove_conflict_term_pair
-R22264:22272 Licenta.Syntax <> term_pair ind
-binder 22259:22260 <> tp:195
-R22281:22299 Licenta.Syntax <> unification_problem ind
-binder 22276:22277 <> up:196
-R22304:22322 Licenta.Syntax <> unification_problem ind
-R22329:22335 Licenta.Syntax <> Ubottom constr
-R22348:22372 Licenta.Semantics <> remove_conflict_term_pair def
-R22388:22398 Licenta.Syntax <> unif_probl2 def
-R22374:22386 Licenta.Syntax <> conflict_term def
-def 22414:22438 <> is_occurs_check_term_pair
-R22449:22452 Licenta.Syntax <> term ind
-binder 22441:22442 <> t1:197
-binder 22444:22445 <> t2:198
-R22457:22460 Coq.Init.Datatypes <> bool ind
-R22474:22492 Licenta.Semantics <> term_pair_first_var def
-R22497:22498 Licenta.Semantics <> t2:198 var
-R22494:22495 Licenta.Semantics <> t1:197 var
-R22510:22514 Coq.Init.Datatypes <> false constr
-R22519:22523 Coq.Init.Datatypes <> false constr
-R22529:22532 Coq.Init.Datatypes <> true constr
-R22544:22552 Licenta.Semantics <> vars_term def
-R22554:22555 Licenta.Semantics <> t1:197 var
-R22577:22578 Coq.Lists.List ListNotations ::list_scope:'['_']' not
-R22583:22587 Coq.Init.Datatypes <> false constr
-R22604:22605 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R22612:22622 Licenta.Semantics <> var_in_term def
-R22626:22627 Licenta.Semantics <> t2:198 var
-R22663:22687 Licenta.Semantics <> is_occurs_check_term_pair def
-R22699:22703 Licenta.Syntax <> Tfunc constr
-R22716:22716 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R22723:22724 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R22731:22731 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R22717:22720 Licenta.Syntax <> Tvar constr
-R22722:22722 Licenta.Syntax <> a def
-R22725:22728 Licenta.Syntax <> Tvar constr
-R22730:22730 Licenta.Syntax <> b def
-R22706:22709 Licenta.Syntax <> Func constr
-R22690:22693 Licenta.Syntax <> Tvar constr
-R22695:22695 Licenta.Syntax <> a def
-def 22748:22759 <> occurs_check
-R22767:22775 Licenta.Syntax <> term_pair ind
-binder 22762:22763 <> tp:199
-R22784:22802 Licenta.Syntax <> unification_problem ind
-binder 22779:22780 <> up:200
-R22807:22825 Licenta.Syntax <> unification_problem ind
-R22832:22856 Licenta.Semantics <> remove_conflict_term_pair def
-R22861:22862 Licenta.Semantics <> up:200 var
-R22858:22859 Licenta.Semantics <> tp:199 var
-def 22877:22900 <> is_elimination_term_pair
-R22911:22914 Licenta.Syntax <> term ind
-binder 22903:22904 <> t1:201
-binder 22906:22907 <> t2:202
-R22919:22922 Coq.Init.Datatypes <> bool ind
-R22929:22949 Licenta.Semantics <> term_pair_solved_form def
-R22954:22955 Licenta.Semantics <> t2:202 var
-R22951:22952 Licenta.Semantics <> t1:201 var
-def 22970:23009 <> from_elimination_term_pair_to_assignment
-R23017:23025 Licenta.Syntax <> term_pair ind
-binder 23012:23013 <> tp:203
-R23030:23039 Licenta.Syntax <> assignment ind
-R23052:23053 Licenta.Semantics <> tp:203 var
-R23064:23068 Licenta.Syntax <> Tpair constr
-R23114:23117 Licenta.Syntax <> Tvar constr
-R23124:23129 Licenta.Syntax <> Apairs constr
-R23131:23131 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
-R23142:23142 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
-R23132:23136 Licenta.Syntax <> Apair constr
-R23170:23175 Licenta.Syntax <> Apairs constr
-R23177:23178 Coq.Lists.List ListNotations ::list_scope:'['_']' not
-R23220:23259 Licenta.Semantics <> from_elimination_term_pair_to_assignment def
-R23262:23266 Licenta.Syntax <> Tpair constr
-R23278:23281 Licenta.Syntax <> Tvar constr
-R23283:23283 Licenta.Syntax <> a def
-R23269:23272 Licenta.Syntax <> Tvar constr
-R23274:23274 Licenta.Syntax <> x def
-def 23299:23324 <> elimination_term_pair_list
-R23332:23340 Licenta.Syntax <> term_pair ind
-binder 23327:23328 <> tp:206
-R23350:23353 Coq.Init.Datatypes <> list ind
-R23355:23363 Licenta.Syntax <> term_pair ind
-binder 23344:23346 <> tpl:207
-R23368:23371 Coq.Init.Datatypes <> list ind
-R23373:23381 Licenta.Syntax <> term_pair ind
-R23394:23396 Licenta.Semantics <> tpl:207 var
-R23407:23408 Coq.Lists.List ListNotations ::list_scope:'['_']' not
-R23413:23414 Coq.Lists.List ListNotations ::list_scope:'['_']' not
-R23421:23422 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R23436:23447 Licenta.Semantics <> term_pair_eq def
-R23449:23450 Licenta.Semantics <> tp:206 var
-R23475:23478 Coq.Init.Datatypes <> true constr
-R23483:23483 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R23516:23520 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R23484:23509 Licenta.Semantics <> elimination_term_pair_list:208 def
-R23511:23512 Licenta.Semantics <> tp:206 var
+R21260:21285 Licenta.Semantics <> orientation_term_pair_list:182 def
+R21293:21294 Licenta.Semantics <> tl:181 var
+R21290:21291 Licenta.Semantics <> t2:180 var
+R21287:21288 Licenta.Semantics <> t1:179 var
+R21367:21392 Licenta.Semantics <> orientation_term_pair_list def
+R21406:21406 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R21424:21424 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R21407:21411 Licenta.Syntax <> Tpair constr
+R21417:21420 Licenta.Syntax <> Tvar constr
+R21422:21422 Licenta.Syntax <> a def
+R21413:21414 Licenta.Syntax <> t2 def
+R21398:21401 Licenta.Syntax <> Tvar constr
+R21403:21403 Licenta.Syntax <> a def
+R21394:21395 Licenta.Syntax <> t2 def
+def 21439:21455 <> apply_orientation
+R21463:21471 Licenta.Syntax <> term_pair ind
+binder 21458:21459 <> tp:185
+R21480:21498 Licenta.Syntax <> unification_problem ind
+binder 21475:21476 <> up:186
+R21503:21521 Licenta.Syntax <> unification_problem ind
+R21534:21535 Licenta.Semantics <> up:186 var
+R21546:21552 Licenta.Syntax <> Ubottom constr
+R21557:21563 Licenta.Syntax <> Ubottom constr
+R21569:21572 Licenta.Syntax <> Uset constr
+R21585:21586 Licenta.Semantics <> tp:185 var
+R21608:21612 Licenta.Syntax <> Tpair constr
+R21623:21626 Licenta.Syntax <> Uset constr
+R21629:21654 Licenta.Semantics <> orientation_term_pair_list def
+R21700:21716 Licenta.Semantics <> apply_orientation def
+R21740:21750 Licenta.Syntax <> unif_probl1 def
+R21718:21738 Licenta.Syntax <> orientation_term_pair def
+def 21766:21786 <> is_conflict_term_pair
+R21797:21800 Licenta.Syntax <> term ind
+binder 21789:21790 <> t1:189
+binder 21792:21793 <> t2:190
+R21805:21808 Coq.Init.Datatypes <> bool ind
+R21825:21826 Licenta.Semantics <> t2:190 var
+R21821:21822 Licenta.Semantics <> t1:189 var
+R21837:21841 Licenta.Syntax <> Tfunc constr
+R21850:21854 Licenta.Syntax <> Tfunc constr
+R21911:21914 Licenta.Syntax <> Func constr
+R21921:21924 Licenta.Syntax <> Func constr
+R21933:21936 Coq.Init.Datatypes <> negb def
+R21939:21941 Coq.Strings.String <> eqb def
+R21994:21998 Coq.Init.Datatypes <> false constr
+R22017:22037 Licenta.Semantics <> is_conflict_term_pair def
+R22076:22080 Licenta.Syntax <> Tfunc constr
+R22093:22093 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R22100:22101 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R22108:22108 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R22094:22097 Licenta.Syntax <> Tvar constr
+R22099:22099 Licenta.Syntax <> a def
+R22102:22105 Licenta.Syntax <> Tvar constr
+R22107:22107 Licenta.Syntax <> b def
+R22083:22086 Licenta.Syntax <> Func constr
+R22040:22044 Licenta.Syntax <> Tfunc constr
+R22057:22057 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R22064:22065 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R22072:22072 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R22058:22061 Licenta.Syntax <> Tvar constr
+R22063:22063 Licenta.Syntax <> x def
+R22066:22069 Licenta.Syntax <> Tvar constr
+R22071:22071 Licenta.Syntax <> y def
+R22047:22050 Licenta.Syntax <> Func constr
+R22122:22142 Licenta.Semantics <> is_conflict_term_pair def
+R22181:22185 Licenta.Syntax <> Tfunc constr
+R22198:22198 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R22205:22206 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R22213:22213 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R22199:22202 Licenta.Syntax <> Tvar constr
+R22204:22204 Licenta.Syntax <> a def
+R22207:22210 Licenta.Syntax <> Tvar constr
+R22212:22212 Licenta.Syntax <> b def
+R22188:22191 Licenta.Syntax <> Func constr
+R22145:22149 Licenta.Syntax <> Tfunc constr
+R22162:22162 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R22169:22170 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R22177:22177 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R22163:22166 Licenta.Syntax <> Tvar constr
+R22168:22168 Licenta.Syntax <> x def
+R22171:22174 Licenta.Syntax <> Tvar constr
+R22176:22176 Licenta.Syntax <> y def
+R22152:22155 Licenta.Syntax <> Func constr
+def 22230:22254 <> remove_conflict_term_pair
+R22262:22270 Licenta.Syntax <> term_pair ind
+binder 22257:22258 <> tp:195
+R22279:22297 Licenta.Syntax <> unification_problem ind
+binder 22274:22275 <> up:196
+R22302:22320 Licenta.Syntax <> unification_problem ind
+R22327:22333 Licenta.Syntax <> Ubottom constr
+R22346:22370 Licenta.Semantics <> remove_conflict_term_pair def
+R22386:22396 Licenta.Syntax <> unif_probl2 def
+R22372:22384 Licenta.Syntax <> conflict_term def
+def 22412:22436 <> is_occurs_check_term_pair
+R22447:22450 Licenta.Syntax <> term ind
+binder 22439:22440 <> t1:197
+binder 22442:22443 <> t2:198
+R22455:22458 Coq.Init.Datatypes <> bool ind
+R22472:22490 Licenta.Semantics <> term_pair_first_var def
+R22495:22496 Licenta.Semantics <> t2:198 var
+R22492:22493 Licenta.Semantics <> t1:197 var
+R22508:22512 Coq.Init.Datatypes <> false constr
+R22517:22521 Coq.Init.Datatypes <> false constr
+R22527:22530 Coq.Init.Datatypes <> true constr
+R22542:22550 Licenta.Semantics <> vars_term def
+R22552:22553 Licenta.Semantics <> t1:197 var
+R22575:22576 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R22581:22585 Coq.Init.Datatypes <> false constr
+R22602:22603 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R22610:22620 Licenta.Semantics <> var_in_term def
+R22624:22625 Licenta.Semantics <> t2:198 var
+R22661:22685 Licenta.Semantics <> is_occurs_check_term_pair def
+R22697:22701 Licenta.Syntax <> Tfunc constr
+R22714:22714 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R22721:22722 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R22729:22729 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R22715:22718 Licenta.Syntax <> Tvar constr
+R22720:22720 Licenta.Syntax <> a def
+R22723:22726 Licenta.Syntax <> Tvar constr
+R22728:22728 Licenta.Syntax <> b def
+R22704:22707 Licenta.Syntax <> Func constr
+R22688:22691 Licenta.Syntax <> Tvar constr
+R22693:22693 Licenta.Syntax <> a def
+def 22746:22757 <> occurs_check
+R22765:22773 Licenta.Syntax <> term_pair ind
+binder 22760:22761 <> tp:199
+R22782:22800 Licenta.Syntax <> unification_problem ind
+binder 22777:22778 <> up:200
+R22805:22823 Licenta.Syntax <> unification_problem ind
+R22830:22854 Licenta.Semantics <> remove_conflict_term_pair def
+R22859:22860 Licenta.Semantics <> up:200 var
+R22856:22857 Licenta.Semantics <> tp:199 var
+def 22875:22898 <> is_elimination_term_pair
+R22909:22912 Licenta.Syntax <> term ind
+binder 22901:22902 <> t1:201
+binder 22904:22905 <> t2:202
+R22917:22920 Coq.Init.Datatypes <> bool ind
+R22927:22947 Licenta.Semantics <> term_pair_solved_form def
+R22952:22953 Licenta.Semantics <> t2:202 var
+R22949:22950 Licenta.Semantics <> t1:201 var
+def 22968:23007 <> from_elimination_term_pair_to_assignment
+R23015:23023 Licenta.Syntax <> term_pair ind
+binder 23010:23011 <> tp:203
+R23028:23037 Licenta.Syntax <> assignment ind
+R23050:23051 Licenta.Semantics <> tp:203 var
+R23062:23066 Licenta.Syntax <> Tpair constr
+R23112:23115 Licenta.Syntax <> Tvar constr
+R23122:23127 Licenta.Syntax <> Apairs constr
+R23129:23129 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R23140:23140 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R23130:23134 Licenta.Syntax <> Apair constr
+R23168:23173 Licenta.Syntax <> Apairs constr
+R23175:23176 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R23218:23257 Licenta.Semantics <> from_elimination_term_pair_to_assignment def
+R23260:23264 Licenta.Syntax <> Tpair constr
+R23276:23279 Licenta.Syntax <> Tvar constr
+R23281:23281 Licenta.Syntax <> a def
+R23267:23270 Licenta.Syntax <> Tvar constr
+R23272:23272 Licenta.Syntax <> x def
+def 23297:23322 <> elimination_term_pair_list
+R23330:23338 Licenta.Syntax <> term_pair ind
+binder 23325:23326 <> tp:206
+R23348:23351 Coq.Init.Datatypes <> list ind
+R23353:23361 Licenta.Syntax <> term_pair ind
+binder 23342:23344 <> tpl:207
+R23366:23369 Coq.Init.Datatypes <> list ind
+R23371:23379 Licenta.Syntax <> term_pair ind
+R23392:23394 Licenta.Semantics <> tpl:207 var
+R23405:23406 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R23411:23412 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R23419:23420 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R23434:23445 Licenta.Semantics <> term_pair_eq def
+R23447:23448 Licenta.Semantics <> tp:206 var
+R23473:23476 Coq.Init.Datatypes <> true constr
+R23481:23481 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R23514:23518 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R23482:23507 Licenta.Semantics <> elimination_term_pair_list:208 def
+R23509:23510 Licenta.Semantics <> tp:206 var
+R23519:23519 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
 R23521:23521 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
-R23523:23523 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
-R23580:23584 Licenta.Syntax <> Tpair constr
-R23736:23740 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R23773:23773 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R23595:23595 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
-R23735:23735 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
-R23596:23600 Licenta.Syntax <> Tpair constr
-R23670:23684 Licenta.Semantics <> term_assignment def
-R23687:23726 Licenta.Semantics <> from_elimination_term_pair_to_assignment def
-R23728:23729 Licenta.Semantics <> tp:206 var
-R23603:23617 Licenta.Semantics <> term_assignment def
-R23620:23659 Licenta.Semantics <> from_elimination_term_pair_to_assignment def
-R23661:23662 Licenta.Semantics <> tp:206 var
-R23741:23766 Licenta.Semantics <> elimination_term_pair_list:208 def
-R23768:23769 Licenta.Semantics <> tp:206 var
-def 23835:23845 <> elimination
-R23853:23861 Licenta.Syntax <> term_pair ind
-binder 23848:23849 <> tp:211
-R23870:23888 Licenta.Syntax <> unification_problem ind
-binder 23865:23866 <> up:212
-R23893:23911 Licenta.Syntax <> unification_problem ind
-R23924:23925 Licenta.Semantics <> up:212 var
-R23936:23942 Licenta.Syntax <> Ubottom constr
-R23947:23953 Licenta.Syntax <> Ubottom constr
-R23959:23962 Licenta.Syntax <> Uset constr
-R23969:23972 Licenta.Syntax <> Uset constr
-R23975:24000 Licenta.Semantics <> elimination_term_pair_list def
-R24002:24003 Licenta.Semantics <> tp:211 var
-def 24027:24046 <> elimination_example'
-R24051:24054 Licenta.Syntax <> Uset constr
-R24056:24056 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R24119:24120 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R24138:24139 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R24202:24202 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R24057:24061 Licenta.Syntax <> Tpair constr
-R24111:24114 Licenta.Syntax <> Tvar constr
-R24116:24117 Licenta.Syntax <> x3 def
-R24064:24068 Licenta.Syntax <> Tfunc constr
-R24072:24072 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R24098:24099 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R24107:24107 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R24073:24077 Licenta.Syntax <> Tfunc constr
-R24081:24081 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R24089:24090 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R24097:24097 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R24082:24085 Licenta.Syntax <> Tvar constr
-R24087:24088 Licenta.Syntax <> x1 def
-R24091:24094 Licenta.Syntax <> Tvar constr
-R24096:24096 Licenta.Syntax <> a def
-R24079:24079 Licenta.Syntax <> g def
-R24100:24103 Licenta.Syntax <> Tvar constr
-R24105:24106 Licenta.Syntax <> x2 def
-R24070:24070 Licenta.Syntax <> f def
-R24121:24137 Licenta.Syntax <> elimination_tpair def
-R24140:24144 Licenta.Syntax <> Tpair constr
-R24176:24180 Licenta.Syntax <> Tfunc constr
-R24184:24184 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R24191:24192 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R23578:23582 Licenta.Syntax <> Tpair constr
+R23734:23738 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R23771:23771 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R23593:23593 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R23733:23733 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R23594:23598 Licenta.Syntax <> Tpair constr
+R23668:23682 Licenta.Semantics <> term_assignment def
+R23685:23724 Licenta.Semantics <> from_elimination_term_pair_to_assignment def
+R23726:23727 Licenta.Semantics <> tp:206 var
+R23601:23615 Licenta.Semantics <> term_assignment def
+R23618:23657 Licenta.Semantics <> from_elimination_term_pair_to_assignment def
+R23659:23660 Licenta.Semantics <> tp:206 var
+R23739:23764 Licenta.Semantics <> elimination_term_pair_list:208 def
+R23766:23767 Licenta.Semantics <> tp:206 var
+def 23833:23843 <> elimination
+R23851:23859 Licenta.Syntax <> term_pair ind
+binder 23846:23847 <> tp:211
+R23868:23886 Licenta.Syntax <> unification_problem ind
+binder 23863:23864 <> up:212
+R23891:23909 Licenta.Syntax <> unification_problem ind
+R23922:23923 Licenta.Semantics <> up:212 var
+R23934:23940 Licenta.Syntax <> Ubottom constr
+R23945:23951 Licenta.Syntax <> Ubottom constr
+R23957:23960 Licenta.Syntax <> Uset constr
+R23967:23970 Licenta.Syntax <> Uset constr
+R23973:23998 Licenta.Semantics <> elimination_term_pair_list def
+R24000:24001 Licenta.Semantics <> tp:211 var
+def 24025:24044 <> elimination_example'
+R24049:24052 Licenta.Syntax <> Uset constr
+R24054:24054 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R24117:24118 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R24136:24137 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
 R24200:24200 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R24185:24188 Licenta.Syntax <> Tvar constr
-R24190:24190 Licenta.Syntax <> a def
-R24193:24196 Licenta.Syntax <> Tvar constr
-R24198:24199 Licenta.Syntax <> x1 def
-R24182:24182 Licenta.Syntax <> f def
-R24147:24151 Licenta.Syntax <> Tfunc constr
-R24155:24155 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R24163:24164 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R24172:24172 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R24156:24159 Licenta.Syntax <> Tvar constr
-R24161:24162 Licenta.Syntax <> x2 def
-R24165:24168 Licenta.Syntax <> Tvar constr
-R24170:24171 Licenta.Syntax <> x2 def
-R24153:24153 Licenta.Syntax <> f def
-R24214:24224 Licenta.Semantics <> elimination def
-R24244:24263 Licenta.Semantics <> elimination_example' def
-R24226:24242 Licenta.Syntax <> elimination_tpair def
+R24055:24059 Licenta.Syntax <> Tpair constr
+R24109:24112 Licenta.Syntax <> Tvar constr
+R24114:24115 Licenta.Syntax <> x3 def
+R24062:24066 Licenta.Syntax <> Tfunc constr
+R24070:24070 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R24096:24097 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R24105:24105 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R24071:24075 Licenta.Syntax <> Tfunc constr
+R24079:24079 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R24087:24088 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R24095:24095 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R24080:24083 Licenta.Syntax <> Tvar constr
+R24085:24086 Licenta.Syntax <> x1 def
+R24089:24092 Licenta.Syntax <> Tvar constr
+R24094:24094 Licenta.Syntax <> a def
+R24077:24077 Licenta.Syntax <> g def
+R24098:24101 Licenta.Syntax <> Tvar constr
+R24103:24104 Licenta.Syntax <> x2 def
+R24068:24068 Licenta.Syntax <> f def
+R24119:24135 Licenta.Syntax <> elimination_tpair def
+R24138:24142 Licenta.Syntax <> Tpair constr
+R24174:24178 Licenta.Syntax <> Tfunc constr
+R24182:24182 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R24189:24190 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R24198:24198 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R24183:24186 Licenta.Syntax <> Tvar constr
+R24188:24188 Licenta.Syntax <> a def
+R24191:24194 Licenta.Syntax <> Tvar constr
+R24196:24197 Licenta.Syntax <> x1 def
+R24180:24180 Licenta.Syntax <> f def
+R24145:24149 Licenta.Syntax <> Tfunc constr
+R24153:24153 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R24161:24162 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R24170:24170 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R24154:24157 Licenta.Syntax <> Tvar constr
+R24159:24160 Licenta.Syntax <> x2 def
+R24163:24166 Licenta.Syntax <> Tvar constr
+R24168:24169 Licenta.Syntax <> x2 def
+R24151:24151 Licenta.Syntax <> f def
+R24212:24222 Licenta.Semantics <> elimination def
+R24242:24261 Licenta.Semantics <> elimination_example' def
+R24224:24240 Licenta.Syntax <> elimination_tpair def
