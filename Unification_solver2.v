@@ -268,6 +268,26 @@ Definition apply_rule (tp : term_pair) (u_p : unification_problem) (rule : unif_
                            end
   end.
 
+Fixpoint solve_unification_problem' (m_u_p : maybe_unification_problem) (gas : nat): maybe_unification_problem :=
+  match gas with
+  | O => UError
+  | S n' =>
+          match m_u_p with
+          | UError => UError
+          | UP Ubottom => m_u_p
+          | _ => match (maybe_unification_problem_in_solved_form m_u_p) with
+                 | true => m_u_p
+                 | false => solve_unification_problem' (maybe_apply_one_step m_u_p) n'
+                 end
+          end
+  end.
+
+Definition solve_unification_problem (m_u_p : maybe_unification_problem) :=
+  solve_unification_problem' m_u_p 100.
+
+Compute solve_unification_problem (UP unif_probl1).
+Compute solve_unification_problem (UP unification_problem1').
+
 Inductive solver : maybe_unification_problem -> Prop :=
   | Serror : solver UError
   | Sbottom : solver (UP Ubottom)
