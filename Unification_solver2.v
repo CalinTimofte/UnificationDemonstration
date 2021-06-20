@@ -182,25 +182,59 @@ Compute (elimination elimination_tpair elimination_example').
 Definition apply_one_step (u_p : unification_problem) : maybe_unification_problem :=
   match u_p with
   | Ubottom => UP Ubottom
-  | _ => match (check_conflict_and_deliver u_p) with
-         | TP tp => UP (remove_conflict_term_pair tp u_p)
-         | TError => match (check_occurs_check_and_deliver u_p) with
-                     | TP tp => UP (occurs_check tp u_p)
-                     | TError =>match (check_delete_and_deliver u_p) with
-                               | TP tp => UP (solver_delete tp u_p)
-                               | TError => match (check_decomposition_and_deliver u_p) with
-                                           | TP tp => UP (remove_and_replace_decomposition_unif_problem tp u_p)
-                                           | TError => match (check_elimination_and_deliver u_p) with
-                                                       | TP tp => UP (elimination tp u_p) 
-                                                       | TError => match (check_orientation_and_deliver u_p) with
-                                                                   | TP tp => UP (apply_orientation tp u_p)
-                                                                   | TError => UP u_p
-                                                                   end
-                                                        end
+  | _ => match (unification_problem_in_solved_form u_p) with
+         | true => UP (u_p)
+         | false => match (check_conflict_and_deliver u_p) with
+                     | TP tp => UP (remove_conflict_term_pair tp u_p)
+                     | TError => match (check_occurs_check_and_deliver u_p) with
+                                 | TP tp => UP (occurs_check tp u_p)
+                                 | TError =>match (check_delete_and_deliver u_p) with
+                                           | TP tp => UP (solver_delete tp u_p)
+                                           | TError => match (check_decomposition_and_deliver u_p) with
+                                                       | TP tp => UP (remove_and_replace_decomposition_unif_problem tp u_p)
+                                                       | TError => match (check_elimination_and_deliver u_p) with
+                                                                   | TP tp => UP (elimination tp u_p) 
+                                                                   | TError => match (check_orientation_and_deliver u_p) with
+                                                                               | TP tp => UP (apply_orientation tp u_p)
+                                                                               | TError => UError
+                                                                               end
+                                                                    end
+                                                       end
                                            end
-                               end
-                     end
-       end
+                                 end
+                   end
+        end
+  end.
+
+Definition apply_one_step' (m_u_p : maybe_unification_problem) : maybe_unification_problem :=
+  match m_u_p with
+  | UError => UError
+  | UP u_p =>
+            match u_p with
+            | Ubottom => UP Ubottom
+            | _ => match (unification_problem_in_solved_form u_p) with
+                   | true => UP (u_p)
+                   | false => match (check_conflict_and_deliver u_p) with
+                               | TP tp => UP (remove_conflict_term_pair tp u_p)
+                               | TError => match (check_occurs_check_and_deliver u_p) with
+                                           | TP tp => UP (occurs_check tp u_p)
+                                           | TError =>match (check_delete_and_deliver u_p) with
+                                                     | TP tp => UP (solver_delete tp u_p)
+                                                     | TError => match (check_decomposition_and_deliver u_p) with
+                                                                 | TP tp => UP (remove_and_replace_decomposition_unif_problem tp u_p)
+                                                                 | TError => match (check_elimination_and_deliver u_p) with
+                                                                             | TP tp => UP (elimination tp u_p) 
+                                                                             | TError => match (check_orientation_and_deliver u_p) with
+                                                                                         | TP tp => UP (apply_orientation tp u_p)
+                                                                                         | TError => UError
+                                                                                         end
+                                                                              end
+                                                                 end
+                                                     end
+                                           end
+                             end
+                  end
+            end
   end.
 
 Definition maybe_apply_one_step (m_u_p : maybe_unification_problem) : maybe_unification_problem :=
@@ -387,9 +421,29 @@ Proof.
   - exists (maybe_apply_one_step m_u_p). split. reflexivity. apply H2.
 Qed.
 
+Definition mup_to_up (mup : maybe_unification_problem): unification_problem :=
+  match mup with
+  | UError => Ubottom
+  | UP u_p => u_p
+  end.
+
+Definition mtp_to_tp (mtp : maybe_term_pair): term_pair :=
+  match mtp with
+  | TError => Tpair (Tvar a) (Tvar a)
+  | TP tp => tp 
+  end.
+
+
+Theorem progress'' : forall (m_u_p: maybe_unification_problem),
+  ~(maybe_is_bottom m_u_p = true) /\ ~(maybe_unification_problem_in_solved_form m_u_p = true) ->
+  (exists (m_u_p' : maybe_unification_problem), (apply_one_step' m_u_p = m_u_p') /\ ~(m_u_p = m_u_p')).
+Proof.
+  intros. destruct H. exists (apply_one_step' m_u_p). split.
+  - reflexivity.
+Admitted.
+
 Theorem preserving_solutions : forall (m_u_p m_u_p' : maybe_unification_problem), 
   (maybe_apply_one_step m_u_p = m_u_p') ->
-  (solver (maybe_apply_one_step m_u_p)) = solver m_u_p'.
+  solver m_u_p = solver m_u_p'.
 Proof.
-  intros. rewrite H. simpl. reflexivity.
-Qed.
+  intros. Admitted. 

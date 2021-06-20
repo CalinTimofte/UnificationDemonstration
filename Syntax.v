@@ -42,8 +42,8 @@ Inductive term_pair : Type :=
   | Tpair (t1 t2 : term) : term_pair.
 
 Inductive unification_problem : Type :=
-  | Uset (l : list term_pair) : unification_problem
-  | Ubottom.
+  | Ubottom
+  | Uset (l : list term_pair) : unification_problem.
 
 Definition a := Named_var "a".
 Definition b := Named_var "b".

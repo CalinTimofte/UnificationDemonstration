@@ -1,4 +1,4 @@
-DIGEST 1b17103b5b73adb9439a5e4e8c0286c5
+DIGEST 32a65d4880ab6ae1d344bf8793c6859c
 FLicenta.Syntax
 R15:20 Coq.Strings.String <> <> lib
 R64:67 Coq.Lists.List <> <> lib
@@ -94,12 +94,12 @@ binder 1163:1164 <> t1:33
 binder 1166:1167 <> t2:34
 R1179:1187 Licenta.Syntax <> term_pair:31 ind
 ind 1201:1219 <> unification_problem
-constr 1235:1238 <> Uset
-constr 1287:1293 <> Ubottom
-R1245:1248 Coq.Init.Datatypes <> list ind
-R1250:1258 Licenta.Syntax <> term_pair ind
-binder 1241:1241 <> l:37
-R1263:1281 Licenta.Syntax <> unification_problem:35 ind
+constr 1235:1241 <> Ubottom
+constr 1247:1250 <> Uset
+R1257:1260 Coq.Init.Datatypes <> list ind
+R1262:1270 Licenta.Syntax <> term_pair ind
+binder 1253:1253 <> l:37
+R1275:1293 Licenta.Syntax <> unification_problem:35 ind
 def 1308:1308 <> a
 R1313:1321 Licenta.Syntax <> Named_var constr
 def 1339:1339 <> b
