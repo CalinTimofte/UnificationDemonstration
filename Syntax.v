@@ -45,6 +45,24 @@ Inductive unification_problem : Type :=
   | Ubottom
   | Uset (l : list term_pair) : unification_problem.
 
+Inductive maybe_term_pair : Type :=
+  | TError
+  | TP (tp : term_pair).
+
+Inductive maybe_unification_problem : Type :=
+  | UError
+  | UP (u_p :unification_problem).
+
+Inductive unif_solver_rule (tp : term_pair) (u_p : unification_problem) : Type:=
+  | Rdelete
+  | Rdecompose
+  | Rorientation
+  | Relimination
+  | Rconflict
+  | Roccurs_check .
+
+
+
 Definition a := Named_var "a".
 Definition b := Named_var "b".
 Definition x := Named_var "x".

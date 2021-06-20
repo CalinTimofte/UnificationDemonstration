@@ -594,3 +594,352 @@ Definition elimination (tp : term_pair) (up : unification_problem) : unification
 
 Definition elimination_example' := Uset [Tpair (Tfunc f [Tfunc g [Tvar x1; Tvar a]; Tvar x2]) (Tvar x3); elimination_tpair; Tpair (Tfunc f [Tvar x2; Tvar x2]) (Tfunc f [Tvar a; Tvar x1])].
 Compute (elimination elimination_tpair elimination_example').
+
+Definition unification_problem_is_bottom (u : unification_problem) : bool :=
+  true.
+
+Definition unif_problem_minus_term_pair (u_p : unification_problem) (tp : term_pair) : unification_problem :=
+  match u_p with
+  | Ubottom => u_p
+  | Uset l => Uset (remove_decomposition_term_pair tp l)
+  end.
+
+Fixpoint no_common_vars_in_lists (lvar1 lvar2 : list var) : bool :=
+  match lvar1 with 
+  | [] => true
+  | h::tl => match (var_in_list_var h lvar2) with
+            | true => false
+            | false => no_common_vars_in_lists tl lvar2
+            end
+  end.
+
+Compute (no_common_vars_in_lists [a; b] [x1; x2]).
+Compute (no_common_vars_in_lists [a; b] [x1; b; x3]).
+
+Fixpoint vars_in_unification_problem' (u_p : unification_problem) (gas : nat): list var :=
+  match gas with
+  | O => []
+  | S n' =>
+            match u_p with
+            | Ubottom => []
+            | Uset l => match l with
+                        | [] => []
+                        | h::tl => match h with
+                                   | Tpair t1 t2 => (vars_term t1) ++ (vars_term t2) ++ (vars_in_unification_problem' (Uset tl) n')
+                                   end
+                        end
+            end
+  end.
+
+Definition vars_in_unification_problem (u_p : unification_problem) :=  remove_duplicates_var_list (vars_in_unification_problem' u_p 100).
+
+Compute vars_in_unification_problem (Uset [Tpair (Tvar a) (Tvar b); Tpair (Tvar a) (Tvar x1)]).
+
+Definition check_if_elimination_applies (u_p : unification_problem) (tp : term_pair) : bool :=
+  match tp with
+  | Tpair t1 t2 => negb (no_common_vars_in_lists (vars_term t1) (vars_in_unification_problem (unif_problem_minus_term_pair u_p tp)))
+  end.
+
+Compute (check_if_elimination_applies (Uset [Tpair (Tvar x2) (Tvar x2); elimination_tpair]) elimination_tpair).
+Compute (check_if_elimination_applies (Uset [Tpair (Tvar a) (Tvar a); elimination_tpair]) elimination_tpair).
+
+
+Definition solver_delete (tp : term_pair) (up : unification_problem) : unification_problem :=
+  remove_first_appearance_term_unification_problem up term_eq.
+
+Definition term_pair_correct_for_rule (tp : term_pair) (rule : term -> term -> bool) : bool :=
+  match tp with
+  | Tpair t1 t2 => rule t1 t2
+  end.
+
+Definition rule_test (tp : term_pair) (u_p : unification_problem) (criterion : term -> term -> bool) : bool :=
+  andb (term_pair_correct_for_rule tp criterion) (term_in_unification_problem u_p criterion).
+
+Definition delete_test (tp : term_pair) (u_p : unification_problem) : bool :=
+  andb (term_pair_correct_for_rule tp term_eq) (term_in_unification_problem u_p term_eq).
+
+Definition decompose_test (tp : term_pair) (u_p : unification_problem) :=
+  rule_test tp u_p is_decomposition_term_pair.
+
+Definition orientation_test (tp : term_pair) (u_p : unification_problem) :=
+  rule_test tp u_p is_orientation_term_pair.
+
+Definition elimination_test (tp : term_pair) (u_p : unification_problem) :=
+  rule_test tp u_p is_elimination_term_pair.
+
+Definition conflict_test (tp : term_pair) (u_p : unification_problem) :=
+  rule_test tp u_p is_conflict_term_pair.
+
+Definition occurs_check_test (tp : term_pair) (u_p : unification_problem) :=
+  rule_test tp u_p is_occurs_check_term_pair.
+
+Fixpoint deliver_tpair_from_list (tpl : list term_pair) (criterion : term -> term -> bool) : maybe_term_pair :=
+  match tpl with
+  | [] => TError
+  | h::tl => match (term_pair_correct_for_rule h criterion) with
+             | true => TP h
+             | false => deliver_tpair_from_list tl criterion
+             end
+  end.
+
+Definition deliver_tpair_from_unification_problem (u_p : unification_problem) (criterion : term -> term -> bool) : maybe_term_pair :=
+  match u_p with
+  | Ubottom => TError
+  | Uset l => deliver_tpair_from_list l criterion
+  end.
+
+Definition delete_term_pair := Tpair t1 t1.
+
+Definition check_delete_and_deliver (u_p : unification_problem) :=
+  deliver_tpair_from_unification_problem u_p term_eq.
+
+Definition check_decomposition_and_deliver (u_p : unification_problem) :=
+  deliver_tpair_from_unification_problem u_p is_decomposition_term_pair.
+
+Definition check_orientation_and_deliver (u_p : unification_problem) :=
+  deliver_tpair_from_unification_problem u_p is_orientation_term_pair.
+
+Definition check_conflict_and_deliver (u_p : unification_problem) :=
+  deliver_tpair_from_unification_problem u_p is_conflict_term_pair.
+
+Definition check_occurs_check_and_deliver (u_p : unification_problem) :=
+  deliver_tpair_from_unification_problem u_p is_occurs_check_term_pair.
+
+Fixpoint deliver_elimination_tpair_from_list (tpl copy: list term_pair) : maybe_term_pair :=
+  match tpl with
+  | [] => TError
+  | h::tl => match (term_pair_correct_for_rule h is_elimination_term_pair) with
+             | true => match (check_if_elimination_applies (Uset copy) h) with
+                       | true => TP h
+                       | false => deliver_elimination_tpair_from_list tl copy
+                       end
+             | false => deliver_elimination_tpair_from_list tl copy
+             end
+  end.
+
+Definition deliver_elimination_tpair_from_unification_problem (u_p : unification_problem) : maybe_term_pair :=
+  match u_p with
+  | Ubottom => TError
+  | Uset l => deliver_elimination_tpair_from_list l l
+  end.
+
+
+Definition check_elimination_and_deliver (u_p : unification_problem) :=
+  deliver_elimination_tpair_from_unification_problem u_p.
+
+Compute (check_elimination_and_deliver elimination_example).
+
+Compute (check_delete_and_deliver unif_probl1).
+
+Definition unif_probl1' := Uset [decomposition_term_pair; orientation_term_pair].
+Compute (check_decomposition_and_deliver unif_probl1').
+
+Definition unif_probl1'' := Uset [orientation_term_pair].
+Compute (check_decomposition_and_deliver unif_probl1'').
+
+Compute (check_orientation_and_deliver unif_probl1).
+Compute (term_pair_correct_for_rule elimination_tpair is_elimination_term_pair).
+Compute (check_elimination_and_deliver elimination_example).
+
+Compute (check_conflict_and_deliver unif_probl2).
+
+Compute (check_occurs_check_and_deliver (Uset [occurs_check_term_pair])).
+
+Compute (elimination elimination_tpair elimination_example').
+
+
+Definition apply_one_step (u_p : unification_problem) : maybe_unification_problem :=
+  match u_p with
+  | Ubottom => UP Ubottom
+  | _ => match (unification_problem_in_solved_form u_p) with
+         | true => UP (u_p)
+         | false => match (check_conflict_and_deliver u_p) with
+                     | TP tp => UP (remove_conflict_term_pair tp u_p)
+                     | TError => match (check_occurs_check_and_deliver u_p) with
+                                 | TP tp => UP (occurs_check tp u_p)
+                                 | TError =>match (check_delete_and_deliver u_p) with
+                                           | TP tp => UP (solver_delete tp u_p)
+                                           | TError => match (check_decomposition_and_deliver u_p) with
+                                                       | TP tp => UP (remove_and_replace_decomposition_unif_problem tp u_p)
+                                                       | TError => match (check_elimination_and_deliver u_p) with
+                                                                   | TP tp => UP (elimination tp u_p) 
+                                                                   | TError => match (check_orientation_and_deliver u_p) with
+                                                                               | TP tp => UP (apply_orientation tp u_p)
+                                                                               | TError => UError
+                                                                               end
+                                                                    end
+                                                       end
+                                           end
+                                 end
+                   end
+        end
+  end.
+
+Definition apply_one_step' (m_u_p : maybe_unification_problem) : maybe_unification_problem :=
+  match m_u_p with
+  | UError => UError
+  | UP u_p =>
+            match u_p with
+            | Ubottom => UP Ubottom
+            | _ => match (unification_problem_in_solved_form u_p) with
+                   | true => UP (u_p)
+                   | false => match (check_conflict_and_deliver u_p) with
+                               | TP tp => UP (remove_conflict_term_pair tp u_p)
+                               | TError => match (check_occurs_check_and_deliver u_p) with
+                                           | TP tp => UP (occurs_check tp u_p)
+                                           | TError =>match (check_delete_and_deliver u_p) with
+                                                     | TP tp => UP (solver_delete tp u_p)
+                                                     | TError => match (check_decomposition_and_deliver u_p) with
+                                                                 | TP tp => UP (remove_and_replace_decomposition_unif_problem tp u_p)
+                                                                 | TError => match (check_elimination_and_deliver u_p) with
+                                                                             | TP tp => UP (elimination tp u_p) 
+                                                                             | TError => match (check_orientation_and_deliver u_p) with
+                                                                                         | TP tp => UP (apply_orientation tp u_p)
+                                                                                         | TError => UError
+                                                                                         end
+                                                                              end
+                                                                 end
+                                                     end
+                                           end
+                             end
+                  end
+            end
+  end.
+
+Definition maybe_apply_one_step (m_u_p : maybe_unification_problem) : maybe_unification_problem :=
+  match m_u_p with
+  | UError => UError
+  | UP up => apply_one_step up
+  end.
+
+Definition maybe_unification_problem_in_solved_form (m_u_p : maybe_unification_problem) : bool :=
+  match m_u_p with
+  | UError => false
+  | UP up => unification_problem_in_solved_form up
+  end.
+
+
+Definition orientation_term_pair' := Tpair t2 (Tvar x2).
+Definition unification_problem1' := Uset [ Tpair t1 t1; decomposition_term_pair; orientation_term_pair'].
+Compute apply_one_step unification_problem1'.
+Compute maybe_apply_one_step (apply_one_step unification_problem1').
+Compute maybe_apply_one_step (maybe_apply_one_step (apply_one_step unification_problem1')).
+Compute maybe_apply_one_step (maybe_apply_one_step (maybe_apply_one_step (apply_one_step unification_problem1'))).
+Compute maybe_apply_one_step (maybe_apply_one_step (maybe_apply_one_step (maybe_apply_one_step (apply_one_step unification_problem1')))).
+Compute maybe_unification_problem_in_solved_form (maybe_apply_one_step (maybe_apply_one_step (maybe_apply_one_step (maybe_apply_one_step (apply_one_step unification_problem1'))))).
+
+Print unif_probl1.
+Compute apply_one_step unif_probl1.
+Compute maybe_apply_one_step (apply_one_step unif_probl1).
+Compute maybe_apply_one_step (maybe_apply_one_step (apply_one_step unif_probl1)).
+Compute maybe_apply_one_step (maybe_apply_one_step (maybe_apply_one_step (apply_one_step unif_probl1))).
+Compute maybe_apply_one_step (maybe_apply_one_step (maybe_apply_one_step (maybe_apply_one_step (apply_one_step unif_probl1)))).
+Compute maybe_apply_one_step (maybe_apply_one_step (maybe_apply_one_step (maybe_apply_one_step (maybe_apply_one_step (apply_one_step unif_probl1))))).
+
+Print elimination_example.
+Compute apply_one_step elimination_example.
+Compute maybe_apply_one_step (apply_one_step elimination_example).
+Compute maybe_apply_one_step (maybe_apply_one_step (apply_one_step elimination_example)).
+Compute maybe_apply_one_step (maybe_apply_one_step (maybe_apply_one_step (apply_one_step elimination_example))).
+Compute maybe_apply_one_step (maybe_apply_one_step (maybe_apply_one_step (maybe_apply_one_step (apply_one_step elimination_example)))).
+
+Definition apply_rule (tp : term_pair) (u_p : unification_problem) (rule : unif_solver_rule tp u_p) : maybe_unification_problem :=
+  match rule with
+  | Rdelete _ _ => match (delete_test tp u_p) with
+                   | true => UP (solver_delete tp u_p)
+                   | false => UError
+                   end
+  | Rdecompose  _ _ => match (decompose_test tp u_p) with
+                       | true => UP (remove_and_replace_decomposition_unif_problem tp u_p)
+                       | false => UError
+                       end
+  | Rorientation  _ _ => match (orientation_test tp u_p) with
+                         | true => UP (apply_orientation tp u_p)
+                         | false => UError
+                         end
+  | Relimination  _ _ => match (elimination_test tp u_p) with
+                         | true => UP (elimination tp u_p)
+                         | false => UError
+                         end
+  | Rconflict   _ _ => match (conflict_test tp u_p) with
+                       | true => UP (remove_conflict_term_pair tp u_p)
+                       | false => UError
+                       end
+  | Roccurs_check   _ _ => match (occurs_check_test tp u_p) with
+                           | true => UP (occurs_check tp u_p)
+                           | false => UError
+                           end
+  end.
+
+Fixpoint solve_unification_problem' (m_u_p : maybe_unification_problem) (gas : nat): maybe_unification_problem :=
+  match gas with
+  | O => UError
+  | S n' =>
+          match m_u_p with
+          | UError => UError
+          | UP Ubottom => m_u_p
+          | _ => match (maybe_unification_problem_in_solved_form m_u_p) with
+                 | true => m_u_p
+                 | false => solve_unification_problem' (maybe_apply_one_step m_u_p) n'
+                 end
+          end
+  end.
+
+Definition solve_unification_problem (m_u_p : maybe_unification_problem) :=
+  solve_unification_problem' m_u_p 100.
+
+Compute solve_unification_problem (UP unif_probl1).
+Compute solve_unification_problem (UP unification_problem1').
+
+Definition is_bottom (u : unification_problem) : bool :=
+  match u with
+  | Ubottom => true
+  | _ => false
+  end.
+
+Definition maybe_is_bottom (m_u_p : maybe_unification_problem) : bool :=
+  match m_u_p with
+  | UError => false
+  | UP u_p => is_bottom u_p
+  end.
+
+Fixpoint term_pair_list_eq (tpl1 tpl2 : list term_pair) : bool :=
+  match tpl1 with
+  | [] => match tpl2 with 
+          | [] => true
+          | _ => false
+          end
+  | h1::tl1 => match tpl2 with
+               | [] => false
+               | h2::tl2 => andb (term_pair_eq h1 h2) (term_pair_list_eq tl1 tl2)
+               end
+  end.
+
+Definition unification_problem_eq (up1 up2: unification_problem) : bool :=
+  match up1 with
+  | Ubottom => match up2 with
+              | Ubottom => true
+              | _ => false
+              end
+  | Uset l1 => match up2 with
+               | Ubottom => false
+               | Uset l2 => term_pair_list_eq l1 l2
+               end
+  end.
+
+Compute (unification_problem_eq
+        (Uset [orientation_term_pair; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)])
+        (Uset [orientation_term_pair; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)])
+      ).
+
+Definition mup_to_up (mup : maybe_unification_problem): unification_problem :=
+  match mup with
+  | UError => Ubottom
+  | UP u_p => u_p
+  end.
+
+Definition mtp_to_tp (mtp : maybe_term_pair): term_pair :=
+  match mtp with
+  | TError => Tpair (Tvar a) (Tvar a)
+  | TP tp => tp 
+  end.

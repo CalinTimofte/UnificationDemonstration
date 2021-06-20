@@ -1,6 +1,5 @@
 From Licenta Require Import Semantics.
 From Licenta Require Import Syntax.
-From Licenta Require Import Unification_solver2.
 
 Theorem apply_conflict_up_different: forall (u_p : unification_problem),
   ~(check_conflict_and_deliver u_p = TError) /\ ~(u_p = Ubottom) ->
