@@ -1,4 +1,4 @@
-DIGEST 762a7982a810679715c600c84bbf58ef
+DIGEST db8f5370d739ec5543db59f67cb2656b
 FLicenta.Syntax
 R15:20 Coq.Strings.String <> <> lib
 R64:67 Coq.Lists.List <> <> lib
@@ -33,588 +33,665 @@ R443:446 Licenta.Syntax <> term:7 ind
 R430:433 Coq.Init.Datatypes <> list ind
 R435:438 Licenta.Syntax <> term:7 ind
 R409:425 Licenta.Syntax <> functional_symbol ind
-ind 460:474 <> atomic_formulae
-constr 490:495 <> Afpred
-R516:519 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R529:532 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R533:547 Licenta.Syntax <> atomic_formulae:9 ind
-R520:523 Coq.Init.Datatypes <> list ind
-R525:528 Licenta.Syntax <> term ind
-R498:515 Licenta.Syntax <> predicative_symbol ind
-ind 562:581 <> first_order_formulae
-constr 597:605 <> Aformulae
-constr 635:638 <> Anot
-constr 673:676 <> Aand
-constr 717:719 <> Aor
-constr 760:767 <> Aimplies
-constr 808:821 <> Adoubleimplies
-constr 862:868 <> Aforall
-constr 913:919 <> Aexists
-R614:628 Licenta.Syntax <> atomic_formulae ind
-binder 608:610 <> phi:13
-R647:666 Licenta.Syntax <> first_order_formulae:11 ind
-binder 641:643 <> phi:14
-R691:710 Licenta.Syntax <> first_order_formulae:11 ind
-binder 679:682 <> phi1:15
-binder 684:687 <> phi2:16
-R734:753 Licenta.Syntax <> first_order_formulae:11 ind
-binder 722:725 <> phi1:17
-binder 727:730 <> phi2:18
-R782:801 Licenta.Syntax <> first_order_formulae:11 ind
-binder 770:773 <> phi1:19
-binder 775:778 <> phi2:20
-R836:855 Licenta.Syntax <> first_order_formulae:11 ind
-binder 824:827 <> phi1:21
-binder 829:832 <> phi2:22
-R875:877 Licenta.Syntax <> var ind
-binder 871:871 <> x:23
-R887:906 Licenta.Syntax <> first_order_formulae:11 ind
-binder 881:883 <> phi:24
-R926:928 Licenta.Syntax <> var ind
-binder 922:922 <> x:25
-R938:957 Licenta.Syntax <> first_order_formulae:11 ind
-binder 932:934 <> phi:26
-ind 972:986 <> assignment_pair
-constr 1002:1006 <> Apair
-R1012:1015 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1020:1023 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1024:1038 Licenta.Syntax <> assignment_pair:27 ind
-R1016:1019 Licenta.Syntax <> term ind
-R1009:1011 Licenta.Syntax <> var ind
-ind 1052:1061 <> assignment
-constr 1077:1082 <> Apairs
-R1105:1108 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1109:1118 Licenta.Syntax <> assignment:29 ind
-R1085:1088 Coq.Init.Datatypes <> list ind
-R1090:1104 Licenta.Syntax <> assignment_pair ind
-ind 1132:1140 <> term_pair
-constr 1156:1160 <> Tpair
-R1171:1174 Licenta.Syntax <> term ind
-binder 1163:1164 <> t1:33
-binder 1166:1167 <> t2:34
-R1179:1187 Licenta.Syntax <> term_pair:31 ind
-ind 1201:1219 <> unification_problem
-constr 1235:1241 <> Ubottom
-constr 1247:1250 <> Uset
-R1257:1260 Coq.Init.Datatypes <> list ind
-R1262:1270 Licenta.Syntax <> term_pair ind
-binder 1253:1253 <> l:37
-R1275:1293 Licenta.Syntax <> unification_problem:35 ind
-ind 1307:1321 <> maybe_term_pair
-constr 1337:1342 <> TError
-constr 1348:1349 <> TP
-R1357:1365 Licenta.Syntax <> term_pair ind
-binder 1352:1353 <> tp:40
-ind 1380:1404 <> maybe_unification_problem
-constr 1420:1425 <> UError
-constr 1431:1432 <> UP
-R1440:1458 Licenta.Syntax <> unification_problem ind
-binder 1435:1437 <> u_p:43
-ind 1473:1488 <> unif_solver_rule
-constr 1548:1554 <> Rdelete
-constr 1560:1569 <> Rdecompose
-constr 1575:1586 <> Rorientation
-constr 1592:1603 <> Relimination
-constr 1609:1617 <> Rconflict
-constr 1623:1635 <> Roccurs_check
-R1496:1504 Licenta.Syntax <> term_pair ind
-binder 1491:1492 <> tp:44
-R1514:1532 Licenta.Syntax <> unification_problem ind
-binder 1508:1510 <> u_p:45
-def 1653:1653 <> a
-R1658:1666 Licenta.Syntax <> Named_var constr
-def 1684:1684 <> b
-R1689:1697 Licenta.Syntax <> Named_var constr
-def 1715:1715 <> x
-R1720:1728 Licenta.Syntax <> Named_var constr
-def 1746:1746 <> y
-R1751:1759 Licenta.Syntax <> Named_var constr
-def 1777:1777 <> z
-R1782:1790 Licenta.Syntax <> Named_var constr
-def 1808:1809 <> x1
-R1814:1822 Licenta.Syntax <> Named_var constr
-def 1841:1842 <> x2
-R1847:1855 Licenta.Syntax <> Named_var constr
-def 1874:1875 <> x3
-R1880:1888 Licenta.Syntax <> Named_var constr
-def 1907:1907 <> f
-R1912:1915 Licenta.Syntax <> Func constr
-def 1933:1933 <> g
-R1938:1941 Licenta.Syntax <> Func constr
-def 1961:1961 <> P
-R1966:1974 Licenta.Syntax <> Predicate constr
-def 1992:1994 <> phi
-R1999:2004 Licenta.Syntax <> Afpred constr
-R2006:2006 Licenta.Syntax <> P def
-def 2021:2024 <> phi1
-R2031:2034 Licenta.Syntax <> Aand constr
-R2229:2237 Licenta.Syntax <> Aformulae constr
-R2241:2243 Licenta.Syntax <> phi def
-R2245:2245 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2252:2253 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2260:2260 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2246:2249 Licenta.Syntax <> Tvar constr
-R2251:2251 Licenta.Syntax <> x def
-R2254:2257 Licenta.Syntax <> Tvar constr
-R2259:2259 Licenta.Syntax <> x def
-R2038:2044 Licenta.Syntax <> Aforall constr
-R2050:2053 Licenta.Syntax <> Aand constr
-R2096:2102 Licenta.Syntax <> Aexists constr
-R2108:2111 Licenta.Syntax <> Aand constr
-R2181:2189 Licenta.Syntax <> Aformulae constr
-R2193:2195 Licenta.Syntax <> phi def
-R2197:2197 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2204:2205 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2212:2212 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2198:2201 Licenta.Syntax <> Tvar constr
-R2203:2203 Licenta.Syntax <> x def
-R2206:2209 Licenta.Syntax <> Tvar constr
-R2211:2211 Licenta.Syntax <> y def
-R2115:2123 Licenta.Syntax <> Aformulae constr
-R2126:2128 Licenta.Syntax <> phi def
-R2130:2130 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2137:2138 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2174:2174 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2131:2134 Licenta.Syntax <> Tvar constr
-R2136:2136 Licenta.Syntax <> z def
-R2139:2143 Licenta.Syntax <> Tfunc constr
-R2158:2158 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2165:2166 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2173:2173 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2159:2162 Licenta.Syntax <> Tvar constr
-R2164:2164 Licenta.Syntax <> x def
-R2167:2170 Licenta.Syntax <> Tvar constr
-R2172:2172 Licenta.Syntax <> y def
-R2147:2150 Licenta.Syntax <> Func constr
-R2104:2104 Licenta.Syntax <> y def
-R2057:2065 Licenta.Syntax <> Aformulae constr
-R2069:2071 Licenta.Syntax <> phi def
-R2073:2073 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2080:2081 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2088:2088 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2074:2077 Licenta.Syntax <> Tvar constr
-R2079:2079 Licenta.Syntax <> x def
+ind 460:474 <> assignment_pair
+constr 490:494 <> Apair
+R500:503 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R508:511 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R512:526 Licenta.Syntax <> assignment_pair:9 ind
+R504:507 Licenta.Syntax <> term ind
+R497:499 Licenta.Syntax <> var ind
+ind 540:549 <> assignment
+constr 565:570 <> Apairs
+R593:596 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R597:606 Licenta.Syntax <> assignment:11 ind
+R573:576 Coq.Init.Datatypes <> list ind
+R578:592 Licenta.Syntax <> assignment_pair ind
+ind 620:628 <> term_pair
+constr 644:648 <> Tpair
+R659:662 Licenta.Syntax <> term ind
+binder 651:652 <> t1:15
+binder 654:655 <> t2:16
+R667:675 Licenta.Syntax <> term_pair:13 ind
+ind 689:703 <> maybe_term_pair
+constr 719:724 <> TError
+constr 730:731 <> TP
+R739:747 Licenta.Syntax <> term_pair ind
+binder 734:735 <> tp:19
+ind 762:780 <> unification_problem
+constr 796:802 <> Ubottom
+constr 808:811 <> Uset
+R818:821 Coq.Init.Datatypes <> list ind
+R823:831 Licenta.Syntax <> term_pair ind
+binder 814:814 <> l:22
+R836:854 Licenta.Syntax <> unification_problem:20 ind
+ind 868:892 <> maybe_unification_problem
+constr 908:913 <> UError
+constr 919:920 <> UP
+R928:946 Licenta.Syntax <> unification_problem ind
+binder 923:925 <> u_p:25
+def 964:964 <> a
+R969:977 Licenta.Syntax <> Named_var constr
+def 995:995 <> b
+R1000:1008 Licenta.Syntax <> Named_var constr
+def 1026:1026 <> x
+R1031:1039 Licenta.Syntax <> Named_var constr
+def 1057:1057 <> y
+R1062:1070 Licenta.Syntax <> Named_var constr
+def 1088:1088 <> z
+R1093:1101 Licenta.Syntax <> Named_var constr
+def 1119:1120 <> x1
+R1125:1133 Licenta.Syntax <> Named_var constr
+def 1152:1153 <> x2
+R1158:1166 Licenta.Syntax <> Named_var constr
+def 1185:1186 <> x3
+R1191:1199 Licenta.Syntax <> Named_var constr
+def 1218:1218 <> f
+R1223:1226 Licenta.Syntax <> Func constr
+def 1244:1244 <> g
+R1249:1252 Licenta.Syntax <> Func constr
+def 1272:1272 <> P
+R1277:1285 Licenta.Syntax <> Predicate constr
+def 1306:1311 <> sigma1
+R1316:1321 Licenta.Syntax <> Apairs constr
+R1323:1323 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1340:1341 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1358:1358 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1324:1328 Licenta.Syntax <> Apair constr
+R1333:1336 Licenta.Syntax <> Tvar constr
+R1338:1338 Licenta.Syntax <> x def
+R1330:1330 Licenta.Syntax <> y def
+R1342:1346 Licenta.Syntax <> Apair constr
+R1351:1354 Licenta.Syntax <> Tvar constr
+R1356:1356 Licenta.Syntax <> y def
+R1348:1348 Licenta.Syntax <> x def
+def 1373:1374 <> t1
+R1379:1383 Licenta.Syntax <> Tfunc constr
+R1396:1396 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1403:1404 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1411:1412 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1419:1420 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1454:1454 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1397:1400 Licenta.Syntax <> Tvar constr
+R1402:1402 Licenta.Syntax <> x def
+R1405:1408 Licenta.Syntax <> Tvar constr
+R1410:1410 Licenta.Syntax <> y def
+R1413:1416 Licenta.Syntax <> Tvar constr
+R1418:1418 Licenta.Syntax <> x def
+R1421:1425 Licenta.Syntax <> Tfunc constr
+R1438:1438 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1445:1446 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1453:1453 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1439:1442 Licenta.Syntax <> Tvar constr
+R1444:1444 Licenta.Syntax <> x def
+R1447:1450 Licenta.Syntax <> Tvar constr
+R1452:1452 Licenta.Syntax <> y def
+R1428:1431 Licenta.Syntax <> Func constr
+R1386:1389 Licenta.Syntax <> Func constr
+def 1468:1469 <> t2
+R1474:1478 Licenta.Syntax <> Tfunc constr
+R1491:1491 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1498:1499 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1506:1507 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1514:1514 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1492:1495 Licenta.Syntax <> Tvar constr
+R1497:1497 Licenta.Syntax <> x def
+R1500:1503 Licenta.Syntax <> Tvar constr
+R1505:1505 Licenta.Syntax <> y def
+R1508:1511 Licenta.Syntax <> Tvar constr
+R1513:1513 Licenta.Syntax <> x def
+R1481:1484 Licenta.Syntax <> Func constr
+def 1529:1551 <> decomposition_term_pair
+R1556:1560 Licenta.Syntax <> Tpair constr
+R1599:1603 Licenta.Syntax <> Tfunc constr
+R1616:1616 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1623:1624 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1631:1631 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1617:1620 Licenta.Syntax <> Tvar constr
+R1622:1622 Licenta.Syntax <> a def
+R1625:1628 Licenta.Syntax <> Tvar constr
+R1630:1630 Licenta.Syntax <> b def
+R1606:1609 Licenta.Syntax <> Func constr
+R1563:1567 Licenta.Syntax <> Tfunc constr
+R1580:1580 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1587:1588 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1595:1595 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1581:1584 Licenta.Syntax <> Tvar constr
+R1586:1586 Licenta.Syntax <> x def
+R1589:1592 Licenta.Syntax <> Tvar constr
+R1594:1594 Licenta.Syntax <> y def
+R1570:1573 Licenta.Syntax <> Func constr
+def 1646:1666 <> orientation_term_pair
+R1671:1675 Licenta.Syntax <> Tpair constr
+R1681:1684 Licenta.Syntax <> Tvar constr
+R1686:1686 Licenta.Syntax <> a def
+R1677:1678 Licenta.Syntax <> t2 def
+def 1701:1713 <> conflict_term
+R1718:1722 Licenta.Syntax <> Tpair constr
+R1761:1765 Licenta.Syntax <> Tfunc constr
+R1778:1778 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1785:1786 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1793:1793 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1779:1782 Licenta.Syntax <> Tvar constr
+R1784:1784 Licenta.Syntax <> a def
+R1787:1790 Licenta.Syntax <> Tvar constr
+R1792:1792 Licenta.Syntax <> b def
+R1768:1771 Licenta.Syntax <> Func constr
+R1725:1729 Licenta.Syntax <> Tfunc constr
+R1742:1742 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1749:1750 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1757:1757 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1743:1746 Licenta.Syntax <> Tvar constr
+R1748:1748 Licenta.Syntax <> x def
+R1751:1754 Licenta.Syntax <> Tvar constr
+R1756:1756 Licenta.Syntax <> y def
+R1732:1735 Licenta.Syntax <> Func constr
+def 1808:1829 <> occurs_check_term_pair
+R1835:1839 Licenta.Syntax <> Tpair constr
+R1851:1855 Licenta.Syntax <> Tfunc constr
+R1868:1868 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1875:1876 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1883:1883 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1869:1872 Licenta.Syntax <> Tvar constr
+R1874:1874 Licenta.Syntax <> a def
+R1877:1880 Licenta.Syntax <> Tvar constr
+R1882:1882 Licenta.Syntax <> b def
+R1858:1861 Licenta.Syntax <> Func constr
+R1842:1845 Licenta.Syntax <> Tvar constr
+R1847:1847 Licenta.Syntax <> a def
+def 1899:1909 <> unif_probl1
+R1914:1917 Licenta.Syntax <> Uset constr
+R1919:1920 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1932:1933 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1957:1958 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1980:1980 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R1921:1925 Licenta.Syntax <> Tpair constr
+R1930:1931 Licenta.Syntax <> t1 def
+R1927:1928 Licenta.Syntax <> t1 def
+R1934:1956 Licenta.Syntax <> decomposition_term_pair def
+R1959:1979 Licenta.Syntax <> orientation_term_pair def
+def 1994:2004 <> unif_probl2
+R2009:2012 Licenta.Syntax <> Uset constr
+R2014:2015 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R2029:2030 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R2016:2028 Licenta.Syntax <> conflict_term def
+def 2044:2060 <> elimination_tpair
+R2065:2069 Licenta.Syntax <> Tpair constr
 R2082:2085 Licenta.Syntax <> Tvar constr
-R2087:2087 Licenta.Syntax <> y def
-R2046:2046 Licenta.Syntax <> x def
-def 2280:2285 <> sigma1
-R2290:2295 Licenta.Syntax <> Apairs constr
-R2297:2297 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2314:2315 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2332:2332 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2298:2302 Licenta.Syntax <> Apair constr
-R2307:2310 Licenta.Syntax <> Tvar constr
-R2312:2312 Licenta.Syntax <> x def
-R2304:2304 Licenta.Syntax <> y def
-R2316:2320 Licenta.Syntax <> Apair constr
-R2325:2328 Licenta.Syntax <> Tvar constr
-R2330:2330 Licenta.Syntax <> y def
-R2322:2322 Licenta.Syntax <> x def
-def 2347:2348 <> t1
-R2353:2357 Licenta.Syntax <> Tfunc constr
-R2370:2370 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2377:2378 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2385:2386 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2393:2394 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2428:2428 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2371:2374 Licenta.Syntax <> Tvar constr
-R2376:2376 Licenta.Syntax <> x def
-R2379:2382 Licenta.Syntax <> Tvar constr
-R2384:2384 Licenta.Syntax <> y def
-R2387:2390 Licenta.Syntax <> Tvar constr
-R2392:2392 Licenta.Syntax <> x def
-R2395:2399 Licenta.Syntax <> Tfunc constr
-R2412:2412 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2419:2420 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2427:2427 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2413:2416 Licenta.Syntax <> Tvar constr
-R2418:2418 Licenta.Syntax <> x def
-R2421:2424 Licenta.Syntax <> Tvar constr
-R2426:2426 Licenta.Syntax <> y def
-R2402:2405 Licenta.Syntax <> Func constr
-R2360:2363 Licenta.Syntax <> Func constr
-def 2442:2443 <> t2
-R2448:2452 Licenta.Syntax <> Tfunc constr
-R2465:2465 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2472:2473 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2480:2481 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2488:2488 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2466:2469 Licenta.Syntax <> Tvar constr
-R2471:2471 Licenta.Syntax <> x def
-R2474:2477 Licenta.Syntax <> Tvar constr
-R2479:2479 Licenta.Syntax <> y def
-R2482:2485 Licenta.Syntax <> Tvar constr
-R2487:2487 Licenta.Syntax <> x def
-R2455:2458 Licenta.Syntax <> Func constr
-def 2503:2525 <> decomposition_term_pair
-R2530:2534 Licenta.Syntax <> Tpair constr
-R2573:2577 Licenta.Syntax <> Tfunc constr
-R2590:2590 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2597:2598 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2605:2605 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2591:2594 Licenta.Syntax <> Tvar constr
-R2596:2596 Licenta.Syntax <> a def
-R2599:2602 Licenta.Syntax <> Tvar constr
-R2604:2604 Licenta.Syntax <> b def
-R2580:2583 Licenta.Syntax <> Func constr
-R2537:2541 Licenta.Syntax <> Tfunc constr
-R2554:2554 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2561:2562 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2569:2569 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2555:2558 Licenta.Syntax <> Tvar constr
-R2560:2560 Licenta.Syntax <> x def
-R2563:2566 Licenta.Syntax <> Tvar constr
-R2568:2568 Licenta.Syntax <> y def
-R2544:2547 Licenta.Syntax <> Func constr
-def 2620:2640 <> orientation_term_pair
-R2645:2649 Licenta.Syntax <> Tpair constr
-R2655:2658 Licenta.Syntax <> Tvar constr
-R2660:2660 Licenta.Syntax <> a def
-R2651:2652 Licenta.Syntax <> t2 def
-def 2675:2687 <> conflict_term
-R2692:2696 Licenta.Syntax <> Tpair constr
-R2735:2739 Licenta.Syntax <> Tfunc constr
-R2752:2752 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2759:2760 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2767:2767 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2753:2756 Licenta.Syntax <> Tvar constr
-R2758:2758 Licenta.Syntax <> a def
-R2761:2764 Licenta.Syntax <> Tvar constr
-R2766:2766 Licenta.Syntax <> b def
-R2742:2745 Licenta.Syntax <> Func constr
-R2699:2703 Licenta.Syntax <> Tfunc constr
-R2716:2716 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2723:2724 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2731:2731 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2717:2720 Licenta.Syntax <> Tvar constr
-R2722:2722 Licenta.Syntax <> x def
-R2725:2728 Licenta.Syntax <> Tvar constr
-R2730:2730 Licenta.Syntax <> y def
-R2706:2709 Licenta.Syntax <> Func constr
-def 2782:2803 <> occurs_check_term_pair
-R2809:2813 Licenta.Syntax <> Tpair constr
-R2825:2829 Licenta.Syntax <> Tfunc constr
-R2842:2842 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2849:2850 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2857:2857 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2843:2846 Licenta.Syntax <> Tvar constr
-R2848:2848 Licenta.Syntax <> a def
-R2851:2854 Licenta.Syntax <> Tvar constr
-R2856:2856 Licenta.Syntax <> b def
-R2832:2835 Licenta.Syntax <> Func constr
-R2816:2819 Licenta.Syntax <> Tvar constr
-R2821:2821 Licenta.Syntax <> a def
-def 2873:2883 <> unif_probl1
-R2888:2891 Licenta.Syntax <> Uset constr
-R2893:2894 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2906:2907 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2931:2932 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2954:2954 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R2895:2899 Licenta.Syntax <> Tpair constr
-R2904:2905 Licenta.Syntax <> t1 def
-R2901:2902 Licenta.Syntax <> t1 def
-R2908:2930 Licenta.Syntax <> decomposition_term_pair def
-R2933:2953 Licenta.Syntax <> orientation_term_pair def
-def 2968:2978 <> unif_probl2
-R2983:2986 Licenta.Syntax <> Uset constr
-R2988:2989 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
-R3003:3004 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
-R2990:3002 Licenta.Syntax <> conflict_term def
-def 3018:3034 <> elimination_tpair
-R3039:3043 Licenta.Syntax <> Tpair constr
-R3056:3059 Licenta.Syntax <> Tvar constr
-R3061:3061 Licenta.Syntax <> a def
-R3046:3049 Licenta.Syntax <> Tvar constr
-R3051:3052 Licenta.Syntax <> x2 def
-def 3076:3086 <> unif_probl4
-R3091:3094 Licenta.Syntax <> Uset constr
-R3096:3096 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3159:3160 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3223:3223 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3097:3101 Licenta.Syntax <> Tpair constr
-R3151:3154 Licenta.Syntax <> Tvar constr
-R3156:3157 Licenta.Syntax <> x3 def
-R3104:3108 Licenta.Syntax <> Tfunc constr
-R3112:3112 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3138:3139 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3147:3147 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3113:3117 Licenta.Syntax <> Tfunc constr
-R3121:3121 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3129:3130 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3137:3137 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3122:3125 Licenta.Syntax <> Tvar constr
-R3127:3128 Licenta.Syntax <> x1 def
-R3131:3134 Licenta.Syntax <> Tvar constr
-R3136:3136 Licenta.Syntax <> a def
-R3119:3119 Licenta.Syntax <> g def
-R3140:3143 Licenta.Syntax <> Tvar constr
-R3145:3146 Licenta.Syntax <> x2 def
-R3110:3110 Licenta.Syntax <> f def
-R3161:3165 Licenta.Syntax <> Tpair constr
-R3197:3201 Licenta.Syntax <> Tfunc constr
-R3205:3205 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3212:3213 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3221:3221 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3206:3209 Licenta.Syntax <> Tvar constr
-R3211:3211 Licenta.Syntax <> a def
-R3214:3217 Licenta.Syntax <> Tvar constr
-R3219:3220 Licenta.Syntax <> x1 def
-R3203:3203 Licenta.Syntax <> f def
-R3168:3172 Licenta.Syntax <> Tfunc constr
-R3176:3176 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3184:3185 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3193:3193 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3177:3180 Licenta.Syntax <> Tvar constr
-R3182:3183 Licenta.Syntax <> x2 def
-R3186:3189 Licenta.Syntax <> Tvar constr
-R3191:3192 Licenta.Syntax <> x2 def
-R3174:3174 Licenta.Syntax <> f def
-def 3237:3248 <> unif_probl4'
-R3253:3256 Licenta.Syntax <> Uset constr
-R3258:3258 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2087:2087 Licenta.Syntax <> a def
+R2072:2075 Licenta.Syntax <> Tvar constr
+R2077:2078 Licenta.Syntax <> x2 def
+def 2102:2112 <> unif_probl4
+R2117:2120 Licenta.Syntax <> Uset constr
+R2122:2122 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2185:2186 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2249:2249 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2123:2127 Licenta.Syntax <> Tpair constr
+R2177:2180 Licenta.Syntax <> Tvar constr
+R2182:2183 Licenta.Syntax <> x3 def
+R2130:2134 Licenta.Syntax <> Tfunc constr
+R2138:2138 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2164:2165 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2173:2173 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2139:2143 Licenta.Syntax <> Tfunc constr
+R2147:2147 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2155:2156 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2163:2163 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2148:2151 Licenta.Syntax <> Tvar constr
+R2153:2154 Licenta.Syntax <> x1 def
+R2157:2160 Licenta.Syntax <> Tvar constr
+R2162:2162 Licenta.Syntax <> a def
+R2145:2145 Licenta.Syntax <> g def
+R2166:2169 Licenta.Syntax <> Tvar constr
+R2171:2172 Licenta.Syntax <> x2 def
+R2136:2136 Licenta.Syntax <> f def
+R2187:2191 Licenta.Syntax <> Tpair constr
+R2223:2227 Licenta.Syntax <> Tfunc constr
+R2231:2231 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2238:2239 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2247:2247 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2232:2235 Licenta.Syntax <> Tvar constr
+R2237:2237 Licenta.Syntax <> a def
+R2240:2243 Licenta.Syntax <> Tvar constr
+R2245:2246 Licenta.Syntax <> x1 def
+R2229:2229 Licenta.Syntax <> f def
+R2194:2198 Licenta.Syntax <> Tfunc constr
+R2202:2202 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2210:2211 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2219:2219 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2203:2206 Licenta.Syntax <> Tvar constr
+R2208:2209 Licenta.Syntax <> x2 def
+R2212:2215 Licenta.Syntax <> Tvar constr
+R2217:2218 Licenta.Syntax <> x2 def
+R2200:2200 Licenta.Syntax <> f def
+def 2263:2274 <> unif_probl4'
+R2279:2282 Licenta.Syntax <> Uset constr
+R2284:2284 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2347:2348 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2373:2374 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2400:2400 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2285:2289 Licenta.Syntax <> Tpair constr
+R2339:2342 Licenta.Syntax <> Tvar constr
+R2344:2345 Licenta.Syntax <> x3 def
+R2292:2296 Licenta.Syntax <> Tfunc constr
+R2300:2300 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2326:2327 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2335:2335 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2301:2305 Licenta.Syntax <> Tfunc constr
+R2309:2309 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2317:2318 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2325:2325 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2310:2313 Licenta.Syntax <> Tvar constr
+R2315:2316 Licenta.Syntax <> x1 def
+R2319:2322 Licenta.Syntax <> Tvar constr
+R2324:2324 Licenta.Syntax <> a def
+R2307:2307 Licenta.Syntax <> g def
+R2328:2331 Licenta.Syntax <> Tvar constr
+R2333:2334 Licenta.Syntax <> x2 def
+R2298:2298 Licenta.Syntax <> f def
+R2349:2353 Licenta.Syntax <> Tpair constr
+R2366:2369 Licenta.Syntax <> Tvar constr
+R2371:2371 Licenta.Syntax <> a def
+R2356:2359 Licenta.Syntax <> Tvar constr
+R2361:2362 Licenta.Syntax <> x2 def
+R2375:2379 Licenta.Syntax <> Tpair constr
+R2392:2395 Licenta.Syntax <> Tvar constr
+R2397:2398 Licenta.Syntax <> x1 def
+R2382:2385 Licenta.Syntax <> Tvar constr
+R2387:2388 Licenta.Syntax <> x2 def
+def 2414:2426 <> unif_probl4''
+R2431:2434 Licenta.Syntax <> Uset constr
+R2436:2436 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2498:2499 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2524:2525 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2550:2550 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2437:2441 Licenta.Syntax <> Tpair constr
+R2490:2493 Licenta.Syntax <> Tvar constr
+R2495:2496 Licenta.Syntax <> x3 def
+R2444:2448 Licenta.Syntax <> Tfunc constr
+R2452:2452 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2478:2479 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2486:2486 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2453:2457 Licenta.Syntax <> Tfunc constr
+R2461:2461 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2469:2470 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2477:2477 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2462:2465 Licenta.Syntax <> Tvar constr
+R2467:2468 Licenta.Syntax <> x1 def
+R2471:2474 Licenta.Syntax <> Tvar constr
+R2476:2476 Licenta.Syntax <> a def
+R2459:2459 Licenta.Syntax <> g def
+R2480:2483 Licenta.Syntax <> Tvar constr
+R2485:2485 Licenta.Syntax <> a def
+R2450:2450 Licenta.Syntax <> f def
+R2500:2504 Licenta.Syntax <> Tpair constr
+R2517:2520 Licenta.Syntax <> Tvar constr
+R2522:2522 Licenta.Syntax <> a def
+R2507:2510 Licenta.Syntax <> Tvar constr
+R2512:2513 Licenta.Syntax <> x2 def
+R2526:2530 Licenta.Syntax <> Tpair constr
+R2542:2545 Licenta.Syntax <> Tvar constr
+R2547:2548 Licenta.Syntax <> x1 def
+R2533:2536 Licenta.Syntax <> Tvar constr
+R2538:2538 Licenta.Syntax <> a def
+def 2564:2577 <> unif_probl4'''
+R2582:2585 Licenta.Syntax <> Uset constr
+R2587:2587 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2649:2650 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2675:2676 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2701:2701 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2588:2592 Licenta.Syntax <> Tpair constr
+R2641:2644 Licenta.Syntax <> Tvar constr
+R2646:2647 Licenta.Syntax <> x3 def
+R2595:2599 Licenta.Syntax <> Tfunc constr
+R2603:2603 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2629:2630 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2637:2637 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2604:2608 Licenta.Syntax <> Tfunc constr
+R2612:2612 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2620:2621 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2628:2628 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2613:2616 Licenta.Syntax <> Tvar constr
+R2618:2619 Licenta.Syntax <> x1 def
+R2622:2625 Licenta.Syntax <> Tvar constr
+R2627:2627 Licenta.Syntax <> a def
+R2610:2610 Licenta.Syntax <> g def
+R2631:2634 Licenta.Syntax <> Tvar constr
+R2636:2636 Licenta.Syntax <> a def
+R2601:2601 Licenta.Syntax <> f def
+R2651:2655 Licenta.Syntax <> Tpair constr
+R2668:2671 Licenta.Syntax <> Tvar constr
+R2673:2673 Licenta.Syntax <> a def
+R2658:2661 Licenta.Syntax <> Tvar constr
+R2663:2664 Licenta.Syntax <> x2 def
+R2677:2681 Licenta.Syntax <> Tpair constr
+R2694:2697 Licenta.Syntax <> Tvar constr
+R2699:2699 Licenta.Syntax <> a def
+R2684:2687 Licenta.Syntax <> Tvar constr
+R2689:2690 Licenta.Syntax <> x1 def
+def 2715:2729 <> unif_probl4''''
+R2734:2737 Licenta.Syntax <> Uset constr
+R2739:2739 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2800:2801 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2826:2827 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2852:2852 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2740:2744 Licenta.Syntax <> Tpair constr
+R2792:2795 Licenta.Syntax <> Tvar constr
+R2797:2798 Licenta.Syntax <> x3 def
+R2747:2751 Licenta.Syntax <> Tfunc constr
+R2755:2755 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2780:2781 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2788:2788 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2756:2760 Licenta.Syntax <> Tfunc constr
+R2764:2764 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2771:2772 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2779:2779 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2765:2768 Licenta.Syntax <> Tvar constr
+R2770:2770 Licenta.Syntax <> a def
+R2773:2776 Licenta.Syntax <> Tvar constr
+R2778:2778 Licenta.Syntax <> a def
+R2762:2762 Licenta.Syntax <> g def
+R2782:2785 Licenta.Syntax <> Tvar constr
+R2787:2787 Licenta.Syntax <> a def
+R2753:2753 Licenta.Syntax <> f def
+R2802:2806 Licenta.Syntax <> Tpair constr
+R2819:2822 Licenta.Syntax <> Tvar constr
+R2824:2824 Licenta.Syntax <> a def
+R2809:2812 Licenta.Syntax <> Tvar constr
+R2814:2815 Licenta.Syntax <> x2 def
+R2828:2832 Licenta.Syntax <> Tpair constr
+R2845:2848 Licenta.Syntax <> Tvar constr
+R2850:2850 Licenta.Syntax <> a def
+R2835:2838 Licenta.Syntax <> Tvar constr
+R2840:2841 Licenta.Syntax <> x1 def
+def 2866:2881 <> unif_probl4'''''
+R2886:2889 Licenta.Syntax <> Uset constr
+R2891:2891 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2952:2953 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2978:2979 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3004:3004 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2892:2896 Licenta.Syntax <> Tpair constr
+R2909:2913 Licenta.Syntax <> Tfunc constr
+R2917:2917 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2942:2943 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2950:2950 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2918:2922 Licenta.Syntax <> Tfunc constr
+R2926:2926 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2933:2934 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2941:2941 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R2927:2930 Licenta.Syntax <> Tvar constr
+R2932:2932 Licenta.Syntax <> a def
+R2935:2938 Licenta.Syntax <> Tvar constr
+R2940:2940 Licenta.Syntax <> a def
+R2924:2924 Licenta.Syntax <> g def
+R2944:2947 Licenta.Syntax <> Tvar constr
+R2949:2949 Licenta.Syntax <> a def
+R2915:2915 Licenta.Syntax <> f def
+R2899:2902 Licenta.Syntax <> Tvar constr
+R2904:2905 Licenta.Syntax <> x3 def
+R2954:2958 Licenta.Syntax <> Tpair constr
+R2971:2974 Licenta.Syntax <> Tvar constr
+R2976:2976 Licenta.Syntax <> a def
+R2961:2964 Licenta.Syntax <> Tvar constr
+R2966:2967 Licenta.Syntax <> x2 def
+R2980:2984 Licenta.Syntax <> Tpair constr
+R2997:3000 Licenta.Syntax <> Tvar constr
+R3002:3002 Licenta.Syntax <> a def
+R2987:2990 Licenta.Syntax <> Tvar constr
+R2992:2993 Licenta.Syntax <> x1 def
+def 3018:3036 <> elimination_example
+R3041:3044 Licenta.Syntax <> Uset constr
+R3046:3046 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3109:3110 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3173:3174 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3192:3192 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3047:3051 Licenta.Syntax <> Tpair constr
+R3101:3104 Licenta.Syntax <> Tvar constr
+R3106:3107 Licenta.Syntax <> x3 def
+R3054:3058 Licenta.Syntax <> Tfunc constr
+R3062:3062 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3088:3089 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3097:3097 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3063:3067 Licenta.Syntax <> Tfunc constr
+R3071:3071 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3079:3080 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3087:3087 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3072:3075 Licenta.Syntax <> Tvar constr
+R3077:3078 Licenta.Syntax <> x1 def
+R3081:3084 Licenta.Syntax <> Tvar constr
+R3086:3086 Licenta.Syntax <> a def
+R3069:3069 Licenta.Syntax <> g def
+R3090:3093 Licenta.Syntax <> Tvar constr
+R3095:3096 Licenta.Syntax <> x2 def
+R3060:3060 Licenta.Syntax <> f def
+R3111:3115 Licenta.Syntax <> Tpair constr
+R3147:3151 Licenta.Syntax <> Tfunc constr
+R3155:3155 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3162:3163 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3171:3171 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3156:3159 Licenta.Syntax <> Tvar constr
+R3161:3161 Licenta.Syntax <> a def
+R3164:3167 Licenta.Syntax <> Tvar constr
+R3169:3170 Licenta.Syntax <> x1 def
+R3153:3153 Licenta.Syntax <> f def
+R3118:3122 Licenta.Syntax <> Tfunc constr
+R3126:3126 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3134:3135 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3143:3143 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3127:3130 Licenta.Syntax <> Tvar constr
+R3132:3133 Licenta.Syntax <> x2 def
+R3136:3139 Licenta.Syntax <> Tvar constr
+R3141:3142 Licenta.Syntax <> x2 def
+R3124:3124 Licenta.Syntax <> f def
+R3175:3191 Licenta.Syntax <> elimination_tpair def
+def 3206:3221 <> delete_term_pair
+R3226:3230 Licenta.Syntax <> Tpair constr
+R3235:3236 Licenta.Syntax <> t1 def
+R3232:3233 Licenta.Syntax <> t1 def
+def 3250:3269 <> elimination_example'
+R3274:3277 Licenta.Syntax <> Uset constr
+R3279:3279 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3342:3343 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3361:3362 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3425:3425 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3280:3284 Licenta.Syntax <> Tpair constr
+R3334:3337 Licenta.Syntax <> Tvar constr
+R3339:3340 Licenta.Syntax <> x3 def
+R3287:3291 Licenta.Syntax <> Tfunc constr
+R3295:3295 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
 R3321:3322 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3347:3348 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3374:3374 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3259:3263 Licenta.Syntax <> Tpair constr
-R3313:3316 Licenta.Syntax <> Tvar constr
-R3318:3319 Licenta.Syntax <> x3 def
-R3266:3270 Licenta.Syntax <> Tfunc constr
-R3274:3274 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3300:3301 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3309:3309 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3275:3279 Licenta.Syntax <> Tfunc constr
-R3283:3283 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3291:3292 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3299:3299 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3284:3287 Licenta.Syntax <> Tvar constr
-R3289:3290 Licenta.Syntax <> x1 def
-R3293:3296 Licenta.Syntax <> Tvar constr
-R3298:3298 Licenta.Syntax <> a def
-R3281:3281 Licenta.Syntax <> g def
-R3302:3305 Licenta.Syntax <> Tvar constr
-R3307:3308 Licenta.Syntax <> x2 def
-R3272:3272 Licenta.Syntax <> f def
-R3323:3327 Licenta.Syntax <> Tpair constr
-R3340:3343 Licenta.Syntax <> Tvar constr
-R3345:3345 Licenta.Syntax <> a def
-R3330:3333 Licenta.Syntax <> Tvar constr
-R3335:3336 Licenta.Syntax <> x2 def
-R3349:3353 Licenta.Syntax <> Tpair constr
-R3366:3369 Licenta.Syntax <> Tvar constr
-R3371:3372 Licenta.Syntax <> x1 def
-R3356:3359 Licenta.Syntax <> Tvar constr
-R3361:3362 Licenta.Syntax <> x2 def
-def 3388:3400 <> unif_probl4''
-R3405:3408 Licenta.Syntax <> Uset constr
-R3410:3410 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3472:3473 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3498:3499 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3524:3524 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3411:3415 Licenta.Syntax <> Tpair constr
-R3464:3467 Licenta.Syntax <> Tvar constr
-R3469:3470 Licenta.Syntax <> x3 def
-R3418:3422 Licenta.Syntax <> Tfunc constr
-R3426:3426 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3452:3453 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3460:3460 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3427:3431 Licenta.Syntax <> Tfunc constr
-R3435:3435 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3443:3444 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3451:3451 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3436:3439 Licenta.Syntax <> Tvar constr
-R3441:3442 Licenta.Syntax <> x1 def
-R3445:3448 Licenta.Syntax <> Tvar constr
-R3450:3450 Licenta.Syntax <> a def
-R3433:3433 Licenta.Syntax <> g def
-R3454:3457 Licenta.Syntax <> Tvar constr
-R3459:3459 Licenta.Syntax <> a def
-R3424:3424 Licenta.Syntax <> f def
-R3474:3478 Licenta.Syntax <> Tpair constr
-R3491:3494 Licenta.Syntax <> Tvar constr
-R3496:3496 Licenta.Syntax <> a def
-R3481:3484 Licenta.Syntax <> Tvar constr
-R3486:3487 Licenta.Syntax <> x2 def
-R3500:3504 Licenta.Syntax <> Tpair constr
-R3516:3519 Licenta.Syntax <> Tvar constr
-R3521:3522 Licenta.Syntax <> x1 def
-R3507:3510 Licenta.Syntax <> Tvar constr
-R3512:3512 Licenta.Syntax <> a def
-def 3538:3551 <> unif_probl4'''
-R3556:3559 Licenta.Syntax <> Uset constr
-R3561:3561 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3623:3624 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3649:3650 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3675:3675 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3562:3566 Licenta.Syntax <> Tpair constr
-R3615:3618 Licenta.Syntax <> Tvar constr
-R3620:3621 Licenta.Syntax <> x3 def
-R3569:3573 Licenta.Syntax <> Tfunc constr
-R3577:3577 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3603:3604 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3611:3611 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3578:3582 Licenta.Syntax <> Tfunc constr
-R3586:3586 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3594:3595 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3602:3602 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3587:3590 Licenta.Syntax <> Tvar constr
-R3592:3593 Licenta.Syntax <> x1 def
-R3596:3599 Licenta.Syntax <> Tvar constr
-R3601:3601 Licenta.Syntax <> a def
-R3584:3584 Licenta.Syntax <> g def
-R3605:3608 Licenta.Syntax <> Tvar constr
-R3610:3610 Licenta.Syntax <> a def
-R3575:3575 Licenta.Syntax <> f def
-R3625:3629 Licenta.Syntax <> Tpair constr
-R3642:3645 Licenta.Syntax <> Tvar constr
-R3647:3647 Licenta.Syntax <> a def
-R3632:3635 Licenta.Syntax <> Tvar constr
-R3637:3638 Licenta.Syntax <> x2 def
-R3651:3655 Licenta.Syntax <> Tpair constr
-R3668:3671 Licenta.Syntax <> Tvar constr
-R3673:3673 Licenta.Syntax <> a def
-R3658:3661 Licenta.Syntax <> Tvar constr
-R3663:3664 Licenta.Syntax <> x1 def
-def 3689:3703 <> unif_probl4''''
-R3708:3711 Licenta.Syntax <> Uset constr
-R3713:3713 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3774:3775 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3800:3801 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3826:3826 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3714:3718 Licenta.Syntax <> Tpair constr
-R3766:3769 Licenta.Syntax <> Tvar constr
-R3771:3772 Licenta.Syntax <> x3 def
-R3721:3725 Licenta.Syntax <> Tfunc constr
-R3729:3729 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3754:3755 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3762:3762 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3730:3734 Licenta.Syntax <> Tfunc constr
-R3738:3738 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3745:3746 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3753:3753 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3739:3742 Licenta.Syntax <> Tvar constr
-R3744:3744 Licenta.Syntax <> a def
-R3747:3750 Licenta.Syntax <> Tvar constr
-R3752:3752 Licenta.Syntax <> a def
-R3736:3736 Licenta.Syntax <> g def
-R3756:3759 Licenta.Syntax <> Tvar constr
-R3761:3761 Licenta.Syntax <> a def
-R3727:3727 Licenta.Syntax <> f def
-R3776:3780 Licenta.Syntax <> Tpair constr
-R3793:3796 Licenta.Syntax <> Tvar constr
-R3798:3798 Licenta.Syntax <> a def
-R3783:3786 Licenta.Syntax <> Tvar constr
-R3788:3789 Licenta.Syntax <> x2 def
-R3802:3806 Licenta.Syntax <> Tpair constr
-R3819:3822 Licenta.Syntax <> Tvar constr
-R3824:3824 Licenta.Syntax <> a def
-R3809:3812 Licenta.Syntax <> Tvar constr
-R3814:3815 Licenta.Syntax <> x1 def
-def 3840:3855 <> unif_probl4'''''
-R3860:3863 Licenta.Syntax <> Uset constr
-R3865:3865 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3926:3927 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3952:3953 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3978:3978 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3866:3870 Licenta.Syntax <> Tpair constr
-R3883:3887 Licenta.Syntax <> Tfunc constr
-R3891:3891 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3916:3917 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3924:3924 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3892:3896 Licenta.Syntax <> Tfunc constr
-R3900:3900 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3907:3908 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3915:3915 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R3901:3904 Licenta.Syntax <> Tvar constr
-R3906:3906 Licenta.Syntax <> a def
-R3909:3912 Licenta.Syntax <> Tvar constr
-R3914:3914 Licenta.Syntax <> a def
-R3898:3898 Licenta.Syntax <> g def
-R3918:3921 Licenta.Syntax <> Tvar constr
-R3923:3923 Licenta.Syntax <> a def
-R3889:3889 Licenta.Syntax <> f def
-R3873:3876 Licenta.Syntax <> Tvar constr
-R3878:3879 Licenta.Syntax <> x3 def
-R3928:3932 Licenta.Syntax <> Tpair constr
-R3945:3948 Licenta.Syntax <> Tvar constr
-R3950:3950 Licenta.Syntax <> a def
-R3935:3938 Licenta.Syntax <> Tvar constr
-R3940:3941 Licenta.Syntax <> x2 def
-R3954:3958 Licenta.Syntax <> Tpair constr
-R3971:3974 Licenta.Syntax <> Tvar constr
-R3976:3976 Licenta.Syntax <> a def
-R3961:3964 Licenta.Syntax <> Tvar constr
-R3966:3967 Licenta.Syntax <> x1 def
-def 3992:4010 <> elimination_example
-R4015:4018 Licenta.Syntax <> Uset constr
-R4020:4020 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R4083:4084 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R4147:4148 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R4166:4166 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R4021:4025 Licenta.Syntax <> Tpair constr
-R4075:4078 Licenta.Syntax <> Tvar constr
-R4080:4081 Licenta.Syntax <> x3 def
-R4028:4032 Licenta.Syntax <> Tfunc constr
-R4036:4036 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R4062:4063 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R4071:4071 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R4037:4041 Licenta.Syntax <> Tfunc constr
-R4045:4045 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R4053:4054 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R4061:4061 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R4046:4049 Licenta.Syntax <> Tvar constr
-R4051:4052 Licenta.Syntax <> x1 def
-R4055:4058 Licenta.Syntax <> Tvar constr
-R4060:4060 Licenta.Syntax <> a def
-R4043:4043 Licenta.Syntax <> g def
-R4064:4067 Licenta.Syntax <> Tvar constr
-R4069:4070 Licenta.Syntax <> x2 def
-R4034:4034 Licenta.Syntax <> f def
-R4085:4089 Licenta.Syntax <> Tpair constr
-R4121:4125 Licenta.Syntax <> Tfunc constr
-R4129:4129 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R4136:4137 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R4145:4145 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R4130:4133 Licenta.Syntax <> Tvar constr
-R4135:4135 Licenta.Syntax <> a def
-R4138:4141 Licenta.Syntax <> Tvar constr
-R4143:4144 Licenta.Syntax <> x1 def
-R4127:4127 Licenta.Syntax <> f def
-R4092:4096 Licenta.Syntax <> Tfunc constr
-R4100:4100 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R4108:4109 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R4117:4117 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R4101:4104 Licenta.Syntax <> Tvar constr
-R4106:4107 Licenta.Syntax <> x2 def
-R4110:4113 Licenta.Syntax <> Tvar constr
-R4115:4116 Licenta.Syntax <> x2 def
-R4098:4098 Licenta.Syntax <> f def
-R4149:4165 Licenta.Syntax <> elimination_tpair def
-R4177:4182 Licenta.Syntax <> Afpred constr
-R4200:4200 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
-R4207:4207 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
-R4201:4204 Licenta.Syntax <> Tvar constr
-R4206:4206 Licenta.Syntax <> a def
-R4185:4193 Licenta.Syntax <> Predicate constr
-R4218:4222 Licenta.Syntax <> Apair constr
-R4227:4230 Licenta.Syntax <> Tvar constr
-R4232:4232 Licenta.Syntax <> y def
-R4224:4224 Licenta.Syntax <> x def
-R4244:4249 Licenta.Syntax <> Apairs constr
-R4251:4251 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R4268:4269 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R4313:4313 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R4252:4256 Licenta.Syntax <> Apair constr
-R4261:4264 Licenta.Syntax <> Tvar constr
-R4266:4266 Licenta.Syntax <> y def
-R4258:4258 Licenta.Syntax <> x def
-R4270:4274 Licenta.Syntax <> Apair constr
-R4279:4283 Licenta.Syntax <> Tfunc constr
-R4296:4296 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R4303:4304 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R4311:4311 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
-R4297:4300 Licenta.Syntax <> Tvar constr
-R4302:4302 Licenta.Syntax <> x def
-R4305:4308 Licenta.Syntax <> Tvar constr
-R4310:4310 Licenta.Syntax <> y def
-R4286:4289 Licenta.Syntax <> Func constr
-R4276:4276 Licenta.Syntax <> z def
+R3330:3330 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3296:3300 Licenta.Syntax <> Tfunc constr
+R3304:3304 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3312:3313 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3320:3320 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3305:3308 Licenta.Syntax <> Tvar constr
+R3310:3311 Licenta.Syntax <> x1 def
+R3314:3317 Licenta.Syntax <> Tvar constr
+R3319:3319 Licenta.Syntax <> a def
+R3302:3302 Licenta.Syntax <> g def
+R3323:3326 Licenta.Syntax <> Tvar constr
+R3328:3329 Licenta.Syntax <> x2 def
+R3293:3293 Licenta.Syntax <> f def
+R3344:3360 Licenta.Syntax <> elimination_tpair def
+R3363:3367 Licenta.Syntax <> Tpair constr
+R3399:3403 Licenta.Syntax <> Tfunc constr
+R3407:3407 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3414:3415 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3423:3423 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3408:3411 Licenta.Syntax <> Tvar constr
+R3413:3413 Licenta.Syntax <> a def
+R3416:3419 Licenta.Syntax <> Tvar constr
+R3421:3422 Licenta.Syntax <> x1 def
+R3405:3405 Licenta.Syntax <> f def
+R3370:3374 Licenta.Syntax <> Tfunc constr
+R3378:3378 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3386:3387 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3395:3395 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3379:3382 Licenta.Syntax <> Tvar constr
+R3384:3385 Licenta.Syntax <> x2 def
+R3388:3391 Licenta.Syntax <> Tvar constr
+R3393:3394 Licenta.Syntax <> x2 def
+R3376:3376 Licenta.Syntax <> f def
+def 3439:3460 <> orientation_term_pair'
+R3465:3469 Licenta.Syntax <> Tpair constr
+R3475:3478 Licenta.Syntax <> Tvar constr
+R3480:3481 Licenta.Syntax <> x2 def
+R3471:3472 Licenta.Syntax <> t2 def
+def 3496:3516 <> unification_problem1'
+R3521:3524 Licenta.Syntax <> Uset constr
+R3526:3527 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3539:3540 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3564:3565 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3588:3588 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3528:3532 Licenta.Syntax <> Tpair constr
+R3537:3538 Licenta.Syntax <> t1 def
+R3534:3535 Licenta.Syntax <> t1 def
+R3541:3563 Licenta.Syntax <> decomposition_term_pair def
+R3566:3587 Licenta.Syntax <> orientation_term_pair' def
+def 3603:3614 <> unif_probl1'
+R3619:3622 Licenta.Syntax <> Uset constr
+R3624:3624 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3648:3649 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3671:3671 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3625:3647 Licenta.Syntax <> decomposition_term_pair def
+R3650:3670 Licenta.Syntax <> orientation_term_pair def
+def 3686:3698 <> unif_probl1''
+R3703:3706 Licenta.Syntax <> Uset constr
+R3708:3708 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R3730:3730 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R3709:3729 Licenta.Syntax <> orientation_term_pair def
+R3741:3745 Licenta.Syntax <> Apair constr
+R3750:3753 Licenta.Syntax <> Tvar constr
+R3755:3755 Licenta.Syntax <> y def
+R3747:3747 Licenta.Syntax <> x def
+R3767:3772 Licenta.Syntax <> Apairs constr
+R3774:3774 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3791:3792 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3836:3836 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3775:3779 Licenta.Syntax <> Apair constr
+R3784:3787 Licenta.Syntax <> Tvar constr
+R3789:3789 Licenta.Syntax <> y def
+R3781:3781 Licenta.Syntax <> x def
+R3793:3797 Licenta.Syntax <> Apair constr
+R3802:3806 Licenta.Syntax <> Tfunc constr
+R3819:3819 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3826:3827 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3834:3834 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R3820:3823 Licenta.Syntax <> Tvar constr
+R3825:3825 Licenta.Syntax <> x def
+R3828:3831 Licenta.Syntax <> Tvar constr
+R3833:3833 Licenta.Syntax <> y def
+R3809:3812 Licenta.Syntax <> Func constr
+R3799:3799 Licenta.Syntax <> z def
+ind 3871:3885 <> atomic_formulae
+constr 3901:3906 <> Afpred
+R3927:3930 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3940:3943 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3944:3958 Licenta.Syntax <> atomic_formulae:26 ind
+R3931:3934 Coq.Init.Datatypes <> list ind
+R3936:3939 Licenta.Syntax <> term ind
+R3909:3926 Licenta.Syntax <> predicative_symbol ind
+ind 3973:3992 <> first_order_formulae
+constr 4008:4016 <> Aformulae
+constr 4046:4049 <> Anot
+constr 4084:4087 <> Aand
+constr 4128:4130 <> Aor
+constr 4171:4178 <> Aimplies
+constr 4219:4232 <> Adoubleimplies
+constr 4273:4279 <> Aforall
+constr 4324:4330 <> Aexists
+R4025:4039 Licenta.Syntax <> atomic_formulae ind
+binder 4019:4021 <> phi:30
+R4058:4077 Licenta.Syntax <> first_order_formulae:28 ind
+binder 4052:4054 <> phi:31
+R4102:4121 Licenta.Syntax <> first_order_formulae:28 ind
+binder 4090:4093 <> phi1:32
+binder 4095:4098 <> phi2:33
+R4145:4164 Licenta.Syntax <> first_order_formulae:28 ind
+binder 4133:4136 <> phi1:34
+binder 4138:4141 <> phi2:35
+R4193:4212 Licenta.Syntax <> first_order_formulae:28 ind
+binder 4181:4184 <> phi1:36
+binder 4186:4189 <> phi2:37
+R4247:4266 Licenta.Syntax <> first_order_formulae:28 ind
+binder 4235:4238 <> phi1:38
+binder 4240:4243 <> phi2:39
+R4286:4288 Licenta.Syntax <> var ind
+binder 4282:4282 <> x:40
+R4298:4317 Licenta.Syntax <> first_order_formulae:28 ind
+binder 4292:4294 <> phi:41
+R4337:4339 Licenta.Syntax <> var ind
+binder 4333:4333 <> x:42
+R4349:4368 Licenta.Syntax <> first_order_formulae:28 ind
+binder 4343:4345 <> phi:43
+ind 4383:4398 <> unif_solver_rule
+constr 4458:4464 <> Rdelete
+constr 4470:4479 <> Rdecompose
+constr 4485:4496 <> Rorientation
+constr 4502:4513 <> Relimination
+constr 4519:4527 <> Rconflict
+constr 4533:4545 <> Roccurs_check
+R4406:4414 Licenta.Syntax <> term_pair ind
+binder 4401:4402 <> tp:44
+R4424:4442 Licenta.Syntax <> unification_problem ind
+binder 4418:4420 <> u_p:45
+def 6476:6478 <> phi
+R6483:6488 Licenta.Syntax <> Afpred constr
+R6490:6490 Licenta.Syntax <> P def
+def 6505:6508 <> phi1
+R6515:6518 Licenta.Syntax <> Aand constr
+R6714:6722 Licenta.Syntax <> Aformulae constr
+R6726:6728 Licenta.Syntax <> phi def
+R6730:6730 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R6737:6738 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R6745:6745 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R6731:6734 Licenta.Syntax <> Tvar constr
+R6736:6736 Licenta.Syntax <> x def
+R6739:6742 Licenta.Syntax <> Tvar constr
+R6744:6744 Licenta.Syntax <> x def
+R6522:6528 Licenta.Syntax <> Aforall constr
+R6534:6537 Licenta.Syntax <> Aand constr
+R6580:6586 Licenta.Syntax <> Aexists constr
+R6592:6595 Licenta.Syntax <> Aand constr
+R6665:6673 Licenta.Syntax <> Aformulae constr
+R6677:6679 Licenta.Syntax <> phi def
+R6681:6681 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R6688:6689 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R6696:6696 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R6682:6685 Licenta.Syntax <> Tvar constr
+R6687:6687 Licenta.Syntax <> x def
+R6690:6693 Licenta.Syntax <> Tvar constr
+R6695:6695 Licenta.Syntax <> y def
+R6599:6607 Licenta.Syntax <> Aformulae constr
+R6610:6612 Licenta.Syntax <> phi def
+R6614:6614 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R6621:6622 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R6658:6658 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R6615:6618 Licenta.Syntax <> Tvar constr
+R6620:6620 Licenta.Syntax <> z def
+R6623:6627 Licenta.Syntax <> Tfunc constr
+R6642:6642 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R6649:6650 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R6657:6657 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R6643:6646 Licenta.Syntax <> Tvar constr
+R6648:6648 Licenta.Syntax <> x def
+R6651:6654 Licenta.Syntax <> Tvar constr
+R6656:6656 Licenta.Syntax <> y def
+R6631:6634 Licenta.Syntax <> Func constr
+R6588:6588 Licenta.Syntax <> y def
+R6541:6549 Licenta.Syntax <> Aformulae constr
+R6553:6555 Licenta.Syntax <> phi def
+R6557:6557 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R6564:6565 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R6572:6572 Coq.Lists.List ListNotations ::list_scope:'['_x_';'_x_';'_'..'_';'_x_']' not
+R6558:6561 Licenta.Syntax <> Tvar constr
+R6563:6563 Licenta.Syntax <> x def
+R6566:6569 Licenta.Syntax <> Tvar constr
+R6571:6571 Licenta.Syntax <> y def
+R6530:6530 Licenta.Syntax <> x def
+R6761:6766 Licenta.Syntax <> Afpred constr
+R6784:6784 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R6791:6791 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R6785:6788 Licenta.Syntax <> Tvar constr
+R6790:6790 Licenta.Syntax <> a def
+R6769:6777 Licenta.Syntax <> Predicate constr
