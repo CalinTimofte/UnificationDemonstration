@@ -6,6 +6,19 @@ Open Scope string_scope.
 Require Import List.
 Import ListNotations.
 
+Definition mup_to_up (mup : maybe_unification_problem): unification_problem :=
+  match mup with
+  | UError => Uset [Tpair (Tvar (Named_var "Error")) (Tvar (Named_var "Error"))]
+  | UP u_p => u_p
+  end.
+
+Definition mtp_to_tp (mtp : maybe_term_pair): term_pair :=
+  match mtp with
+  | TError => Tpair (Tvar (Named_var "Error")) (Tvar (Named_var "Error"))
+  | TP tp => tp 
+  end.
+
+
 Definition arity_term (t : term) : nat :=
   match t with
   | Tconst _ => 0
@@ -639,7 +652,10 @@ Compute (check_elimination_and_deliver elimination_example).
 Compute (check_delete_and_deliver unif_probl1).
 
 Definition solver_delete (tp : term_pair) (up : unification_problem) : unification_problem :=
-  remove_first_appearance_term_unification_problem up term_eq.
+  unif_problem_minus_term_pair up tp.
+
+Print unif_probl1.
+Compute (solver_delete (mtp_to_tp (check_delete_and_deliver unif_probl1)) unif_probl1).
 
 Compute (check_decomposition_and_deliver unif_probl1').
 
@@ -777,15 +793,19 @@ Definition maybe_is_bottom (m_u_p : maybe_unification_problem) : bool :=
   end.
 
 Fixpoint term_pair_list_eq (tpl1 tpl2 : list term_pair) : bool :=
-  match tpl1 with
-  | [] => match tpl2 with 
-          | [] => true
-          | _ => false
+  match (Nat.eqb (length tpl1) (length tpl2)) with
+  | false => false
+  | true =>
+          match tpl1 with
+          | [] => match tpl2 with 
+                  | [] => true
+                  | _ => false
+                  end
+          | h1::tl1 => match tpl2 with
+                       | [] => false
+                       | h2::tl2 => andb (term_pair_eq h1 h2) (term_pair_list_eq tl1 tl2)
+                       end
           end
-  | h1::tl1 => match tpl2 with
-               | [] => false
-               | h2::tl2 => andb (term_pair_eq h1 h2) (term_pair_list_eq tl1 tl2)
-               end
   end.
 
 Definition unification_problem_eq (up1 up2: unification_problem) : bool :=
@@ -805,18 +825,26 @@ Compute (unification_problem_eq
         (Uset [orientation_term_pair; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)])
       ).
 
-Definition mup_to_up (mup : maybe_unification_problem): unification_problem :=
-  match mup with
-  | UError => Uset [Tpair (Tvar (Named_var "Error")) (Tvar (Named_var "Error"))]
-  | UP u_p => u_p
+Definition maybe_unification_problem_eq (mup1 mup2 : maybe_unification_problem) : bool :=
+  match mup1 with 
+  | UError => match mup2 with
+              | UError => true
+              | _ => false
+              end
+  | UP up1 => match mup2 with
+              | UError => false
+              | UP up2 => unification_problem_eq up1 up2
+              end
   end.
 
-Definition mtp_to_tp (mtp : maybe_term_pair): term_pair :=
-  match mtp with
-  | TError => Tpair (Tvar (Named_var "Error")) (Tvar (Named_var "Error"))
-  | TP tp => tp 
-  end.
+Compute (maybe_unification_problem_eq
+        (UP (Uset [orientation_term_pair; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)]))
+        (UP (Uset [orientation_term_pair; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)]))
+        ).
 
+Compute (maybe_unification_problem_eq
+        (UP (Uset [orientation_term_pair; Tpair (Tvar x) (Tvar a); Tpair (Tvar y) (Tvar b)]))
+        UError).
 
 
 
